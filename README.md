@@ -1,0 +1,2 @@
+# netdepend
+.Net dependency resolver
