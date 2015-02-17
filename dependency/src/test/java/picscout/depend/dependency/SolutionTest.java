@@ -1,8 +1,14 @@
 package picscout.depend.dependency;
 
+import java.io.File;
+
 import org.junit.Test;
 import org.junit.Before;
 import org.mockito.Mockito;
+
+import java.lang.ClassLoader;
+import java.net.URL;
+
 import picscout.depend.dependency.Solution;
 
 public class SolutionTest {
@@ -15,7 +21,8 @@ public class SolutionTest {
 		//solution = new Solution(
 		//		"C:\\git\\imagetracker\\Source\\PicScout.IT.Common\\PicScout.IT.Common.sln");
 		
-		solution = new Solution("C:\\Users\\oschliefer\\Documents\\Visual Studio 2013\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln");
+		URL url = this.getClass().getResource("/test.sln");
+		solution = new Solution(url.getPath());
 	}	
 
 	@Test
