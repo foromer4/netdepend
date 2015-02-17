@@ -9,6 +9,7 @@ import org.mockito.Mockito;
 import java.lang.ClassLoader;
 import java.net.URL;
 
+import junit.framework.Assert;
 import picscout.depend.dependency.Solution;
 
 public class SolutionTest {
@@ -27,6 +28,7 @@ public class SolutionTest {
 
 	@Test
 	public void testParse() {
-		solution.parse();			
+		solution.parse();	
+		Assert.assertEquals("should have 4 projects",4,solution.getProjects().size());
 	}
 }
