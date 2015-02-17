@@ -18,6 +18,7 @@ public class Project implements IProject {
 	private List<String> dependenciesGuids;
 	
 	
+	
 	public Project(String fullPath)
 	{
 		this.fullPath = fullPath;		

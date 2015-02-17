@@ -7,12 +7,17 @@ import java.util.ArrayList;
 import java.util.regex.Pattern;
 import java.util.regex.Matcher;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
+
 public class Solution {
 
 	private final String fullPath;
 	private final String path;
 	private final String name;
 	private List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>();
+    static final Logger logger = LogManager.getLogger(Solution.class.getName());
 	
 	public Solution(String fullPath) {
 		this.fullPath = fullPath;
@@ -78,7 +83,8 @@ public class Solution {
 		String projectFullPath = path +"\\" + splittedData[1];				
 		String projectGuid = splittedData[2].replace("{", "").replace("}", "");;
 		ProjectDescriptor descriptor = new ProjectDescriptor(projectFullPath, projectName, projectGuid, null);
-
+        
+		logger.info("added new project descriptor to solution: " + descriptor.toString());
 		projects.add(descriptor);
 	}
 	

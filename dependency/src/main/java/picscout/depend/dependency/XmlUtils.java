@@ -2,12 +2,16 @@ package picscout.depend.dependency;
 import java.util.List;
 import java.io.File;
 import java.util.ArrayList;
+
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.XPath;
 import javax.xml.xpath.XPathConstants;
 import javax.xml.xpath.XPathExpression;
 import javax.xml.xpath.XPathFactory;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
@@ -16,7 +20,7 @@ import org.w3c.dom.NodeList;
 public final class XmlUtils {
 
 	
-	
+	 static final Logger logger = LogManager.getLogger(XmlUtils.class.getName());
 	
 	public static List<String> readTextFromXML(String file, String xpathExpression)
 	{
@@ -36,7 +40,7 @@ public final class XmlUtils {
 		}
 			catch(Exception ex)
 			{
-				//TODO - save to log [O.S]
+				logger.warn("Error parsing file: "+ file + " for xpath: " + xpathExpression, ex);
 			}
 			return reuslts;
 	}
@@ -62,7 +66,7 @@ public final class XmlUtils {
 		}
 			catch(Exception ex)
 			{
-				//TODO - save to log [O.S]				
+				logger.warn("Error parsing file: "+ file + " for xpath: " + xpathExpression + " attribute:" + attribute, ex);			
 			}
 			return reuslts;
 	}
@@ -80,7 +84,7 @@ public final class XmlUtils {
 			}
 			catch(Exception ex)
 			{
-				//TODO - save to log [O.S]
+				logger.warn("Error parsing file: "+ file + " for element: " + elementName, ex);
 			}
 			return result;
 	}
