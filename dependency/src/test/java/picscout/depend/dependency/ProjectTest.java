@@ -23,8 +23,7 @@ public class ProjectTest {
 	}	
 
 	@Test
-	public void testParse() {
-		//test push
+	public void testParse() {		
 		project.parse();		
 		//Assert.assertEquals("Assembly name should be correct", "AssemblyName", project.getDescriptor().getAssemblyName());
 		project.getDependenciesGuids();

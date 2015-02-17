@@ -17,11 +17,7 @@ public class SolutionTest {
 	Solution solution;
 	
 	@Before
-	public void init() {
-
-		//solution = new Solution(
-		//		"C:\\git\\imagetracker\\Source\\PicScout.IT.Common\\PicScout.IT.Common.sln");
-		
+	public void init() {		
 		URL url = this.getClass().getResource("/test.sln");
 		solution = new Solution(url.getPath());
 	}	
