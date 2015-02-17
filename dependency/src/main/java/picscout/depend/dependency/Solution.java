@@ -12,9 +12,8 @@ public class Solution {
 	private final String fullPath;
 	private final String path;
 	private final String name;
-	private List<IProject> projects = new ArrayList<IProject>();
-	private ProjectBuilder projectBuilder= new ProjectBuilder();
-
+	private List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>();
+	
 	public Solution(String fullPath) {
 		this.fullPath = fullPath;
 		File file = new File(fullPath);
@@ -35,7 +34,7 @@ public class Solution {
 		return name;
 	}
 	
-	List<IProject> getProjects()	{
+	List<ProjectDescriptor> getProjects()	{
 		return projects;
 	}
 
@@ -66,24 +65,22 @@ public class Solution {
 				int endIndex = matcher.end();
 				line = line.substring(endIndex).replace("\"", "");
 				String[] splittedData = line.split(",");
-				String projectName = path +"\\" + splittedData[1];
-				IProject project = projectBuilder.create(projectName);
-				project.parse();
-				projects.add(project);
+				extractProjectDescriptor(splittedData);
 			}
 		}
-
 		catch (Exception ex) {
 			// TODO - write log [O.S]
 		}
 	}
-	
-    /**
-     * For testing only	
-     * @param builder
-     */
-	public void setProjectBuilder(ProjectBuilder builder)
-	{
-		projectBuilder = builder;
+
+	private void extractProjectDescriptor(String[] splittedData) {
+		String projectName = splittedData[0];
+		String projectFullPath = path +"\\" + splittedData[1];				
+		String projectGuid = splittedData[2].replace("{", "").replace("}", "");;
+		ProjectDescriptor descriptor = new ProjectDescriptor(projectFullPath, projectName, projectGuid, null);
+
+		projects.add(descriptor);
 	}
+	
+ 
 }

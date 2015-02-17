@@ -3,6 +3,7 @@ package picscout.depend.dependency;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import org.apache.commons.io.FilenameUtils;
 
 public class Project implements IProject {
 
@@ -11,38 +12,16 @@ public class Project implements IProject {
 	private final static String PROJECT_REFRENCE_XPATH = "/Project/ItemGroup/ProjectReference/Project";
 	private final static String ASSEMBLY_REFRENCE_XPATH = "/Project/ItemGroup/Reference";
 	private static final String ASSEMBLY_NAME = "AssemblyName";	
-	private final String fullPath;
-    private final String path;
-	private final String fileName;
-	private String assemblyName;
-	private String guid;
+	private String fullPath;
+	private ProjectDescriptor descriptor;
 	private List<String> depnedenciesAssembliesNames;
 	private List<String> dependenciesGuids;
 	
 	
 	public Project(String fullPath)
 	{
-		this.fullPath = fullPath;
-		File file =  new File(fullPath);
-		this.fileName = file.getName();
-		this.path = file.getParent();
-	}
-	
-	/* (non-Javadoc)
-	 * @see picscout.depend.dependency.IProject#getPath()
-	 */
-	public String getPath() {
-		return path;
-	}
-
-
-	/* (non-Javadoc)
-	 * @see picscout.depend.dependency.IProject#getAssemblyName()
-	 */
-	public String getAssemblyName() {
-		return assemblyName;
-	}
-	
+		this.fullPath = fullPath;		
+	}	
 
 	/* (non-Javadoc)
 	 * @see picscout.depend.dependency.IProject#getDepnedenciesNames()
@@ -56,29 +35,13 @@ public class Project implements IProject {
 	 */
 	public List<String> getDependenciesGuids() {
 		return dependenciesGuids;
-	}
-
-	
-
-	/* (non-Javadoc)
-	 * @see picscout.depend.dependency.IProject#getName()
-	 */
-	public String getFileName() {
-		return fileName;
-	}
-	
-	/* (non-Javadoc)
-	 * @see picscout.depend.dependency.IProject#getName()
-	 */
-	public String getGuid() {
-		return guid;
-	}
+	}	
 	
 	/* (non-Javadoc)
 	 * @see picscout.depend.dependency.IProject#getFullPath()
 	 */
-	public String getFullPath() {
-		return fullPath;
+	public ProjectDescriptor getDescriptor() {
+		return descriptor;
 	}
 	
 	/* (non-Javadoc)
@@ -86,13 +49,20 @@ public class Project implements IProject {
 	 */
 	public void parse()
 	{
-		parseAssemblyName();
-		parseGuid();
+		generateDescriptor();
+		
 		parseDependencies();
 	}
 
-	private void parseDependencies() {		
-		
+	private void generateDescriptor() {
+		String assemblyName =  extractAssemblyName();
+		String guid = extractGuid();
+		File file = new File(fullPath);
+		String name = FilenameUtils.removeExtension(file.getName());
+		descriptor = new ProjectDescriptor(fullPath, name, guid, assemblyName); 
+	}
+
+	private void parseDependencies() {			
 		extractProjectDependenices();			
 		extractAssemblyDependencies();
 	}
@@ -111,18 +81,17 @@ public class Project implements IProject {
 		for(String result : results)		{
 			dependenciesGuids.add(RemoveCurlyBraces(result));
 		}
-	}
-	
+	}	
 	
 	private String RemoveCurlyBraces(String str){
 		return str.replace("{", "").replace("}", "");
 	}
 
-	private void parseAssemblyName() {
-		assemblyName = XmlUtils.readValueFromXML(fullPath, ASSEMBLY_NAME);
+	private String extractAssemblyName() {
+		return XmlUtils.readValueFromXML(fullPath, ASSEMBLY_NAME);
 	}
 	
-	private void parseGuid() {
-		guid = RemoveCurlyBraces(XmlUtils.readValueFromXML(fullPath, PROJECT_GUID));
+	private String extractGuid() {
+		return RemoveCurlyBraces(XmlUtils.readValueFromXML(fullPath, PROJECT_GUID));
 	}
 }

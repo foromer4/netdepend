@@ -8,21 +8,18 @@ import picscout.depend.dependency.Solution;
 public class SolutionTest {
 
 	Solution solution;
-	IProject project;
+	
 	@Before
 	public void init() {
 
-		solution = new Solution(
-				"C:\\git\\imagetracker\\Source\\PicScout.IT.Common\\PicScout.IT.Common.sln");
-		ProjectBuilder builder = Mockito.mock(ProjectBuilder.class);
-		project = Mockito.mock(IProject.class);
-		Mockito.when(builder.create(Mockito.anyString())).thenReturn(project);
-		solution.setProjectBuilder(builder);
+		//solution = new Solution(
+		//		"C:\\git\\imagetracker\\Source\\PicScout.IT.Common\\PicScout.IT.Common.sln");
+		
+		solution = new Solution("C:\\Users\\oschliefer\\Documents\\Visual Studio 2013\\Projects\\ConsoleApplication1\\ConsoleApplication1.sln");
 	}	
 
 	@Test
 	public void testParse() {
-		solution.parse();		
-		Mockito.verify(project, Mockito.times(solution.getProjects().size())).parse();		
+		solution.parse();			
 	}
 }

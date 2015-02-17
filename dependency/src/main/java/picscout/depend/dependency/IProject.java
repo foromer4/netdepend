@@ -4,19 +4,11 @@ import java.util.List;
 
 public interface IProject {
 	
-	public String getFullPath();
-
-	public String getPath();
-	
-	public String getFileName();
-
-	public String getAssemblyName();
+	public ProjectDescriptor getDescriptor();	
 
 	public List<String> getDepnedenciesAssembliesNames();
 	
-	public List<String> getDependenciesGuids();	
-	
-	public String getGuid();
+	public List<String> getDependenciesGuids();		
 
 	public void parse();
 
