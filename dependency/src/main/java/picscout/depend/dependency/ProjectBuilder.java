@@ -6,5 +6,4 @@ public class ProjectBuilder {
 	{
 		return new Project(fullPath);
 	}
-
 }
