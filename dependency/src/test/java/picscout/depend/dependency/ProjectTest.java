@@ -1,11 +1,7 @@
 package picscout.depend.dependency;
 
-import static org.junit.Assert.assertEquals;
 
 import java.net.URL;
-
-import junit.framework.Assert;
-
 import org.junit.Before;
 import org.junit.Test;
 

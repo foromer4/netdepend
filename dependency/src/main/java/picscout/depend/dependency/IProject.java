@@ -4,7 +4,7 @@ import java.util.List;
 
 public interface IProject {
 	
-	public ProjectDescriptor getDescriptor();	
+	public IProjectDescriptor getDescriptor();	
 
 	public List<String> getDepnedenciesAssembliesNames();
 	

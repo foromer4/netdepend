@@ -1,15 +1,10 @@
 package picscout.depend.dependency;
 
-import java.io.File;
-
 import org.junit.Test;
 import org.junit.Before;
-import org.mockito.Mockito;
-
-import java.lang.ClassLoader;
 import java.net.URL;
 
-import junit.framework.Assert;
+import org.junit.Assert;
 import picscout.depend.dependency.Solution;
 
 public class SolutionTest {

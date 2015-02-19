@@ -13,7 +13,7 @@ public class Project implements IProject {
 	private final static String ASSEMBLY_REFRENCE_XPATH = "/Project/ItemGroup/Reference";
 	private static final String ASSEMBLY_NAME = "AssemblyName";	
 	private String fullPath;
-	private ProjectDescriptor descriptor;
+	private IProjectDescriptor descriptor;
 	private List<String> depnedenciesAssembliesNames;
 	private List<String> dependenciesGuids;
 	
@@ -41,7 +41,7 @@ public class Project implements IProject {
 	/* (non-Javadoc)
 	 * @see picscout.depend.dependency.IProject#getFullPath()
 	 */
-	public ProjectDescriptor getDescriptor() {
+	public IProjectDescriptor getDescriptor() {
 		return descriptor;
 	}
 	

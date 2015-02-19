@@ -8,7 +8,7 @@ import java.io.IOException;
  * @author OSchliefer
  *
  */
-public final class ProjectDescriptor {
+public final class ProjectDescriptor implements IProjectDescriptor {
 
 	private String fullPath;
 	private String name;
@@ -29,21 +29,36 @@ public final class ProjectDescriptor {
 		this.assemblyName = assemblyName;		
 	}
 	
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.IProjectDescriptor#toString()
+	 */
 	@Override
 	public String toString() {
 		return "ProjectDescriptor [fullPath=" + fullPath + ", name=" + name
 				+ ", guid=" + guid + ", assemblyName=" + assemblyName + "]";
 	}
 
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.IProjectDescriptor#getName()
+	 */
 	public String getName() {
 		return name;
 	}
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.IProjectDescriptor#getGuid()
+	 */
 	public String getGuid() {
 		return guid;
 	}
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.IProjectDescriptor#getFullPath()
+	 */
 	public String getFullPath() {
 		return fullPath;
 	}
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.IProjectDescriptor#getAssemblyName()
+	 */
 	public String getAssemblyName() {
 		return assemblyName;
 	}
