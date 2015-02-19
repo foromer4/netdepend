@@ -2,8 +2,12 @@ package picscout.depend.dependency;
 
 
 import java.net.URL;
+
 import org.junit.Before;
 import org.junit.Test;
+
+import picscout.depend.dependency.classes.Project;
+import picscout.depend.dependency.interfaces.IProject;
 
 public class ProjectTest {
 	

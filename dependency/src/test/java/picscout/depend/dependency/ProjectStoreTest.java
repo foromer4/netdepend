@@ -1,16 +1,20 @@
 package picscout.depend.dependency;
 
 import static org.junit.Assert.*;
-import org.junit.Assert;
 
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
 
+import picscout.depend.dependency.classes.ProjectStore;
+import picscout.depend.dependency.interfaces.IProject;
+import picscout.depend.dependency.interfaces.IProjectDescriptor;
+import picscout.depend.dependency.interfaces.IProjectStore;
+
 public class ProjectStoreTest {
 	
 	
-	private ProjectStore store;
+	private IProjectStore store;
 	private IProject project;
 	private IProjectDescriptor descriptor;
 	private String assemblyName = "Assembly.Name";
@@ -60,5 +64,24 @@ public class ProjectStoreTest {
 		  store.addProject(project);
 		  assertEquals("A project should return", store.getProjectByGuid(projectGuid), project);    
 	}
+	
+	@Test
+	public void testGetProjectCountWhenEmpty() {  
+	 assertEquals("no projects are mapped", store.getAllMappedProjects().size(), 0);
+	}
+	
+	@Test
+	public void testGetProjectCountWhenNotEmpty() {
+      store.addProject(project);
+	 assertEquals("no projects are mapped", store.getAllMappedProjects().size(), 1);
+	}
+	
+	@Test
+	public void testGetProjectCountWhenNotEmptyAvoidDuplicates() {
+      store.addProject(project);
+      store.addProject(project);
+	 assertEquals("no projects are mapped", store.getAllMappedProjects().size(), 1);
+	}
+
 
 }

@@ -1,4 +1,4 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.interfaces;
 
 public interface IProjectDescriptor {
 

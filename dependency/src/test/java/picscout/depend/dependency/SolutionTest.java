@@ -2,10 +2,12 @@ package picscout.depend.dependency;
 
 import org.junit.Test;
 import org.junit.Before;
+
 import java.net.URL;
 
 import org.junit.Assert;
-import picscout.depend.dependency.Solution;
+
+import picscout.depend.dependency.classes.Solution;
 
 public class SolutionTest {
 

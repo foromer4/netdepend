@@ -1,4 +1,4 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.classes;
 
 import java.util.List;
 import java.io.File;
@@ -9,6 +9,8 @@ import java.util.regex.Matcher;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
+import picscout.depend.dependency.utils.FileUtils;
 
 
 public class Solution {
@@ -39,7 +41,7 @@ public class Solution {
 		return name;
 	}
 	
-	List<ProjectDescriptor> getProjects()	{
+	public List<ProjectDescriptor> getProjects()	{
 		return projects;
 	}
 

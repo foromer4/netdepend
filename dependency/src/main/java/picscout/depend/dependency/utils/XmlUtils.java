@@ -1,4 +1,4 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.utils;
 import java.util.List;
 import java.io.File;
 import java.util.ArrayList;

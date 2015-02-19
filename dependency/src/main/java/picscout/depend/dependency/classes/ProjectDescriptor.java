@@ -1,7 +1,9 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.classes;
 
 import java.io.File;
 import java.io.IOException;
+
+import picscout.depend.dependency.interfaces.IProjectDescriptor;
 
 /**
  * Descriptor for project might contain some or all of these fields

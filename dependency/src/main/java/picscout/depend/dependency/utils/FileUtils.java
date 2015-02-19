@@ -1,4 +1,4 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.utils;
 
 import java.io.BufferedReader;
 import java.io.FileReader;

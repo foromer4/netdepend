@@ -1,9 +1,14 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.classes;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.commons.io.FilenameUtils;
+
+import picscout.depend.dependency.interfaces.IProject;
+import picscout.depend.dependency.interfaces.IProjectDescriptor;
+import picscout.depend.dependency.utils.XmlUtils;
 
 public class Project implements IProject {
 
