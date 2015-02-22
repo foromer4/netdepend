@@ -15,7 +15,7 @@ import picscout.depend.dependency.interfaces.IProjectStore;
 public class ProjectDependencyMapper {
 	
 	private IProjectStore store;
-	private HashSet<String> alreadyParsedProjectsgUIDS;
+	private HashSet<String> alreadyParsedProjectsGuids;
 	/**
 	 * For each project (guid), hold a set of all projects (guids) that depend on that 
 	 * project.
@@ -24,7 +24,7 @@ public class ProjectDependencyMapper {
 	public ProjectDependencyMapper(IProjectStore store) {
 		this.store = store;
 		projectReveresedDependencies = new HashMap<String,  HashSet<String>>();
-		alreadyParsedProjectsgUIDS = new HashSet<String>();
+		alreadyParsedProjectsGuids = new HashSet<String>();
 	}
 	
 	
@@ -37,14 +37,15 @@ public class ProjectDependencyMapper {
 
 
 	private void createMap() {
-		for(IProject project : store.getAllMappedProjects()) {			
+		for(IProject project : store.getAllMappedProjects()) {	
+			alreadyParsedProjectsGuids.clear();
 			parseProject(project);
 		}		
 	}
 
 
 	private void parseProject(IProject project) {
-		if(alreadyParsedProjectsgUIDS.contains(project.getDescriptor().getGuid())) {
+		if(alreadyParsedProjectsGuids.contains(project.getDescriptor().getGuid())) {
 			return;
 		}
 		IProject projectDependencyParent;
@@ -64,7 +65,7 @@ public class ProjectDependencyMapper {
 				
 			}
 		}
-		alreadyParsedProjectsgUIDS.add(project.getDescriptor().getGuid());
+		alreadyParsedProjectsGuids.add(project.getDescriptor().getGuid());
 	}
 	
 	private void saveDependency(IProject parentProject, IProject dependentProject) {

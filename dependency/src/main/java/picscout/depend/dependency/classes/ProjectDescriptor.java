@@ -64,5 +64,6 @@ public final class ProjectDescriptor implements IProjectDescriptor {
 	public String getAssemblyName() {
 		return assemblyName;
 	}
-	
+
+		
 }
