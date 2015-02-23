@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Map;
 
 import picscout.depend.dependency.interfaces.IProject;
+import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.IProjectStore;
 
 /**
@@ -15,20 +16,20 @@ import picscout.depend.dependency.interfaces.IProjectStore;
 public class ProjectDependencyMapper {
 	
 	private IProjectStore store;
-	private HashSet<String> alreadyParsedProjectsGuids;
+	private HashSet<IProjectDescriptor> alreadyParsedProjectsGuids;
 	/**
 	 * For each project (guid), hold a set of all projects (guids) that depend on that 
 	 * project.
 	 */
-	private Map<String, HashSet<String>> projectReveresedDependencies;
+	private Map<IProjectDescriptor, HashSet<IProjectDescriptor>> projectReveresedDependencies;
 	public ProjectDependencyMapper(IProjectStore store) {
 		this.store = store;
-		projectReveresedDependencies = new HashMap<String,  HashSet<String>>();
-		alreadyParsedProjectsGuids = new HashSet<String>();
+		projectReveresedDependencies = new HashMap<IProjectDescriptor,  HashSet<IProjectDescriptor>>();
+		alreadyParsedProjectsGuids = new HashSet<IProjectDescriptor>();
 	}
 	
 	
-	public Map<String, HashSet<String>>  getMap() {
+	public Map<IProjectDescriptor, HashSet<IProjectDescriptor>>  getMap() {
 		if(projectReveresedDependencies == null) {
 			createMap();
 		}
@@ -45,7 +46,7 @@ public class ProjectDependencyMapper {
 
 
 	private void parseProject(IProject project) {
-		if(alreadyParsedProjectsGuids.contains(project.getDescriptor().getGuid())) {
+		if(alreadyParsedProjectsGuids.contains(project.getDescriptor())) {
 			return;
 		}
 		IProject projectDependencyParent;
@@ -65,16 +66,16 @@ public class ProjectDependencyMapper {
 				
 			}
 		}
-		alreadyParsedProjectsGuids.add(project.getDescriptor().getGuid());
+		alreadyParsedProjectsGuids.add(project.getDescriptor());
 	}
 	
 	private void saveDependency(IProject parentProject, IProject dependentProject) {
-		String parentGuid = parentProject.getDescriptor().getGuid();
-		if(!projectReveresedDependencies.containsKey(parentGuid)){
-			projectReveresedDependencies.put(parentGuid, new HashSet<String>());
+		IProjectDescriptor parentDescriptor = parentProject.getDescriptor();
+		if(!projectReveresedDependencies.containsKey(parentDescriptor)){
+			projectReveresedDependencies.put(parentDescriptor, new HashSet<IProjectDescriptor>());
 		}
-		String dependentGuid = dependentProject.getDescriptor().getGuid();
-		projectReveresedDependencies.get(parentGuid).add(dependentGuid);
+		IProjectDescriptor dependentDescriptor = dependentProject.getDescriptor();
+		projectReveresedDependencies.get(parentDescriptor).add(dependentDescriptor);
 	}
 
 }

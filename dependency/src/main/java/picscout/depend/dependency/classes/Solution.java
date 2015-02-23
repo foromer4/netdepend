@@ -76,7 +76,7 @@ public class Solution {
 			}
 		}
 		catch (Exception ex) {
-			// TODO - write log [O.S]
+			logger.warn("Error parsing data in solution: " + fullPath, ex);
 		}
 	}
 
