@@ -3,10 +3,12 @@ package picscout.depend.dependency;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.mockito.Mockito.*;
+import org.mockito.Mockito;
 
+import static org.mockito.Mockito.*;
 import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
+import picscout.depend.dependency.interfaces.ISolution;
 
 public class TestProjectsGenerator {
 
@@ -33,6 +35,8 @@ public class TestProjectsGenerator {
 
 		return projects;
 	}
+	
+	
 
 	private static void addDependency(IProject project,
 			IProject projectDependency, boolean isGuidDependency) {
@@ -48,7 +52,7 @@ public class TestProjectsGenerator {
 
 	}
 
-	private static IProject createParoject(String name,
+	public static IProject createParoject(String name,
 			ArrayList<IProject> projects) {
 		IProject project = mock(IProject.class);
 		IProjectDescriptor descriptor = mock(IProjectDescriptor.class);
@@ -57,5 +61,12 @@ public class TestProjectsGenerator {
 		when(descriptor.getGuid()).thenReturn("guid-" + name);
 		projects.add(project);
 		return project;
+	}
+	
+	
+	public static ISolution createSoution(String name, List<IProjectDescriptor> projectsInSolution) {
+		ISolution result = Mockito.mock(ISolution.class);
+		Mockito.when(result.getProjectsDescriptors()).thenReturn(projectsInSolution);
+		return result;
 	}
 }
