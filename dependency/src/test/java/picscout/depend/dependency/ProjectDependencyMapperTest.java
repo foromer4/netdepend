@@ -1,7 +1,6 @@
 package picscout.depend.dependency;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 
@@ -16,71 +15,69 @@ import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 
 public class ProjectDependencyMapperTest {
-	
+
 	private ProjectDependencyMapper mapper;
 	private List<IProject> projects;
+
 	@Before
-	public void init()
-	{
-	ProjectStore store = new ProjectStore();
-	projects = TestProjectsGenerator.generateProjects();
-	for(IProject project: projects) {
-		store.addProject(project);
+	public void init() {
+		ProjectStore store = new ProjectStore();
+		projects = TestProjectsGenerator.generateProjects();
+		for (IProject project : projects) {
+			store.addProject(project);
+		}
+		mapper = new ProjectDependencyMapper(store);
+		mapper.init();
 	}
-	mapper = new ProjectDependencyMapper(store);
-	mapper.init();
-	}
-	
+
 	@Test
-	public void testChainForDProject()
-	{
+	public void testChainForDProject() {
 		IProject dProj = projects.get(3);
-		HashSet<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(dProj.getDescriptor());
-		HashSet<IProjectDescriptor> expected =new HashSet<IProjectDescriptor>();
-		expected.add(projects.get(0).getDescriptor());
-		expected.add(projects.get(1).getDescriptor());
+		List<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(dProj
+				.getDescriptor());
+		ArrayList<IProjectDescriptor> expected = new ArrayList<IProjectDescriptor>();
 		expected.add(projects.get(2).getDescriptor());
-		assertEquals("d should have c,b,a projects that depend on it",expected, result);
-	}
-	
-	@Test
-	public void testChainForCProject()
-	{
-		IProject cProj = projects.get(2);
-		HashSet<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(cProj.getDescriptor());
-		HashSet<IProjectDescriptor> expected =new HashSet<IProjectDescriptor>();
-		expected.add(projects.get(0).getDescriptor());
 		expected.add(projects.get(1).getDescriptor());
+		expected.add(projects.get(0).getDescriptor());
+		assertArrayEquals("d should have c,b,a projects that depend on it",
+				expected.toArray(), result.toArray());
+	}
+
+	@Test
+	public void testChainForCProject() {
+		IProject cProj = projects.get(2);
+		List<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(cProj
+				.getDescriptor());
+		ArrayList<IProjectDescriptor> expected = new ArrayList<IProjectDescriptor>();
 		expected.add(projects.get(3).getDescriptor());
-		assertEquals("c should have d,b,a projects depend on it",expected, result);
+		expected.add(projects.get(1).getDescriptor());
+		expected.add(projects.get(0).getDescriptor());
+		assertArrayEquals("c should have d,b,a projects depend on it",
+				expected.toArray(), result.toArray());
 	}
-	
+
 	@Test
-	public void testChainForBProject()
-	{
+	public void testChainForBProject() {
 		IProject bProj = projects.get(1);
-		HashSet<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(bProj.getDescriptor());
-		HashSet<IProjectDescriptor> expected =new HashSet<IProjectDescriptor>();
-		expected.add(projects.get(0).getDescriptor());	
-		assertEquals("b should have a project depending on it",expected, result);
+		List<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(bProj
+				.getDescriptor());
+		ArrayList<IProjectDescriptor> expected = new ArrayList<IProjectDescriptor>();
+		expected.add(projects.get(0).getDescriptor());
+		assertArrayEquals("b should have a project depending on it",
+				expected.toArray(), result.toArray());
 	}
-	
+
 	@Test
-	public void testChainForAProject()
-	{
+	public void testChainForAProject() {
 		IProject aProj = projects.get(0);
-		HashSet<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(aProj.getDescriptor());
+		List<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(aProj
+				.getDescriptor());
 		assertNull("a should have no projects that depend on it", result);
 	}
-	
-	
+
 	@Test
-	public void testCahinMap()
-	{
-		Map<IProjectDescriptor,HashSet<IProjectDescriptor>> map =mapper.getMap();		
+	public void testCahinMap() {
+		Map<IProjectDescriptor, List<IProjectDescriptor>> map = mapper.getMap();
 	}
-	
-	
-	
 
 }
