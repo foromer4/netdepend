@@ -12,11 +12,12 @@ import org.junit.Test;
 import picscout.depend.dependency.classes.ProjectDependencyMapper;
 import picscout.depend.dependency.classes.ProjectStore;
 import picscout.depend.dependency.interfaces.IProject;
+import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 
 public class ProjectDependencyMapperTest {
 
-	private ProjectDependencyMapper mapper;
+	private IProjectDependencyMapper mapper;
 	private List<IProject> projects;
 
 	@Before

@@ -8,16 +8,20 @@ import java.util.Map;
 import java.util.Stack;
 
 import picscout.depend.dependency.interfaces.IProject;
+import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.IProjectStore;
 
 /**
- * Maps the dependendcies between project.
+ * Maps the dependencies between projects. For each project we can get a list of
+ * project that depend on it by the correct order.(closest first). Note that
+ * each project can have more than one chain, in that case chains are one after
+ * another.
  * 
  * @author OSchliefer
  *
  */
-public class ProjectDependencyMapper {
+public class ProjectDependencyMapper implements IProjectDependencyMapper {
 
 	private IProjectStore store;
 	private HashSet<String> alreadyParsedProjectsGuids;
@@ -33,49 +37,63 @@ public class ProjectDependencyMapper {
 		alreadyParsedProjectsGuids = new HashSet<String>();
 	}
 
-	/**
-	 * Initialise the dependency map, calculate the map
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see picscout.depend.dependency.classes.IProjectDependencyMapper#init()
 	 */
 	public void init() {
 		createMap();
 	}
 
-	/**
-	 * Get arraylist containing all projects that depend on the given project.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @param projectDesceipror
-	 *            descriptor
-	 * @return list if found, null otherwise. order is by closest project to most far ,
-	 * for each dependency chain. chains can be one after another.
+	 * @see picscout.depend.dependency.classes.IProjectDependencyMapper#
+	 * getProjectsThatDepeantOn
+	 * (picscout.depend.dependency.interfaces.IProjectDescriptor)
 	 */
 	public List<IProjectDescriptor> getProjectsThatDepeantOn(
 			IProjectDescriptor projectDesceipror) {
-		return getMap().get(projectDesceipror);
+		if (projectReveresedDependencies == null) {
+			init();
+		}
+		List<IProjectDescriptor> result = projectReveresedDependencies
+				.get(projectDesceipror);
+		if (result == null) {
+			return null;
+		}
+		return new ArrayList<IProjectDescriptor>(
+				projectReveresedDependencies.get(projectDesceipror));
 	}
 
-	/**
-	 * Get map off project as key, projects that depend on this project as
-	 * value.
+	/*
+	 * (non-Javadoc)
 	 * 
-	 * @return entire map based on the given store.
+	 * @see picscout.depend.dependency.classes.IProjectDependencyMapper#getMap()
 	 */
 	public Map<IProjectDescriptor, List<IProjectDescriptor>> getMap() {
 		if (projectReveresedDependencies == null) {
 			init();
 		}
-		return projectReveresedDependencies;
+		HashMap<IProjectDescriptor, List<IProjectDescriptor>> result = new HashMap<IProjectDescriptor, List<IProjectDescriptor>>();
+		for (IProjectDescriptor key : projectReveresedDependencies.keySet()) {
+			result.put(key, getProjectsThatDepeantOn(key));
+		}
+		return result;
 	}
 
 	private void createMap() {
 		projectReveresedDependencies = new HashMap<IProjectDescriptor, List<IProjectDescriptor>>();
 		for (IProject project : store.getAllMappedProjects()) {
 			alreadyParsedProjectsGuids.clear();
-			ArrayList<IProjectDescriptor> chain = new ArrayList<IProjectDescriptor>();			
+			ArrayList<IProjectDescriptor> chain = new ArrayList<IProjectDescriptor>();
 			parseProject(project, chain);
 		}
-	}	
+	}
 
-	private void parseProject(IProject project,ArrayList<IProjectDescriptor> chain) {
+	private void parseProject(IProject project,
+			ArrayList<IProjectDescriptor> chain) {
 		if (alreadyParsedProjectsGuids.contains(project.getDescriptor()
 				.getGuid())) {
 			return;
@@ -100,7 +118,8 @@ public class ProjectDependencyMapper {
 				parseProject(projectDependencyParent, chain);
 			}
 		}
-		chain.remove(chain.size() - 1);// when done parsing remove this project from the chain
+		chain.remove(chain.size() - 1);// when done parsing remove this project
+										// from the chain
 	}
 
 	private void saveDependency(IProject parentProject,
@@ -112,10 +131,12 @@ public class ProjectDependencyMapper {
 		}
 		List<IProjectDescriptor> bucket = projectReveresedDependencies
 				.get(parentDescriptor);
-		for(int i = chain.size() - 1; i >= 0; i--){ //Reverse dependency chani
+		for (int i = chain.size() - 1; i >= 0; i--) { // Reverse dependency
+														// chain
 			IProjectDescriptor dependentDescriptor = chain.get(i);
-			if(!bucket.contains(dependentDescriptor) && !dependentDescriptor.equals(parentDescriptor)){				
-		bucket.add(dependentDescriptor);		
+			if (!bucket.contains(dependentDescriptor)
+					&& !dependentDescriptor.equals(parentDescriptor)) {
+				bucket.add(dependentDescriptor);
 			}
 		}
 	}

@@ -8,10 +8,11 @@ import java.net.URL;
 import org.junit.Assert;
 
 import picscout.depend.dependency.classes.Solution;
+import picscout.depend.dependency.interfaces.ISolution;
 
 public class SolutionTest {
 
-	Solution solution;
+	ISolution solution;
 	
 	@Before
 	public void init() {		
@@ -22,6 +23,6 @@ public class SolutionTest {
 	@Test
 	public void testParse() {
 		solution.parse();	
-		Assert.assertEquals("should have 4 projects",4,solution.getProjects().size());
+		Assert.assertEquals("should have 4 projects",4,solution.getProjectsDescriptors().size());
 	}
 }

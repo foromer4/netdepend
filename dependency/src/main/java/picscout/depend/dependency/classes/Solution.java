@@ -10,15 +10,17 @@ import java.util.regex.Matcher;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import picscout.depend.dependency.interfaces.IProjectDescriptor;
+import picscout.depend.dependency.interfaces.ISolution;
 import picscout.depend.dependency.utils.FileUtils;
 
 
-public class Solution {
+public class Solution implements ISolution {
 
 	private final String fullPath;
 	private final String path;
 	private final String name;
-	private List<ProjectDescriptor> projects = new ArrayList<ProjectDescriptor>();
+	private List<IProjectDescriptor> projects = new ArrayList<IProjectDescriptor>();
     static final Logger logger = LogManager.getLogger(Solution.class.getName());
 	
 	public Solution(String fullPath) {
@@ -29,22 +31,37 @@ public class Solution {
 
 	}
 
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.ISolution#getFullPath()
+	 */
 	public String getFullPath() {
 		return fullPath;
 	}
 	
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.ISolution#getPath()
+	 */
 	public String getPath() {
 		return path;
 	}
 
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.ISolution#getName()
+	 */
 	public String getName() {
 		return name;
 	}
 	
-	public List<ProjectDescriptor> getProjects()	{
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.ISolution#getProjects()
+	 */
+	public List<IProjectDescriptor> getProjectsDescriptors()	{
 		return projects;
 	}
 
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.ISolution#parse()
+	 */
 	public void parse() {
 		List<String> lines = null;
 		try {
@@ -79,16 +96,43 @@ public class Solution {
 			logger.warn("Error parsing data in solution: " + fullPath, ex);
 		}
 	}
-
+	
 	private void extractProjectDescriptor(String[] splittedData) {
 		String projectName = splittedData[0];
 		String projectFullPath = path +"\\" + splittedData[1];				
 		String projectGuid = splittedData[2].replace("{", "").replace("}", "");;
-		ProjectDescriptor descriptor = new ProjectDescriptor(projectFullPath, projectName, projectGuid, null);
-        
+		ProjectDescriptor descriptor = new ProjectDescriptor(projectFullPath, projectName, projectGuid, null);        
 		logger.info("added new project descriptor to solution: " + descriptor.toString());
 		projects.add(descriptor);
 	}
+	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result
+				+ ((fullPath == null) ? 0 : fullPath.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Solution other = (Solution) obj;
+		if (fullPath == null) {
+			if (other.fullPath != null)
+				return false;
+		} else if (!fullPath.equals(other.fullPath))
+			return false;
+		return true;
+	}
+
 	
  
 }
