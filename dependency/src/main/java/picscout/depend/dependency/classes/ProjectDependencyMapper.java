@@ -103,23 +103,35 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 
 		IProject projectDependencyParent;
 		for (String guid : project.getDependenciesGuids()) {
-			projectDependencyParent = store.getProjectByGuid(guid);
-			if (projectDependencyParent != null) {
-				saveDependency(projectDependencyParent, chain);
-				parseProject(projectDependencyParent, chain);
-			}
+			parseProjectDependency(chain, guid);
 		}
 
 		for (String assemblyName : project.getDepnedenciesAssembliesNames()) {
-			projectDependencyParent = store
-					.getProjectByAssemblyName(assemblyName);
-			if (projectDependencyParent != null) {
-				saveDependency(projectDependencyParent, chain);
-				parseProject(projectDependencyParent, chain);
-			}
+			parseAssemblyDependency(chain, assemblyName);
 		}
 		chain.remove(chain.size() - 1);// when done parsing remove this project
 										// from the chain
+	}
+
+	private void parseProjectDependency(ArrayList<IProjectDescriptor> chain,
+			String guid) {
+		IProject projectDependencyParent;
+		projectDependencyParent = store.getProjectByGuid(guid);
+		if (projectDependencyParent != null) {
+			saveDependency(projectDependencyParent, chain);
+			parseProject(projectDependencyParent, chain);
+		}
+	}
+
+	private void parseAssemblyDependency(ArrayList<IProjectDescriptor> chain,
+			String assemblyName) {
+		IProject projectDependencyParent;
+		projectDependencyParent = store
+				.getProjectByAssemblyName(assemblyName);
+		if (projectDependencyParent != null) {
+			saveDependency(projectDependencyParent, chain);
+			parseProject(projectDependencyParent, chain);
+		}
 	}
 
 	private void saveDependency(IProject parentProject,
