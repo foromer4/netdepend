@@ -42,27 +42,30 @@ public class SolutionMapper {
 		List<ISolution> reuslt = new ArrayList<ISolution>();
 		List<IProjectDescriptor> chain = projectMapper
 				.getProjectsThatDepeantOn(projectDescriptor);
-		for (ISolution solution : map) {
-			List<IProjectDescriptor> projectInSolution = solution
-					.getProjectsDescriptors();
-			if (projectInSolution.contains(projectDescriptor)) {
-				if (!reuslt.contains(solution)) {
-					reuslt.add(solution);
-					break;
-				}
-			}
+		fillSolutionByProject(projectDescriptor, reuslt);
+		
+		if (chain != null) {
 			for (IProjectDescriptor descriptor : chain) {
-				if (projectInSolution.contains(descriptor)) {
-					if (!reuslt.contains(solution)) {
-						reuslt.add(solution);
-						break;
-					}
-				}
+				fillSolutionByProject(descriptor, reuslt);
 			}
 		}
 
 		return reuslt;
 
+	}
+
+	private void fillSolutionByProject(IProjectDescriptor projectDescriptor,
+			List<ISolution> reuslt) {
+		
+		for (ISolution solution : map) {
+			List<IProjectDescriptor> projectsInSolution = solution
+					.getProjectsDescriptors();
+			if (projectsInSolution.contains(projectDescriptor)) {
+				if (!reuslt.contains(solution)) {
+					reuslt.add(solution);
+				}
+			}
+		}
 	}
 
 }
