@@ -77,8 +77,23 @@ public class ProjectDependencyMapperTest {
 	}
 
 	@Test
-	public void testCahinMap() {
+	public void testChainMap() {
 		Map<IProjectDescriptor, List<IProjectDescriptor>> map = mapper.getMap();
+		for (int i = 0; i < projects.size(); i++) {
+			List<IProjectDescriptor> expected = mapper
+					.getProjectsThatDepeantOn(projects.get(i).getDescriptor());
+			List<IProjectDescriptor> actual = map.get(projects.get(i).getDescriptor());
+			if (expected != null) {
+				assertArrayEquals("map shold reflect chains",
+						expected.toArray(), actual.toArray());
+			} else {
+				assertNull(
+						"If chain is null,map result for that key should be null",
+						actual);
+			}
+
+		}
+
 	}
 
 }
