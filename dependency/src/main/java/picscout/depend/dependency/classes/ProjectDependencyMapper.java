@@ -100,8 +100,7 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 		}
 		chain.add(project.getDescriptor());
 		alreadyParsedProjectsGuids.add(project.getDescriptor().getGuid());
-
-		IProject projectDependencyParent;
+		
 		for (String guid : project.getDependenciesGuids()) {
 			parseProjectDependency(chain, guid);
 		}

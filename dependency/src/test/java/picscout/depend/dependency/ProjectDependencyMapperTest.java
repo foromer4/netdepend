@@ -75,6 +75,15 @@ public class ProjectDependencyMapperTest {
 				.getDescriptor());
 		assertNull("a should have no projects that depend on it", result);
 	}
+	
+	@Test
+	public void testChainForAssemblies() {
+		IProject gProj = projects.get(6);
+		List<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(gProj
+				.getDescriptor());
+		assertEquals("G should have 2 projects that depend on it",2, result.size());
+	}
+
 
 	@Test
 	public void testChainMap() {

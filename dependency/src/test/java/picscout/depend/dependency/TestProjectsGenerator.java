@@ -32,6 +32,12 @@ public class TestProjectsGenerator {
 		addDependency(bProj, dProj, false);
 		addDependency(dProj, cProj, true);
 		addDependency(cProj, dProj, false);
+		
+		IProject eProj = createParoject("e", projects);
+		IProject fProj = createParoject("f", projects);
+		IProject gProj = createParoject("g", projects);
+		addDependency(eProj, fProj, false);
+		addDependency(fProj, gProj, false);
 
 		return projects;
 	}
