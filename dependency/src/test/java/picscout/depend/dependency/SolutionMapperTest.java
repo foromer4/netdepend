@@ -37,7 +37,8 @@ public class SolutionMapperTest {
 	public void init() {
 		ProjectDependencyMapper projectMapper = Mockito
 				.mock(ProjectDependencyMapper.class);
-		mapper = new SolutionMapper(projectMapper);
+		mapper = new SolutionMapper();
+		mapper.init(projectMapper);
 		createProjects(projectMapper);
 		createSolutions();
 	}

@@ -12,7 +12,7 @@ import org.apache.log4j.Logger;
 
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.ISolution;
-import picscout.depend.dependency.utils.FileUtils;
+import picscout.depend.dependency.utils.FileUtilsHelper;
 
 
 public class Solution implements ISolution {
@@ -65,7 +65,7 @@ public class Solution implements ISolution {
 	public void parse() {
 		List<String> lines = null;
 		try {
-			lines = FileUtils.readFile(fullPath);
+			lines = FileUtilsHelper.readFile(fullPath);
 		} catch (IOException e) {
 		}
 

@@ -15,14 +15,17 @@ import picscout.depend.dependency.interfaces.ISolution;
  * @author OSchliefer
  *
  */
-public class SolutionMapper {
+public class SolutionMapper implements ISolutionMapper {
 
 	private HashSet<ISolution> map;
 	private IProjectDependencyMapper projectMapper;
 
-	public SolutionMapper(IProjectDependencyMapper projectMapper) {
-		this.projectMapper = projectMapper;
+	public SolutionMapper() {		
 		map = new HashSet<ISolution>();
+	}
+	
+	public void init(IProjectDependencyMapper projectMapper) {
+		this.projectMapper = projectMapper;
 	}
 
 	public void add(ISolution solution) {
