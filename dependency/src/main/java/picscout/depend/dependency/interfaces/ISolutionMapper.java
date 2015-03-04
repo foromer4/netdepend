@@ -1,10 +1,6 @@
-package picscout.depend.dependency.classes;
+package picscout.depend.dependency.interfaces;
 
 import java.util.List;
-
-import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
-import picscout.depend.dependency.interfaces.IProjectDescriptor;
-import picscout.depend.dependency.interfaces.ISolution;
 
 public interface ISolutionMapper {
 	public abstract void add(ISolution solution);

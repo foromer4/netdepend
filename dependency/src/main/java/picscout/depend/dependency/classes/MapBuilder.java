@@ -14,6 +14,7 @@ import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectStore;
 import picscout.depend.dependency.interfaces.ISolution;
+import picscout.depend.dependency.interfaces.ISolutionMapper;
 import picscout.depend.dependency.utils.FileUtilsHelper;
 
 /**

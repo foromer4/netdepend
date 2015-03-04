@@ -7,6 +7,7 @@ import java.util.List;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.ISolution;
+import picscout.depend.dependency.interfaces.ISolutionMapper;
 
 /**
  * Map solution to all projects in it. Also knows given a changed project to
