@@ -15,6 +15,7 @@ public class ConfigHelper {
 			config = factory.getConfiguration();
 		} catch (ConfigurationException e) {
 			//log exception [O.S]
+			
 		}
 	}
 	
