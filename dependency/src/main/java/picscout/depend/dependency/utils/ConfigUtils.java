@@ -7,7 +7,7 @@ import org.apache.commons.configuration.ConfigurationFactory;
 import org.apache.commons.configuration.XMLConfiguration;
 
 
-public class ConfigHelper {
+public class ConfigUtils {
 	
 	private static Configuration config;
 	public static void init(String filePath) {
