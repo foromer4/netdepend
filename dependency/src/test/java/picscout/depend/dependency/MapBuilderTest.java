@@ -12,7 +12,8 @@ public class MapBuilderTest {
 	
 	@Before
 	public void init() {
-		ConfigHelper.init();		
+		String configPath = MapBuilderTest.class.getResource("/config.xml").toString();
+		ConfigHelper.init(configPath);		
 	  root =	ConfigHelper.readString("rootPath", "c:\\temp");
 	  builder = new MapBuilder(root);
 	}

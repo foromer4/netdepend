@@ -10,6 +10,8 @@ import org.apache.log4j.Logger;
 import org.apache.commons.io.FileUtils;
 import org.apache.log4j.LogManager;
 
+import com.cedarsoftware.util.io.JsonWriter;
+
 import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectStore;
@@ -48,8 +50,17 @@ public class MapBuilder {
 	public void parse() {
 		parseProjects();
 		parseSolutions();
+		persist();
 	}
 	
+	private void persist() {
+		/*FileOutputStream stream =
+		JsonWriter jw = new JsonWriter(outputStream);
+		jw.write(emp);
+		jw.close();*/
+	}
+
+
 	private void parseProjects() {
 		String[] projectExtensions = {csProjExtenstion};
 		Collection<File> projectsFiles = FileUtilsHelper.listFiles(rootPath, projectExtensions);
