@@ -2,7 +2,7 @@ package picscout.depend.dependency;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.MARSHAL;
+
 
 import picscout.depend.dependency.classes.MapBuilder;
 import picscout.depend.dependency.utils.ConfigUtils;
@@ -26,9 +26,5 @@ public class MapBuilderTest {
 		builder.parse();
 	}
 
-	@Test
-	public void testLoad() {
-
-		Object map = builder.load();
-	}
+	
 }

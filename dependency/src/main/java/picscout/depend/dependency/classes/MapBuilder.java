@@ -20,6 +20,7 @@ import org.apache.log4j.LogManager;
 import com.cedarsoftware.util.io.JsonReader;
 import com.cedarsoftware.util.io.JsonWriter;
 
+import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectStore;
@@ -33,7 +34,29 @@ import picscout.depend.dependency.utils.FileUtilsHelper;
  * @author OSchliefer
  *
  */
-public class MapBuilder {
+public class MapBuilder implements IMapBuilder {
+
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.IMapBuilder#getProjectStore()
+	 */
+	public IProjectStore getProjectStore() {
+		return projectStore;
+	}	
+
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.IMapBuilder#getProjectMapper()
+	 */
+	public IProjectDependencyMapper getProjectMapper() {
+		return projectMapper;
+	}
+	
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.IMapBuilder#getSolutionMapper()
+	 */
+	public ISolutionMapper getSolutionMapper() {
+		return solutionMapper;
+	}
+
 
 	private String rootPath;
 	private final static String csProjExtenstion = "csproj";
@@ -54,45 +77,15 @@ public class MapBuilder {
 		solutionMapper.init(projectMapper);
 	}
 
+	/* (non-Javadoc)
+	 * @see picscout.depend.dependency.classes.IMapBuilder#parse()
+	 */
 	public void parse() {
 		parseProjects();
-		parseSolutions();
-		persist();
+		parseSolutions();		
 	}
 
-	public static Object load() {
-		FileInputStream inStream;
-		Object map = null;
-		try {
-			inStream = new FileInputStream("c:\\temp\\json.txt");
-			JsonReader jr = new JsonReader(inStream);
-			map = jr.readObject();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		return map;
-	}
-
-	private void persist() {
-		Writer writer = null;
-		try {
-			String json = JsonWriter.objectToJson(this);
-			json = JsonWriter.formatJson(json);
-
-			writer = new BufferedWriter(new OutputStreamWriter(
-					new FileOutputStream("c:\\temp\\json.txt"), "utf-8"));
-			writer.write(json);
-		} catch (IOException ex) {
-			// report
-		} finally {
-			try {
-				writer.close();
-			} catch (Exception ex) {
-			}
-		}
-	}
+	
 
 	private void parseProjects() {
 		String[] projectExtensions = { csProjExtenstion };
