@@ -1,4 +1,4 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.acceptence;
 
 import org.junit.Before;
 import org.junit.Test;
