@@ -20,7 +20,7 @@ public interface IProjectDependencyMapper {
 	 *         another.
 	 */
 	public abstract List<IProjectDescriptor> getProjectsThatDepeantOn(
-			IProjectDescriptor projectDesceipror);
+			IProjectDescriptor projectDescriptor);
 
 	/**
 	 * Get map off project as key, projects that depend on this project as

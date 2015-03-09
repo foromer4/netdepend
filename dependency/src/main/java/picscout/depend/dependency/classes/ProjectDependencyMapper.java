@@ -56,17 +56,17 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 	 * (picscout.depend.dependency.interfaces.IProjectDescriptor)
 	 */
 	public List<IProjectDescriptor> getProjectsThatDepeantOn(
-			IProjectDescriptor projectDesceipror) {
+			IProjectDescriptor projectDescriptor) {
 		if (projectReveresedDependencies == null) {
 			init();
 		}
 		List<IProjectDescriptor> result = projectReveresedDependencies
-				.get(projectDesceipror);
+				.get(projectDescriptor);
 		if (result == null) {
 			return null;
 		}
 		return new ArrayList<IProjectDescriptor>(
-				projectReveresedDependencies.get(projectDesceipror));
+				projectReveresedDependencies.get(projectDescriptor));
 	}
 
 	/*
