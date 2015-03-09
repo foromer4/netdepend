@@ -2,11 +2,8 @@ package picscout.depend.dependency.classes;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
 import picscout.depend.dependency.interfaces.IProject;
-import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.IProjectStore;
 
 /**

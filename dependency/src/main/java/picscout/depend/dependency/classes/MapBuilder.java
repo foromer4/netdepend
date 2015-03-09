@@ -1,25 +1,9 @@
 package picscout.depend.dependency.classes;
 
-import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.io.Writer;
 import java.util.Collection;
-import java.util.List;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.LogManager;
-
-import com.cedarsoftware.util.io.JsonReader;
-import com.cedarsoftware.util.io.JsonWriter;
-
 import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
