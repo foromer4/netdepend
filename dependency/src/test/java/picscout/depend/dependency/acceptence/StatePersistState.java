@@ -1,15 +1,19 @@
-package picscout.depend.dependency;
+package picscout.depend.dependency.acceptence;
 
+import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import org.omg.CORBA.MARSHAL;
 
 import picscout.depend.dependency.classes.MapBuilder;
+import picscout.depend.dependency.classes.StatePersist;
+import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.utils.ConfigUtils;
 
-public class MapBuilderTest {
+public class StatePersistState {
+
 	String root;
 	MapBuilder builder;
+	StatePersist persister;
 
 	@Before
 	public void init() {
@@ -18,17 +22,19 @@ public class MapBuilderTest {
 		ConfigUtils.init(configPath);
 		root = ConfigUtils.readString("rootPath", "c:\\temp");
 		builder = new MapBuilder(root);
+		persister = new StatePersist();
 	}
 
 	@Test
-	public void testParse() {
-
+	public void testPersist() {
 		builder.parse();
+		persister.persist(builder);
 	}
 
 	@Test
 	public void testLoad() {
-
-		Object map = builder.load();
+		IMapBuilder newBuilder = persister.load();
+		Assert.assertNotNull("Map builder should be recreated", newBuilder);
 	}
+
 }

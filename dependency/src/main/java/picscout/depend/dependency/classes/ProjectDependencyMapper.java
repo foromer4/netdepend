@@ -5,11 +5,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Stack;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
@@ -28,7 +25,8 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 
 	private IProjectStore store;
 	private HashSet<String> alreadyParsedProjectsGuids;
-	private static final Logger logger = LogManager.getLogger(ProjectDependencyMapper.class.getName());
+	private static final Logger logger = LogManager
+			.getLogger(ProjectDependencyMapper.class.getName());
 	/**
 	 * For each project (guid), hold a set of all projects (guids) that depend
 	 * on that project.
@@ -98,26 +96,26 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 
 	private void parseProject(IProject project,
 			ArrayList<IProjectDescriptor> chain) {
-		try{
-		if (alreadyParsedProjectsGuids.contains(project.getDescriptor()
-				.getGuid())) {
-			return;
-		}
-		chain.add(project.getDescriptor());
-		alreadyParsedProjectsGuids.add(project.getDescriptor().getGuid());
-		
-		for (String guid : project.getDependenciesGuids()) {
-			parseProjectDependency(chain, guid);
-		}
+		try {
+			if (alreadyParsedProjectsGuids.contains(project.getDescriptor()
+					.getGuid())) {
+				return;
+			}
+			chain.add(project.getDescriptor());
+			alreadyParsedProjectsGuids.add(project.getDescriptor().getGuid());
 
-		for (String assemblyName : project.getDepnedenciesAssembliesNames()) {
-			parseAssemblyDependency(chain, assemblyName);
-		}
-		chain.remove(chain.size() - 1);// when done parsing remove this project
-										// from the chain
-		}
-		catch (Exception ex) {
-			logger.warn("Problem parsing file dependency" , ex);
+			for (String guid : project.getDependenciesGuids()) {
+				parseProjectDependency(chain, guid);
+			}
+
+			for (String assemblyName : project.getDepnedenciesAssembliesNames()) {
+				parseAssemblyDependency(chain, assemblyName);
+			}
+			chain.remove(chain.size() - 1);// when done parsing remove this
+											// project
+											// from the chain
+		} catch (Exception ex) {
+			logger.warn("Problem parsing file dependency", ex);
 		}
 	}
 
@@ -134,8 +132,7 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 	private void parseAssemblyDependency(ArrayList<IProjectDescriptor> chain,
 			String assemblyName) {
 		IProject projectDependencyParent;
-		projectDependencyParent = store
-				.getProjectByAssemblyName(assemblyName);
+		projectDependencyParent = store.getProjectByAssemblyName(assemblyName);
 		if (projectDependencyParent != null) {
 			saveDependency(projectDependencyParent, chain);
 			parseProject(projectDependencyParent, chain);

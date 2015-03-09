@@ -3,7 +3,6 @@ package picscout.depend.dependency.utils;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
-import org.apache.commons.configuration.ConfigurationFactory;
 import org.apache.commons.configuration.XMLConfiguration;
 
 

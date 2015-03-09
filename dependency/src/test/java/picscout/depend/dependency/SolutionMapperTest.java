@@ -1,18 +1,13 @@
 package picscout.depend.dependency;
 
-import java.io.Console;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
-
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-
 import picscout.depend.dependency.classes.ProjectDependencyMapper;
 import picscout.depend.dependency.classes.SolutionMapper;
 import picscout.depend.dependency.interfaces.IProject;
