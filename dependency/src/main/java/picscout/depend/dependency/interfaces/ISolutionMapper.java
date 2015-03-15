@@ -4,6 +4,7 @@ import java.util.List;
 
 public interface ISolutionMapper {
 	public abstract void add(ISolution solution);
-	public abstract List<ISolution> getSolutionsByProject(IProjectDescriptor projectDescriptor);
+	public abstract List<ISolution> getSolutionsByProjects(List<IProjectDescriptor> projectDescriptors);
 	public void init(IProjectDependencyMapper projectMapper);
+	public abstract List<ISolution> getSolutionsBySolutionsNames(List<String> names);
 }

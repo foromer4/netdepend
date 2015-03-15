@@ -87,8 +87,8 @@ public class SolutionMapperTest {
 
 	@Test
 	public void testNotExistingProject() {
-		result = mapper.getSolutionsByProject(Mockito
-				.mock(IProjectDescriptor.class));
+		result = mapper.getSolutionsByProjects(getSingleList(Mockito
+				.mock(IProjectDescriptor.class)));
 		Assert.assertTrue("No solutions depend on bogus project",
 				result.isEmpty());
 
@@ -96,7 +96,8 @@ public class SolutionMapperTest {
 
 	@Test
 	public void testProjectA() {
-		result = mapper.getSolutionsByProject(aProj.getDescriptor());
+		result = mapper.getSolutionsByProjects(getSingleList(aProj
+				.getDescriptor()));
 
 		ISolution[] expected = new ISolution[] {};
 		for (ISolution s : expected) {
@@ -111,7 +112,8 @@ public class SolutionMapperTest {
 	@Test
 	public void testProjectB() {
 
-		result = mapper.getSolutionsByProject(bProj.getDescriptor());
+		result = mapper.getSolutionsByProjects(getSingleList(bProj
+				.getDescriptor()));
 
 		Assert.assertTrue("For project b we should build soutions: a,b,c",
 				checkSameElements(Arrays.asList(aSol, bSol, cSol), result));
@@ -123,7 +125,8 @@ public class SolutionMapperTest {
 	@Test
 	public void testProjectC() {
 
-		result = mapper.getSolutionsByProject(cProj.getDescriptor());
+		result = mapper.getSolutionsByProjects(getSingleList(cProj
+				.getDescriptor()));
 
 		Assert.assertTrue(
 				"For project C we should build soutions: a,b,c,d",
@@ -134,7 +137,8 @@ public class SolutionMapperTest {
 	@Test
 	public void testProjectD() {
 
-		result = mapper.getSolutionsByProject(dProj.getDescriptor());
+		result = mapper.getSolutionsByProjects(getSingleList(dProj
+				.getDescriptor()));
 
 		Assert.assertTrue(
 				"For project D we should build soutions: a,b,c,d",
@@ -155,6 +159,12 @@ public class SolutionMapperTest {
 		}
 
 		return true;
+	}
+
+	private List<IProjectDescriptor> getSingleList(IProjectDescriptor descriptor) {
+		List<IProjectDescriptor> result = new ArrayList<IProjectDescriptor>();
+		result.add(descriptor);
+		return result;
 	}
 
 }

@@ -21,10 +21,10 @@ public class SolutionMapper implements ISolutionMapper {
 	private HashSet<ISolution> map;
 	private IProjectDependencyMapper projectMapper;
 
-	public SolutionMapper() {		
+	public SolutionMapper() {
 		map = new HashSet<ISolution>();
 	}
-	
+
 	public void init(IProjectDependencyMapper projectMapper) {
 		this.projectMapper = projectMapper;
 	}
@@ -32,6 +32,8 @@ public class SolutionMapper implements ISolutionMapper {
 	public void add(ISolution solution) {
 		map.add(solution);
 	}
+
+	
 
 	/**
 	 * Get all solutions that should be built as a result of project change,
@@ -41,26 +43,43 @@ public class SolutionMapper implements ISolutionMapper {
 	 * @param projectDescriptor
 	 * @return
 	 */
-	public List<ISolution> getSolutionsByProject(
-			IProjectDescriptor projectDescriptor) {
+	public List<ISolution> getSolutionsByProjects(
+			List<IProjectDescriptor> projectDescriptors) {
 		List<ISolution> reuslt = new ArrayList<ISolution>();
-		List<IProjectDescriptor> chain = projectMapper
-				.getProjectsThatDepeantOn(projectDescriptor);
-		fillSolutionByProject(projectDescriptor, reuslt);
-		
-		if (chain != null) {
-			for (IProjectDescriptor descriptor : chain) {
-				fillSolutionByProject(descriptor, reuslt);
+		for (IProjectDescriptor projectDescriptor : projectDescriptors) {
+			List<IProjectDescriptor> chain = projectMapper
+					.getProjectsThatDepeantOn(projectDescriptor);
+			fillSolutionByProject(projectDescriptor, reuslt);
+			if (chain != null) {
+				for (IProjectDescriptor descriptor : chain) {
+					fillSolutionByProject(descriptor, reuslt);
+				}
+			}
+		}		
+		return reuslt;
+	}
+
+	public  List<ISolution> getSolutionsBySolutionsNames(List<String> names)	{
+	
+		//TODO
+		List<IProjectDescriptor> projectDescriptors = new ArrayList<IProjectDescriptor>();	
+		for(String name: names) {
+			for(ISolution solution : map) {
+				if(solution.getName() == name) {
+					for(IProjectDescriptor descriptor: solution.getProjectsDescriptors()) {
+						if(!projectDescriptors.contains(descriptor)) {
+							projectDescriptors.add(descriptor);
+						}
+					}					
+				}
 			}
 		}
-
-		return reuslt;
-
+		return getSolutionsByProjects(projectDescriptors);
 	}
 
 	private void fillSolutionByProject(IProjectDescriptor projectDescriptor,
 			List<ISolution> reuslt) {
-		
+
 		for (ISolution solution : map) {
 			List<IProjectDescriptor> projectsInSolution = solution
 					.getProjectsDescriptors();

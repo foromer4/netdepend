@@ -1,6 +1,8 @@
 package picscout.depend.dependency.main;
 
+import java.util.ArrayList;
 import java.util.List;
+
 import picscout.depend.dependency.classes.MapBuilder;
 import picscout.depend.dependency.classes.StatePersist;
 import picscout.depend.dependency.interfaces.IMapBuilder;
@@ -36,7 +38,10 @@ public class Runner {
 		initIfRequired();
 		loadOrInitBuilder();
 		ISolutionMapper solutionMapper = builder.getSolutionMapper();
-		return solutionMapper.getSolutionsByProject(projectDescriptor);
+		List<IProjectDescriptor> descriptors = new ArrayList<IProjectDescriptor>();
+		descriptors.add(projectDescriptor);
+
+		return solutionMapper.getSolutionsByProjects(descriptors);
 	}
 
 	private void init() {
