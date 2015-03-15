@@ -28,19 +28,19 @@ public class ProjectTest {
 	@Test
 	public void testParse() {		
 		project.parse();
-		List<String> expectedDepnedenciesGuids = CreateDepnedenciesGuids();
-		List<String> expectedDepnedenciesAssembliesNames = CreateDepnedenciesAssembliesNames();
+		List<String> expectedDepnedenciesGuids = createDepnedenciesGuids();
+		List<String> expectedDepnedenciesAssembliesNames = createDepnedenciesAssembliesNames();
 		Assert.assertEquals("should have 1 Guid dependency",expectedDepnedenciesGuids,project.getDependenciesGuids());
 		Assert.assertEquals("should have 8 Guid assembly names",expectedDepnedenciesAssembliesNames,project.getDepnedenciesAssembliesNames());
 	}
 
-	private List<String> CreateDepnedenciesGuids() {
+	private List<String> createDepnedenciesGuids() {
 		List<String> list =  new ArrayList<String>();
 		list.add("8b7db1ba-afc9-42aa-855c-c588876b65e2");
 		return list;
 	}
 
-	private List<String> CreateDepnedenciesAssembliesNames() {
+	private List<String> createDepnedenciesAssembliesNames() {
 		List<String> list =  new ArrayList<String>();
 		list.add("PicScout.IR.Crawler.Common");
 		list.add("System");
