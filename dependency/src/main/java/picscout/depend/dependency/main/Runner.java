@@ -13,6 +13,11 @@ import picscout.depend.dependency.interfaces.ISolutionMapper;
 import picscout.depend.dependency.interfaces.IStatePersist;
 import picscout.depend.dependency.utils.ConfigUtils;
 
+/**
+ * Main enrty point
+ * @author oschliefer
+ *
+ */
 public class Runner {
 
 	private IMapBuilder builder;
