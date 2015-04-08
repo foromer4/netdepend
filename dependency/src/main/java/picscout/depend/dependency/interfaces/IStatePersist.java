@@ -20,6 +20,5 @@ public interface IStatePersist {
 	 */
 	public IMapBuilder load();
 	
-	
 
 }

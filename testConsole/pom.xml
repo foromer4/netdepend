@@ -28,6 +28,9 @@
 							<manifest>
 								<mainClass>picscout.depend.console.Main</mainClass>
 							</manifest>
+							<manifestEntries>
+								<Class-Path>.</Class-Path>
+							</manifestEntries>
 						</archive>
 					</configuration>
 					<executions>

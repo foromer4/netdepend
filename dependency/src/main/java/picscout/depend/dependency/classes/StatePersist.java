@@ -38,12 +38,13 @@ public class StatePersist implements IStatePersist {
 			writer = new BufferedWriter(new OutputStreamWriter(
 					new FileOutputStream(jsonFilePath), "utf-8"));
 			writer.write(json);
-		} catch (IOException ex) {
-			// report
+		} catch (IOException e) {
+			logger.warn("Error persisting state", e);
 		} finally {
 			try {
 				writer.close();
-			} catch (Exception ex) {
+			} catch (Exception e) {
+				logger.warn("Error closing connection to state file", e);
 			}
 		}
 
@@ -58,9 +59,8 @@ public class StatePersist implements IStatePersist {
 			inStream = new FileInputStream(jsonFilePath);
 			jr = new JsonReader(inStream);
 			map = (IMapBuilder) jr.readObject();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		} catch (Exception e) {
+			logger.warn("Error rerading state from state file:" + jsonFilePath, e);
 		} finally {
 			if (jr != null) {
 				jr.close();

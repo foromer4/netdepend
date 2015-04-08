@@ -30,17 +30,22 @@ public class Runner {
 	private Boolean isInitialized = false;
 	private static final Logger logger = LogManager.getLogger(Runner.class
 			.getName());
+	private static String root;
 
 	public void CalculateDependencies() {
 		logger.info("Starting calculation of dependencies");
 		initIfRequired();
-		initBuilder();
+		if (builder == null) {
+			builder = new MapBuilder(root);
+		}
+		builder.parse();
 		persister.persist(builder);
 	}
 
 	public List<IProjectDescriptor> getProjectsThatDepeantOnProject(
 			IProjectDescriptor projectDescriptor) {
 		initIfRequired();
+		loadBuilder();
 		IProjectDependencyMapper mapper = builder.getProjectMapper();
 		return mapper.getProjectsThatDepeantOn(projectDescriptor);
 	}
@@ -48,14 +53,17 @@ public class Runner {
 	public List<ISolution> getSolutionsThatDependOnProject(
 			IProjectDescriptor projectDescriptor) {
 		initIfRequired();
+		loadBuilder();
 		ISolutionMapper solutionMapper = builder.getSolutionMapper();
 		List<IProjectDescriptor> descriptors = new ArrayList<IProjectDescriptor>();
 		descriptors.add(projectDescriptor);
 		return solutionMapper.getSolutionsByProjects(descriptors);
 	}
 
-	public List<ISolution> getSolutionsThatDependOnSolutionsByNames(List<String> names) {
+	public List<ISolution> getSolutionsThatDependOnSolutionsByNames(
+			List<String> names) {
 		initIfRequired();
+		loadBuilder();
 		ISolutionMapper solutionMapper = builder.getSolutionMapper();
 		return solutionMapper.getSolutionsBySolutionsNames(names);
 	}
@@ -64,28 +72,24 @@ public class Runner {
 		String configPath = Runner.class.getResource("/config.xml").toString();
 		logger.info("Setting config path to be:" + configPath);
 		ConfigUtils.init(configPath);
+		root = ConfigUtils.readString("rootPath", "c:\\temp");
+		logger.info("Root directory to scan is:" + root);
 		persister = new StatePersist();
 		isInitialized = true;
-	}
+	}	
 
-	private void initBuilder() {
-		String root = ConfigUtils.readString("rootPath", "c:\\temp");
+	private void loadBuilder() {
 
-		logger.info("Root directory to scan is:" + root);
-
-		builder = new MapBuilder(root);
-
-		builder.parse();
+		builder = persister.load();
+		if (builder == null) {
+			builder = new MapBuilder(root);
+		}
 	}
 
 	private void initIfRequired() {
 		if (!isInitialized) {
 			init();
-		}
-		builder = persister.load();
-		if (builder == null) {
-			initBuilder();
-		}
+		}		
 	}
 
 }
