@@ -31,9 +31,7 @@ public class SolutionMapper implements ISolutionMapper {
 
 	public void add(ISolution solution) {
 		map.add(solution);
-	}
-
-	
+	}	
 
 	/**
 	 * Get all solutions that should be built as a result of project change,
@@ -59,9 +57,7 @@ public class SolutionMapper implements ISolutionMapper {
 		return reuslt;
 	}
 
-	public  List<ISolution> getSolutionsBySolutionsNames(List<String> names)	{
-	
-		//TODO
+	public  List<ISolution> getSolutionsBySolutionsNames(List<String> names)	{	
 		List<IProjectDescriptor> projectDescriptors = new ArrayList<IProjectDescriptor>();	
 		for(String name: names) {
 			for(ISolution solution : map) {
@@ -79,7 +75,6 @@ public class SolutionMapper implements ISolutionMapper {
 
 	private void fillSolutionByProject(IProjectDescriptor projectDescriptor,
 			List<ISolution> reuslt) {
-
 		for (ISolution solution : map) {
 			List<IProjectDescriptor> projectsInSolution = solution
 					.getProjectsDescriptors();

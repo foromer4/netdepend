@@ -72,6 +72,8 @@ public class MapBuilder implements IMapBuilder {
 	
 
 	private void parseProjects() {
+		
+		logger.info("Parsing projects");
 		String[] projectExtensions = { csProjExtenstion };
 		Collection<File> projectsFiles = FileUtilsHelper.listFiles(rootPath,
 				projectExtensions);
@@ -93,6 +95,7 @@ public class MapBuilder implements IMapBuilder {
 	}
 
 	private void parseSolutions() {
+		logger.info("Parsing solutions");
 		String[] solutionExtensions = { solutionExtenstion };
 		Collection<File> solutionFiles = FileUtilsHelper.listFiles(rootPath,
 				solutionExtensions);
