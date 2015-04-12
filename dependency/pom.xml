@@ -68,8 +68,8 @@
 					</configuration>
 					<executions>
 						<execution>
-							<id>make-assembly</id> <!-- this is used for inheritance merges -->
-							<phase>package</phase> <!-- bind to the packaging phase -->
+							<id>make-assembly</id> <!--  this is used for inheritance merges-->
+							<phase>package</phase><!-- bind to the packaging phase-->
 							<goals>
 								<goal>single</goal>
 							</goals>
@@ -85,9 +85,16 @@
             <includes>
                 <include>log4j2.xml</include>
                 <include>config.xml</include>
+                 <include>test.csproj</include>
+                 <include>test.sln</include>
             </includes>
         </resource>
     </resources>
+     <!-- <testResources>
+        <testResource>
+         <directory>${project.basedir}/src/main/resources</directory>
+        </testResource>
+        </testResources> -->
 	</build>
 
 </project>
