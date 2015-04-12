@@ -13,8 +13,8 @@ import picscout.depend.dependency.interfaces.ISolution;
 public class TestProjectsGenerator {
 
 	/**
-	 * Build a simulated connection chain between projects a-d. A -> B , D B ->
-	 * C ,D D -> C C -> D
+	 * Build a simulated connection chain between projects a-d. A -> B , D; B ->
+	 * C ,D; D -> C; C -> D
 	 * 
 	 * @return Projects mocks
 	 */
@@ -72,6 +72,7 @@ public class TestProjectsGenerator {
 	
 	public static ISolution createSoution(String name, List<IProjectDescriptor> projectsInSolution) {
 		ISolution result = Mockito.mock(ISolution.class);
+		Mockito.when(result.getName()).thenReturn(name);
 		Mockito.when(result.getProjectsDescriptors()).thenReturn(projectsInSolution);
 		return result;
 	}

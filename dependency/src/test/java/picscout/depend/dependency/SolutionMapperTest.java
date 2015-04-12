@@ -1,13 +1,17 @@
 package picscout.depend.dependency;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
+
+import org.hamcrest.Matcher;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
+
 import picscout.depend.dependency.classes.ProjectDependencyMapper;
 import picscout.depend.dependency.classes.SolutionMapper;
 import picscout.depend.dependency.interfaces.IProject;
@@ -108,6 +112,34 @@ public class SolutionMapperTest {
 				checkSameElements(Arrays.asList(aSol, cSol), result));
 
 	}
+	
+	@Test
+	public void testGetBySolutionDName() {
+		List<String> names  = Arrays.asList("dSolution");
+		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
+		Assert.assertTrue(checkSameElements(results, Arrays.asList(aSol, bSol, cSol)));		
+	}
+	
+	@Test
+	public void testGetBySolutionDCName() {
+		List<String> names  = Arrays.asList("dSolution" , "cSolution");
+		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
+		Assert.assertTrue(checkSameElements(results, Arrays.asList(aSol, bSol)));		
+	}
+	
+	@Test
+	public void testGetBySolutionDCBName() {
+		List<String> names  = Arrays.asList("dSolution" , "cSolution" , "bSolution");
+		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
+		Assert.assertTrue(checkSameElements(results, Arrays.asList(aSol)));		
+	}
+	
+	@Test
+	public void testGetBySolutionDCBAName() {
+		List<String> names  = Arrays.asList("dSolution" , "cSolution" , "bSolution" , "aSolution");
+		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
+		Assert.assertEquals("should get no results", 0, results.size());
+	}
 
 	@Test
 	public void testProjectB() {
@@ -120,6 +152,13 @@ public class SolutionMapperTest {
 
 		Assert.assertEquals("cSol is last in chain (a,b can change places)",
 				cSol, result.get(2));
+	}
+	
+	@Test
+	public void testGetBySolutionAName() {
+		List<String> names  = Arrays.asList("aSolution");
+		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
+		Assert.assertTrue(checkSameElements(results, Arrays.asList(cSol, bSol)));		
 	}
 
 	@Test

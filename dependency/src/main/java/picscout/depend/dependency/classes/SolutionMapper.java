@@ -58,10 +58,12 @@ public class SolutionMapper implements ISolutionMapper {
 	}
 
 	public  List<ISolution> getSolutionsBySolutionsNames(List<String> names)	{	
+		List<ISolution> changedSolutions = new ArrayList<ISolution>();
 		List<IProjectDescriptor> projectDescriptors = new ArrayList<IProjectDescriptor>();	
 		for(String name: names) {
 			for(ISolution solution : map) {
 				if(solution.getName() == name) {
+					changedSolutions.add(solution);
 					for(IProjectDescriptor descriptor: solution.getProjectsDescriptors()) {
 						if(!projectDescriptors.contains(descriptor)) {
 							projectDescriptors.add(descriptor);
@@ -70,7 +72,9 @@ public class SolutionMapper implements ISolutionMapper {
 				}
 			}
 		}
-		return getSolutionsByProjects(projectDescriptors);
+		List<ISolution> allDependentSolutionos= getSolutionsByProjects(projectDescriptors);
+		allDependentSolutionos.removeAll(changedSolutions);
+		return allDependentSolutionos;
 	}
 
 	private void fillSolutionByProject(IProjectDescriptor projectDescriptor,
