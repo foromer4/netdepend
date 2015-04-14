@@ -29,7 +29,7 @@ public final class ProjectDescriptor implements IProjectDescriptor {
 			this.fullPath = fullPath;
 		}
 		this.name = name;
-		this.guid = guid;
+		this.guid = guid.toLowerCase();
 		this.assemblyName = assemblyName;		
 	}
 	
@@ -71,12 +71,7 @@ public final class ProjectDescriptor implements IProjectDescriptor {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((assemblyName == null) ? 0 : assemblyName.hashCode());
-		result = prime * result
-				+ ((fullPath == null) ? 0 : fullPath.hashCode());
 		result = prime * result + ((guid == null) ? 0 : guid.hashCode());
-		result = prime * result + ((name == null) ? 0 : name.hashCode());
 		return result;
 	}
 
@@ -89,29 +84,11 @@ public final class ProjectDescriptor implements IProjectDescriptor {
 		if (getClass() != obj.getClass())
 			return false;
 		ProjectDescriptor other = (ProjectDescriptor) obj;
-		if (assemblyName == null) {
-			if (other.assemblyName != null)
-				return false;
-		} else if (!assemblyName.equals(other.assemblyName))
-			return false;
-		if (fullPath == null) {
-			if (other.fullPath != null)
-				return false;
-		} else if (!fullPath.equals(other.fullPath))
-			return false;
 		if (guid == null) {
 			if (other.guid != null)
 				return false;
 		} else if (!guid.equals(other.guid))
 			return false;
-		if (name == null) {
-			if (other.name != null)
-				return false;
-		} else if (!name.equals(other.name))
-			return false;
 		return true;
 	}
-
-	
-		
 }

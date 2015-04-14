@@ -31,7 +31,7 @@ public class SolutionMapper implements ISolutionMapper {
 
 	public void add(ISolution solution) {
 		map.add(solution);
-	}	
+	}
 
 	/**
 	 * Get all solutions that should be built as a result of project change,
@@ -53,26 +53,27 @@ public class SolutionMapper implements ISolutionMapper {
 					fillSolutionByProject(descriptor, reuslt);
 				}
 			}
-		}		
+		}
 		return reuslt;
 	}
 
-	public  List<ISolution> getSolutionsBySolutionsNames(List<String> names)	{	
+	public List<ISolution> getSolutionsBySolutionsNames(List<String> names) {
 		List<ISolution> changedSolutions = new ArrayList<ISolution>();
-		List<IProjectDescriptor> projectDescriptors = new ArrayList<IProjectDescriptor>();	
-		for(String name: names) {
-			for(ISolution solution : map) {
-				if(solution.getName() == name) {
+		List<IProjectDescriptor> projectDescriptors = new ArrayList<IProjectDescriptor>();
+		for (String name : names) {
+			for (ISolution solution : map) {
+				if (solution.getName().equals(name)) {
 					changedSolutions.add(solution);
-					for(IProjectDescriptor descriptor: solution.getProjectsDescriptors()) {
-						if(!projectDescriptors.contains(descriptor)) {
+					for (IProjectDescriptor descriptor : solution
+							.getProjectsDescriptors()) {
+						if (!projectDescriptors.contains(descriptor)) {
 							projectDescriptors.add(descriptor);
 						}
-					}					
+					}
 				}
 			}
 		}
-		List<ISolution> allDependentSolutionos= getSolutionsByProjects(projectDescriptors);
+		List<ISolution> allDependentSolutionos = getSolutionsByProjects(projectDescriptors);
 		allDependentSolutionos.removeAll(changedSolutions);
 		return allDependentSolutionos;
 	}

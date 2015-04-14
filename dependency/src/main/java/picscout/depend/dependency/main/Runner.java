@@ -80,10 +80,11 @@ public class Runner {
 
 	private void loadBuilder() {
 
-		builder = persister.load();
-		if (builder == null) {
+	//	builder = persister.load();
+		//if (builder == null) {
 			builder = new MapBuilder(root);
-		}
+			builder.parse();
+		//}
 	}
 
 	private void initIfRequired() {
