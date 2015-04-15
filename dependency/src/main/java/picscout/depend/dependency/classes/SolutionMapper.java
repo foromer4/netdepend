@@ -62,7 +62,7 @@ public class SolutionMapper implements ISolutionMapper {
 		List<IProjectDescriptor> projectDescriptors = new ArrayList<IProjectDescriptor>();
 		for (String name : names) {
 			for (ISolution solution : map) {
-				if (solution.getName().equals(name)) {
+				if (solution.getName().equalsIgnoreCase(name)) {
 					changedSolutions.add(solution);
 					for (IProjectDescriptor descriptor : solution
 							.getProjectsDescriptors()) {
