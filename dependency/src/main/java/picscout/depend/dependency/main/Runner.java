@@ -69,7 +69,13 @@ public class Runner {
 	}
 
 	private void init() {
-		String configPath = Runner.class.getResource("/config.xml").toString();
+		
+		String configPath = System.getProperty("config_file_path");
+		if(configPath == null || configPath.isEmpty()){	
+	    logger.info("no config path passed in. use default");
+		configPath = Runner.class.getResource("/config.xml").toString();
+		}
+		
 		logger.info("Setting config path to be:" + configPath);
 		ConfigUtils.init(configPath);
 		root = ConfigUtils.readString("rootPath", "c:\\temp");
