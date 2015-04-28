@@ -42,7 +42,7 @@ public class MapBuilder implements IMapBuilder {
 	}
 
 
-	private String rootPath;
+	private String[] rootPaths;
 	private final static String csProjExtenstion = "csproj";
 	private final static String solutionExtenstion = "sln";
 	private static final Logger logger = LogManager.getLogger(MapBuilder.class
@@ -51,8 +51,8 @@ public class MapBuilder implements IMapBuilder {
 	private IProjectDependencyMapper projectMapper;
 	private ISolutionMapper solutionMapper;
 
-	public MapBuilder(String rootPath) {
-		this.rootPath = rootPath;
+	public MapBuilder(String[] rootPaths) {
+		this.rootPaths = rootPaths;
 
 		// TODO - factories for store
 		projectStore = new ProjectStore();
@@ -75,7 +75,7 @@ public class MapBuilder implements IMapBuilder {
 		
 		logger.info("Parsing projects");
 		String[] projectExtensions = { csProjExtenstion };
-		Collection<File> projectsFiles = FileUtilsHelper.listFiles(rootPath,
+		Collection<File> projectsFiles = FileUtilsHelper.listFiles(rootPaths,
 				projectExtensions);
 		for (File file : projectsFiles) {
 			try {
@@ -97,7 +97,7 @@ public class MapBuilder implements IMapBuilder {
 	private void parseSolutions() {
 		logger.info("Parsing solutions");
 		String[] solutionExtensions = { solutionExtenstion };
-		Collection<File> solutionFiles = FileUtilsHelper.listFiles(rootPath,
+		Collection<File> solutionFiles = FileUtilsHelper.listFiles(rootPaths,
 				solutionExtensions);
 		for (File file : solutionFiles) {
 			try {

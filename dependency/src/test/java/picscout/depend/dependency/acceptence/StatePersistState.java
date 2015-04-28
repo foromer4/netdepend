@@ -11,7 +11,7 @@ import picscout.depend.dependency.utils.ConfigUtils;
 
 public class StatePersistState {
 
-	String root;
+	String[] roots;
 	MapBuilder builder;
 	StatePersist persister;
 
@@ -20,8 +20,8 @@ public class StatePersistState {
 		String configPath = MapBuilderTest.class.getResource("/config.xml")
 				.toString();
 		ConfigUtils.init(configPath);
-		root = ConfigUtils.readString("rootPath", "c:\\temp");
-		builder = new MapBuilder(root);
+		roots = ConfigUtils.readList("rootPath", new String[]{"c:\\temp"}, null);
+		builder = new MapBuilder(roots);
 		persister = new StatePersist();
 	}
 

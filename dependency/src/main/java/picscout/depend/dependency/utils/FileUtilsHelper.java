@@ -7,6 +7,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 
 public class FileUtilsHelper {
@@ -23,8 +25,14 @@ public class FileUtilsHelper {
 	}
 	
 	
-	public static Collection<File> listFiles(String rootPath, String[] extensionFilters) {	
+	public static Collection<File> listFiles(String[] rootPaths, String[] extensionFilters) {	
 	
-		return FileUtils.listFiles(new File(rootPath), extensionFilters, true);
+		Collection<File> aggregatedResult = new ArrayList<File>();		
+		for(String rootPath: rootPaths) {		
+	    Collection<File> result = FileUtils.listFiles(new File(rootPath), extensionFilters, true);
+		
+		aggregatedResult = CollectionUtils.union(result, aggregatedResult);
+		}
+		return aggregatedResult;
 	}
 }

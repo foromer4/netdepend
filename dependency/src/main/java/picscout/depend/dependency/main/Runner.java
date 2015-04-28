@@ -30,13 +30,13 @@ public class Runner {
 	private Boolean isInitialized = false;
 	private static final Logger logger = LogManager.getLogger(Runner.class
 			.getName());
-	private static String root;
+	private static String[] roots;
 
 	public void CalculateDependencies() {
 		logger.info("Starting calculation of dependencies");
 		initIfRequired();
 		if (builder == null) {
-			builder = new MapBuilder(root);
+			builder = new MapBuilder(roots);
 		}
 		builder.parse();
 		persister.persist(builder);
@@ -69,25 +69,26 @@ public class Runner {
 	}
 
 	private void init() {
-		
+
 		String configPath = System.getProperty("config_file_path");
-		if(configPath == null || configPath.isEmpty()){	
-	    logger.info("no config path passed in. use default");
-		configPath = Runner.class.getResource("/config.xml").toString();
+		if (configPath == null || configPath.isEmpty()) {
+			logger.info("no config path passed in. use default");
+			configPath = Runner.class.getResource("/config.xml").toString();
 		}
-		
+
 		logger.info("Setting config path to be:" + configPath);
 		ConfigUtils.init(configPath);
-		root = ConfigUtils.readString("rootPath", "c:\\temp");
-		logger.info("Root directory to scan is:" + root);
+		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
+				null);
+		logger.info("Root directories to scan are:" + roots);
 		persister = new StatePersist();
 		isInitialized = true;
-	}	
+	}
 
 	private void loadBuilder() {
 		builder = persister.load();
 		if (builder == null) {
-			builder = new MapBuilder(root);
+			builder = new MapBuilder(roots);
 			builder.parse();
 		}
 	}
@@ -95,7 +96,7 @@ public class Runner {
 	private void initIfRequired() {
 		if (!isInitialized) {
 			init();
-		}		
+		}
 	}
 
 }

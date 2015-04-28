@@ -25,5 +25,26 @@ public class ConfigUtils {
 		}
 		return res;
 	}
+	
+	/**
+	 * Read a list of string
+	 * @param key key to read
+	 * @param defaultValue default array of result
+	 * @param seperator regex. optional, if null or empty ; will be used.
+	 * @return
+	 */
+	public static String[] readList(String key ,String[] defaultValue, String seperator) {
+		String resList = config.getString(key);
+		if(resList == null) {
+			return defaultValue;
+		}
+		
+		if(seperator == null || seperator.isEmpty()) {
+			seperator = ";";
+		}
+		
+		String[] result = resList.split(seperator);
+		return result;
+	}
 
 }
