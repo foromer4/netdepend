@@ -69,6 +69,22 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 				projectReveresedDependencies.get(projectDescriptor));
 	}
 
+	public List<IProjectDescriptor> getProjectsThatDepeantOn(
+			List<IProjectDescriptor> projectDescriptors) {
+		List<IProjectDescriptor> aggregatedResult = new ArrayList<IProjectDescriptor>();
+		for (IProjectDescriptor projectDescriptor : projectDescriptors) {
+			List<IProjectDescriptor> result = getProjectsThatDepeantOn(projectDescriptor);
+			if (result != null) {
+				for (IProjectDescriptor descriptor : result) {
+					if (!aggregatedResult.contains(descriptor) && !projectDescriptors.contains(descriptor)) {
+						aggregatedResult.add(descriptor);
+					}
+				}
+			}
+		}
+		return aggregatedResult.isEmpty() ? null : aggregatedResult;
+	}
+
 	/*
 	 * (non-Javadoc)
 	 * 

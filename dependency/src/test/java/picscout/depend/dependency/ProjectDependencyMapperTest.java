@@ -1,6 +1,7 @@
 package picscout.depend.dependency;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -69,21 +70,51 @@ public class ProjectDependencyMapperTest {
 	}
 
 	@Test
+	public void testChainForABProject() {
+		IProject aProj = projects.get(0);
+		IProject bProj = projects.get(1);
+		List<IProjectDescriptor> result = mapper
+				.getProjectsThatDepeantOn(Arrays
+						.asList(new IProjectDescriptor[] {
+								aProj.getDescriptor(), bProj.getDescriptor() }));
+	
+		assertNull("a and b should have no project depending on them", result);
+	}
+	
+	@Test
+	public void testChainForBCProject() {
+		IProject bProj = projects.get(1);
+		IProject cProj = projects.get(2);
+		List<IProjectDescriptor> result = mapper
+				.getProjectsThatDepeantOn(Arrays
+						.asList(new IProjectDescriptor[] {
+								bProj.getDescriptor(), cProj.getDescriptor() }));
+
+		ArrayList<IProjectDescriptor> expected = new ArrayList<IProjectDescriptor>();
+		expected.add(projects.get(0).getDescriptor());		
+		expected.add(projects.get(3).getDescriptor());
+		
+		assertArrayEquals("b ,c projects should have a , d project depending on them",
+				expected.toArray(), result.toArray());
+	}
+
+
+	@Test
 	public void testChainForAProject() {
 		IProject aProj = projects.get(0);
 		List<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(aProj
 				.getDescriptor());
 		assertNull("a should have no projects that depend on it", result);
 	}
-	
+
 	@Test
 	public void testChainForAssemblies() {
 		IProject gProj = projects.get(6);
 		List<IProjectDescriptor> result = mapper.getProjectsThatDepeantOn(gProj
 				.getDescriptor());
-		assertEquals("G should have 2 projects that depend on it",2, result.size());
+		assertEquals("G should have 2 projects that depend on it", 2,
+				result.size());
 	}
-
 
 	@Test
 	public void testChainMap() {
@@ -91,7 +122,8 @@ public class ProjectDependencyMapperTest {
 		for (int i = 0; i < projects.size(); i++) {
 			List<IProjectDescriptor> expected = mapper
 					.getProjectsThatDepeantOn(projects.get(i).getDescriptor());
-			List<IProjectDescriptor> actual = map.get(projects.get(i).getDescriptor());
+			List<IProjectDescriptor> actual = map.get(projects.get(i)
+					.getDescriptor());
 			if (expected != null) {
 				assertArrayEquals("map shold reflect chains",
 						expected.toArray(), actual.toArray());

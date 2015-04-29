@@ -6,7 +6,9 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
@@ -27,11 +29,10 @@ public class FileUtilsHelper {
 	
 	public static Collection<File> listFiles(String[] rootPaths, String[] extensionFilters) {	
 	
-		Collection<File> aggregatedResult = new ArrayList<File>();		
+		Set<File> aggregatedResult = new HashSet<File>();		
 		for(String rootPath: rootPaths) {		
-	    Collection<File> result = FileUtils.listFiles(new File(rootPath), extensionFilters, true);
-		
-		aggregatedResult = CollectionUtils.union(result, aggregatedResult);
+	    Collection<File> result = FileUtils.listFiles(new File(rootPath), extensionFilters, true);	   
+		aggregatedResult.addAll(result);
 		}
 		return aggregatedResult;
 	}
