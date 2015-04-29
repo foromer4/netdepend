@@ -49,6 +49,15 @@ public class Runner {
 		IProjectDependencyMapper mapper = builder.getProjectMapper();
 		return mapper.getProjectsThatDepeantOn(projectDescriptor);
 	}
+	
+	
+	public List<IProjectDescriptor> getProjectsThatDepeantOnProject(
+			List<IProjectDescriptor> projectDescriptors) {
+		initIfRequired();
+		loadBuilder();
+		IProjectDependencyMapper mapper = builder.getProjectMapper();
+		return mapper.getProjectsThatDepeantOn(projectDescriptors);
+	}
 
 	public List<ISolution> getSolutionsThatDependOnProject(
 			IProjectDescriptor projectDescriptor) {
