@@ -5,9 +5,6 @@ public class Wrapper {
     
     public static void main(String[] args) {
     
-   
-      // args = {"Picscout.Inf.profiling"};
-   
         Runner runner = new Runner();
         if (args.length == 0) {
             System.out.println("Going to run calc dependencies");

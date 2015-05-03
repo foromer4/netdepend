@@ -1,0 +1,62 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicScout.IT.PriorityQ", "PicScout.IT.PriorityQ\PicScout.IT.PriorityQ.csproj", "{27B0461C-5D5C-4406-9A1D-564717778B8C}"		  
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{4567D585-5619-4E27-9198-F86E9D1D08BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicScout.IT.PriorityQ.Integration", "PicScout.IT.PriorityQ.Integration\PicScout.IT.PriorityQ.Integration.csproj", "{13257306-02D0-496E-9B47-EB4D5914606C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PicScout.IT.PriorityQ.Test", "PicScout.IT.PriorityQ.Test\PicScout.IT.PriorityQ.Test.csproj", "{2130D535-50CC-497E-B1E9-768E24D81EE9}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 4
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://tfs:8080/tfs/defaultcollection
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = PicScout.IT.PriorityQ\\PicScout.IT.PriorityQ.csproj
+		SccProjectName1 = PicScout.IT.PriorityQ
+		SccLocalPath1 = PicScout.IT.PriorityQ
+		SccProjectUniqueName2 = PicScout.IT.PriorityQ.Integration\\PicScout.IT.PriorityQ.Integration.csproj
+		SccProjectTopLevelParentUniqueName2 = PicScout.IT.PriorityQ.sln
+		SccProjectName2 = PicScout.IT.PriorityQ.Integration
+		SccLocalPath2 = PicScout.IT.PriorityQ.Integration
+		SccProjectUniqueName3 = PicScout.IT.PriorityQ.Test\\PicScout.IT.PriorityQ.Test.csproj
+		SccProjectTopLevelParentUniqueName3 = PicScout.IT.PriorityQ.sln
+		SccProjectName3 = PicScout.IT.PriorityQ.Test
+		SccLocalPath3 = PicScout.IT.PriorityQ.Test
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Prod|Any CPU = Prod|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{27B0461C-5D5C-4406-9A1D-564717778B8C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{27B0461C-5D5C-4406-9A1D-564717778B8C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{27B0461C-5D5C-4406-9A1D-564717778B8C}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{27B0461C-5D5C-4406-9A1D-564717778B8C}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{27B0461C-5D5C-4406-9A1D-564717778B8C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{27B0461C-5D5C-4406-9A1D-564717778B8C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13257306-02D0-496E-9B47-EB4D5914606C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13257306-02D0-496E-9B47-EB4D5914606C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13257306-02D0-496E-9B47-EB4D5914606C}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{13257306-02D0-496E-9B47-EB4D5914606C}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{13257306-02D0-496E-9B47-EB4D5914606C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13257306-02D0-496E-9B47-EB4D5914606C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2130D535-50CC-497E-B1E9-768E24D81EE9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2130D535-50CC-497E-B1E9-768E24D81EE9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2130D535-50CC-497E-B1E9-768E24D81EE9}.Prod|Any CPU.ActiveCfg = Prod|Any CPU
+		{2130D535-50CC-497E-B1E9-768E24D81EE9}.Prod|Any CPU.Build.0 = Prod|Any CPU
+		{2130D535-50CC-497E-B1E9-768E24D81EE9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2130D535-50CC-497E-B1E9-768E24D81EE9}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{13257306-02D0-496E-9B47-EB4D5914606C} = {4567D585-5619-4E27-9198-F86E9D1D08BF}
+		{2130D535-50CC-497E-B1E9-768E24D81EE9} = {4567D585-5619-4E27-9198-F86E9D1D08BF}
+	EndGlobalSection
+EndGlobal
