@@ -1,10 +1,14 @@
 package picscout.depend.dependency.classes;
-
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+
 import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectStore;
+import picscout.depend.dependency.utils.ConfigUtils;
+
+import javax.inject.Singleton;
+
 
 /**
  * Save projects mapped by guid and also mapped by assembly name,
@@ -12,6 +16,7 @@ import picscout.depend.dependency.interfaces.IProjectStore;
  * @author OSchliefer
  *
  */
+@Singleton
 public class ProjectStore implements IProjectStore {
 	
 	private Map<String, IProject> projectByGuid = new HashMap<String,IProject>(); 
@@ -22,7 +27,7 @@ public class ProjectStore implements IProjectStore {
 	 */
 	public void addProject(IProject project)	{
 		projectByGuid.put(project.getDescriptor().getGuid(), project);
-		projectByAssembly.put(project.getDescriptor().getAssemblyName(), project);		
+		projectByAssembly.put(project.getDescriptor().getAssemblyName(), project);			
 	}
 	
 	/* (non-Javadoc)

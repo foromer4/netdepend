@@ -27,7 +27,13 @@ public class ConfigUtils {
 	}
 	
 	public static Boolean readBoolean(String key, boolean defaultValue) {
-		Boolean res =config.getBoolean(key);
+		Boolean res = defaultValue;
+		try		{
+		res =config.getBoolean(key);
+		}
+		catch (Exception e)		{
+			//OK to fail to find element
+		}
 		if(res == null) {
 			res = defaultValue;
 		}

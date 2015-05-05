@@ -9,6 +9,6 @@ public interface IMapBuilder {
 
 	public abstract ISolutionMapper getSolutionMapper();
 
-	public abstract void parse();
+	public abstract void parse(String[] rootPaths);
 
 }

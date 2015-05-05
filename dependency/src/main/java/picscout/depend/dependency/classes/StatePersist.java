@@ -6,17 +6,16 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.cedarsoftware.util.io.JsonReader;
 import com.cedarsoftware.util.io.JsonWriter;
-
 import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IStatePersist;
 import picscout.depend.dependency.utils.ConfigUtils;
+import javax.inject.Singleton;
 
+@Singleton
 public class StatePersist implements IStatePersist {
 
 	private static String jsonFilePath;

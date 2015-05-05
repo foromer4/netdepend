@@ -6,6 +6,9 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.google.inject.Guice;
+import com.google.inject.Injector;
+
 import picscout.depend.dependency.classes.MapBuilder;
 import picscout.depend.dependency.classes.ProjectDependencyMapper;
 import picscout.depend.dependency.classes.StatePersist;
@@ -32,19 +35,23 @@ public class Runner {
 			.getName());
 	private static String[] roots;
 	private boolean shoulUsePersistedState;
-
+    private Injector injector;
 	
+	/**
+	 * 
+	 */
 	public Runner() {
-		shoulUsePersistedState = ConfigUtils.readBoolean("shoulUsePersistedState" , true);
+			
+	    injector = Guice.createInjector(new AppInjector()); 	
 	}
 
 	public void CalculateDependencies() {
 		logger.info("Starting calculation of dependencies");
 		initIfRequired();
 		if (builder == null) {
-			builder = new MapBuilder(roots);
+			builder = injector.getInstance(IMapBuilder.class);
 		}
-		builder.parse();
+		builder.parse(roots);
 		persister.persist(builder);
 	}
 
@@ -96,8 +103,9 @@ public class Runner {
 		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
 				null);
 		logger.info("Root directories to scan are:" + roots);
-		persister = new StatePersist();
+		persister  = injector.getInstance(IStatePersist.class);
 		isInitialized = true;
+		shoulUsePersistedState = ConfigUtils.readBoolean("shoulUsePersistedState" , true);	
 	}
 
 	private void loadBuilder() {
@@ -105,8 +113,8 @@ public class Runner {
 		builder = persister.load();
 		}
 		if (builder == null) {
-			builder = new MapBuilder(roots);
-			builder.parse();
+			builder = injector.getInstance(IMapBuilder.class);
+			builder.parse(roots);
 		}
 	}
 

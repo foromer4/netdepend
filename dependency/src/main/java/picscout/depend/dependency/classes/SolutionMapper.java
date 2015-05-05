@@ -1,13 +1,14 @@
 package picscout.depend.dependency.classes;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
-
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.ISolution;
 import picscout.depend.dependency.interfaces.ISolutionMapper;
+import javax.inject.Singleton;
+import javax.inject.Inject;
+
 
 /**
  * Map solution to all projects in it. Also knows given a changed project to
@@ -16,18 +17,17 @@ import picscout.depend.dependency.interfaces.ISolutionMapper;
  * @author OSchliefer
  *
  */
+@Singleton
 public class SolutionMapper implements ISolutionMapper {
 
 	private HashSet<ISolution> map;
 	private IProjectDependencyMapper projectMapper;
 
-	public SolutionMapper() {
+	@Inject
+	public SolutionMapper(IProjectDependencyMapper projectMapper) {
 		map = new HashSet<ISolution>();
-	}
-
-	public void init(IProjectDependencyMapper projectMapper) {
 		this.projectMapper = projectMapper;
-	}
+	}	
 
 	public void add(ISolution solution) {
 		map.add(solution);

@@ -1,5 +1,4 @@
 package picscout.depend.dependency.classes;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -11,6 +10,8 @@ import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.IProjectStore;
+import javax.inject.Singleton;
+import javax.inject.Inject;
 
 /**
  * Maps the dependencies between projects. For each project we can get a list of
@@ -21,6 +22,7 @@ import picscout.depend.dependency.interfaces.IProjectStore;
  * @author OSchliefer
  *
  */
+@Singleton
 public class ProjectDependencyMapper implements IProjectDependencyMapper {
 
 	private IProjectStore store;
@@ -33,6 +35,7 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 	 */
 	private Map<IProjectDescriptor, List<IProjectDescriptor>> projectReveresedDependencies;
 
+	@Inject
 	public ProjectDependencyMapper(IProjectStore store) {
 		this.store = store;
 

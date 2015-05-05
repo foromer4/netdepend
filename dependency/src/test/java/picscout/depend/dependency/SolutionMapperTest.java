@@ -34,21 +34,20 @@ public class SolutionMapperTest {
 	public void init() {
 		ProjectDependencyMapper projectMapper = Mockito
 				.mock(ProjectDependencyMapper.class);
-		mapper = new SolutionMapper();
-		mapper.init(projectMapper);
+		mapper = new SolutionMapper(projectMapper);
 		createProjects(projectMapper);
 		createSolutions();
 	}
 
 	private void createSolutions() {
-		aSol = TestProjectsGenerator.createSoution("aSolution",
+		aSol = TestProjectsGenerator.createSolution("aSolution",
 				Arrays.asList(aProj.getDescriptor(), bProj.getDescriptor()));
-		bSol = TestProjectsGenerator.createSoution("bSolution", Arrays.asList(
+		bSol = TestProjectsGenerator.createSolution("bSolution", Arrays.asList(
 				bProj.getDescriptor(), cProj.getDescriptor(),
 				dProj.getDescriptor()));
-		cSol = TestProjectsGenerator.createSoution("cSolution",
+		cSol = TestProjectsGenerator.createSolution("cSolution",
 				Arrays.asList(aProj.getDescriptor(), dProj.getDescriptor()));
-		dSol = TestProjectsGenerator.createSoution("dSolution",
+		dSol = TestProjectsGenerator.createSolution("dSolution",
 				Arrays.asList(cProj.getDescriptor()));
 
 		mapper.add(aSol);

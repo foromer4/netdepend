@@ -70,7 +70,7 @@ public class TestProjectsGenerator {
 	}
 	
 	
-	public static ISolution createSoution(String name, List<IProjectDescriptor> projectsInSolution) {
+	public static ISolution createSolution(String name, List<IProjectDescriptor> projectsInSolution) {
 		ISolution result = Mockito.mock(ISolution.class);
 		Mockito.when(result.getName()).thenReturn(name);
 		Mockito.when(result.getProjectsDescriptors()).thenReturn(projectsInSolution);
