@@ -3,7 +3,11 @@ package picscout.depend.dependency.utils;
 
 import org.apache.commons.configuration.Configuration;
 import org.apache.commons.configuration.ConfigurationException;
+import org.apache.commons.configuration.HierarchicalConfiguration;
 import org.apache.commons.configuration.XMLConfiguration;
+import org.apache.commons.configuration.beanutils.BeanDeclaration;
+import org.apache.commons.configuration.beanutils.BeanHelper;
+import org.apache.commons.configuration.beanutils.XMLBeanDeclaration;
 
 
 public class ConfigUtils {
@@ -59,6 +63,20 @@ public class ConfigUtils {
 		
 		String[] result = resList.split(seperator);
 		return result;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	public static <T> T getInstance(String name, T defaultImplemntation) {
+		try {
+		BeanDeclaration decl = new XMLBeanDeclaration((HierarchicalConfiguration) config, name);
+		return (T)BeanHelper.createBean(decl);
+		}
+		catch (Exception e) {
+			//Failed to get type os OK, use default
+			return defaultImplemntation;
+		}
+		
 	}
 
 }

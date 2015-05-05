@@ -1,4 +1,7 @@
 <app>
-<!--  <rootPath>c:\git\infrastructure</rootPath>-->
-<!-- <jsonFilePath>c:\temp\state.txt</jsonFilePath>-->
+ <rootPath>c:\git\infrastructure</rootPath>
+ <jsonFilePath>c:\temp\state.txt</jsonFilePath>
+ <injection>
+ <AppInjector config-class="picscout.depend.dependency.main.AppInjector"/>
+ </injection>
 </app>

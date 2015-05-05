@@ -6,12 +6,9 @@ import java.util.List;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-import picscout.depend.dependency.classes.MapBuilder;
-import picscout.depend.dependency.classes.ProjectDependencyMapper;
-import picscout.depend.dependency.classes.StatePersist;
 import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
@@ -42,7 +39,7 @@ public class Runner {
 	 */
 	public Runner() {
 			
-	    injector = Guice.createInjector(new AppInjector()); 	
+	  
 	}
 
 	public void CalculateDependencies() {
@@ -92,6 +89,24 @@ public class Runner {
 
 	private void init() {
 
+		initConfig();
+		
+		initInjector(); 		  
+		
+		
+		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
+				null);
+		logger.info("Root directories to scan are:" + roots);
+		initPersister();	
+		isInitialized = true;
+	}
+
+	private void initPersister() {
+		persister  = injector.getInstance(IStatePersist.class);		
+		shoulUsePersistedState = ConfigUtils.readBoolean("shoulUsePersistedState" , true);
+	}
+
+	private void initConfig() {
 		String configPath = System.getProperty("config_file_path");
 		if (configPath == null || configPath.isEmpty()) {
 			logger.info("no config path passed in. use default");
@@ -100,12 +115,17 @@ public class Runner {
 
 		logger.info("Setting config path to be:" + configPath);
 		ConfigUtils.init(configPath);
-		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
-				null);
-		logger.info("Root directories to scan are:" + roots);
-		persister  = injector.getInstance(IStatePersist.class);
-		isInitialized = true;
-		shoulUsePersistedState = ConfigUtils.readBoolean("shoulUsePersistedState" , true);	
+	}
+
+	private void initInjector() {
+		AbstractModule module = ConfigUtils.<AbstractModule>getInstance("injection.AppInjector", null);
+		if(module != null) {
+			logger.info("Init AppInjector as type:" + module.getClass().getName());
+		}
+		else {
+			logger.error("Failed to init AppInjector, it is not well defined in the config.");
+		}
+		injector = Guice.createInjector(module);
 	}
 
 	private void loadBuilder() {
