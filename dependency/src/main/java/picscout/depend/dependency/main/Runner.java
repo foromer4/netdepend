@@ -31,6 +31,12 @@ public class Runner {
 	private static final Logger logger = LogManager.getLogger(Runner.class
 			.getName());
 	private static String[] roots;
+	private boolean shoulUsePersistedState;
+
+	
+	public Runner() {
+		shoulUsePersistedState = ConfigUtils.readBoolean("shoulUsePersistedState" , true);
+	}
 
 	public void CalculateDependencies() {
 		logger.info("Starting calculation of dependencies");
@@ -95,7 +101,9 @@ public class Runner {
 	}
 
 	private void loadBuilder() {
+		if(shoulUsePersistedState) {
 		builder = persister.load();
+		}
 		if (builder == null) {
 			builder = new MapBuilder(roots);
 			builder.parse();

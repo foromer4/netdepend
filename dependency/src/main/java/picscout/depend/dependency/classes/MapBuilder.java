@@ -2,14 +2,17 @@ package picscout.depend.dependency.classes;
 
 import java.io.File;
 import java.util.Collection;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectStore;
 import picscout.depend.dependency.interfaces.ISolution;
 import picscout.depend.dependency.interfaces.ISolutionMapper;
+import picscout.depend.dependency.utils.ConfigUtils;
 import picscout.depend.dependency.utils.FileUtilsHelper;
 
 /**
@@ -59,6 +62,8 @@ public class MapBuilder implements IMapBuilder {
 		projectMapper = new ProjectDependencyMapper(projectStore);
 		solutionMapper = new SolutionMapper();
 		solutionMapper.init(projectMapper);
+		
+		
 	}
 
 	/* (non-Javadoc)

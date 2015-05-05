@@ -26,6 +26,14 @@ public class ConfigUtils {
 		return res;
 	}
 	
+	public static Boolean readBoolean(String key, boolean defaultValue) {
+		Boolean res =config.getBoolean(key);
+		if(res == null) {
+			res = defaultValue;
+		}
+		return res;
+	}
+	
 	/**
 	 * Read a list of string
 	 * @param key key to read
