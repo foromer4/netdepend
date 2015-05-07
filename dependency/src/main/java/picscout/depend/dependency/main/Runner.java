@@ -9,6 +9,7 @@ import org.apache.log4j.Logger;
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+
 import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
@@ -16,6 +17,7 @@ import picscout.depend.dependency.interfaces.ISolution;
 import picscout.depend.dependency.interfaces.ISolutionMapper;
 import picscout.depend.dependency.interfaces.IStatePersist;
 import picscout.depend.dependency.utils.ConfigUtils;
+import picscout.depend.dependency.utils.InjectorFactory;
 
 /**
  * Main enrty point
@@ -31,8 +33,7 @@ public class Runner {
 	private static final Logger logger = LogManager.getLogger(Runner.class
 			.getName());
 	private static String[] roots;
-	private boolean shoulUsePersistedState;
-    private Injector injector;
+	private boolean shoulUsePersistedState;  
 	
 	/**
 	 * 
@@ -46,7 +47,7 @@ public class Runner {
 		logger.info("Starting calculation of dependencies");
 		initIfRequired();
 		if (builder == null) {
-			builder = injector.getInstance(IMapBuilder.class);
+			builder = InjectorFactory.getInjector().getInstance(IMapBuilder.class);
 		}
 		builder.parse(roots);
 		persister.persist(builder);
@@ -90,10 +91,6 @@ public class Runner {
 	private void init() {
 
 		initConfig();
-		
-		initInjector(); 		  
-		
-		
 		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
 				null);
 		logger.info("Root directories to scan are:" + roots);
@@ -102,7 +99,7 @@ public class Runner {
 	}
 
 	private void initPersister() {
-		persister  = injector.getInstance(IStatePersist.class);		
+		persister  = InjectorFactory.getInjector().getInstance(IStatePersist.class);		
 		shoulUsePersistedState = ConfigUtils.readBoolean("shoulUsePersistedState" , true);
 	}
 
@@ -115,25 +112,14 @@ public class Runner {
 
 		logger.info("Setting config path to be:" + configPath);
 		ConfigUtils.init(configPath);
-	}
-
-	private void initInjector() {
-		AbstractModule module = ConfigUtils.<AbstractModule>getInstance("injection.AppInjector", null);
-		if(module != null) {
-			logger.info("Init AppInjector as type:" + module.getClass().getName());
-		}
-		else {
-			logger.error("Failed to init AppInjector, it is not well defined in the config.");
-		}
-		injector = Guice.createInjector(module);
-	}
+	}	
 
 	private void loadBuilder() {
 		if(shoulUsePersistedState) {
 		builder = persister.load();
 		}
 		if (builder == null) {
-			builder = injector.getInstance(IMapBuilder.class);
+			builder = InjectorFactory.getInjector().getInstance(IMapBuilder.class);
 			builder.parse(roots);
 		}
 	}

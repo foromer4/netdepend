@@ -15,6 +15,7 @@ import picscout.depend.dependency.interfaces.ISolution;
 import picscout.depend.dependency.interfaces.ISolutionBuilder;
 import picscout.depend.dependency.interfaces.ISolutionMapper;
 import picscout.depend.dependency.utils.FileUtilsHelper;
+import picscout.depend.dependency.utils.InjectorFactory;
 
 import javax.inject.Singleton;
 import javax.inject.Inject;
@@ -27,35 +28,22 @@ import javax.inject.Inject;
  */
 @Singleton
 public class MapBuilder implements IMapBuilder {
-
-	
-
 	private String[] rootPaths;
 	private final static String csProjExtenstion = "csproj";
 	private final static String solutionExtenstion = "sln";
 	private static final Logger logger = LogManager.getLogger(MapBuilder.class
 			.getName());
 	private IProjectStore projectStore;
-	private IProjectDependencyMapper projectMapper;
+	private IProjectDependencyMapper projectMapper; //TODO -delete
 	private ISolutionMapper solutionMapper;
 	private IProjectBuilder projectBuilder;
 	private ISolutionBuilder solutionBuilder;
-		
-	public IProjectBuilder getProjectBuilder() {
-		return projectBuilder;
+	
+	
+	public MapBuilder() {
+		initMembers();
 	}
 	
-
-	public ISolutionBuilder getSolutionBuilder() {
-		return solutionBuilder;
-	}	
-	
-	/* (non-Javadoc)
-	 * @see picscout.depend.dependency.classes.IMapBuilder#getProjectStore()
-	 */
-	public IProjectStore getProjectStore() {
-		return projectStore;
-	}	
 	
 
 	/* (non-Javadoc)
@@ -70,43 +58,31 @@ public class MapBuilder implements IMapBuilder {
 	 */
 	public ISolutionMapper getSolutionMapper() {
 		return solutionMapper;
-	}
-	
-	@Inject
-	public void setProjectStore(IProjectStore projectStore) {
-		this.projectStore = projectStore;
-	}
+	}	
 
-	@Inject
-	public void setProjectMapper(IProjectDependencyMapper projectMapper) {
-		this.projectMapper = projectMapper;
-	}
-
-	@Inject
-	public void setSolutionMapper(ISolutionMapper solutionMapper) {
-		this.solutionMapper = solutionMapper;
-	}
-	
-	@Inject
-	public void setProjectBuilder(IProjectBuilder projectBuilder) {
-		this.projectBuilder = projectBuilder;
-	}
-
-	@Inject
-	public void setSolutionBuilder(ISolutionBuilder solutionBuilder) {
-		this.solutionBuilder = solutionBuilder;
-	}
 
 	/* (non-Javadoc)
 	 * @see picscout.depend.dependency.classes.IMapBuilder#parse()
 	 */
 	public void parse(String[] rootPaths) {
-		this.rootPaths = rootPaths;
+		this.rootPaths = rootPaths;	
 		parseProjects();
-		parseSolutions();		
+		parseSolutions();	
+		
+		
 	}
 
 	
+
+	private void initMembers() {
+		projectBuilder = InjectorFactory.getInjector().getInstance(IProjectBuilder.class);
+		solutionBuilder = InjectorFactory.getInjector().getInstance(ISolutionBuilder.class);
+		projectStore = InjectorFactory.getInjector().getInstance(IProjectStore.class);
+		projectMapper = InjectorFactory.getInjector().getInstance(IProjectDependencyMapper.class);
+		solutionMapper = InjectorFactory.getInjector().getInstance(ISolutionMapper.class);
+	
+	}
+
 
 	private void parseProjects() {
 		
@@ -115,8 +91,7 @@ public class MapBuilder implements IMapBuilder {
 		Collection<File> projectsFiles = FileUtilsHelper.listFiles(rootPaths,
 				projectExtensions);
 		for (File file : projectsFiles) {
-			try {
-				// TODO - factory for project
+			try {				
 				IProject project =  projectBuilder.build(file.getCanonicalPath()
 						.toString());
 				project.parse();
@@ -126,9 +101,6 @@ public class MapBuilder implements IMapBuilder {
 				logger.warn("problem parsing file: " + file.toString(), e);
 			}
 		}
-
-		projectMapper.init();
-
 	}
 
 	private void parseSolutions() {
@@ -137,8 +109,7 @@ public class MapBuilder implements IMapBuilder {
 		Collection<File> solutionFiles = FileUtilsHelper.listFiles(rootPaths,
 				solutionExtensions);
 		for (File file : solutionFiles) {
-			try {
-				// TODO - factory for solution
+			try {				
 				ISolution solution = solutionBuilder.build(file.getCanonicalPath()
 						.toString());
 				solution.parse();

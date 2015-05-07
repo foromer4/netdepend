@@ -47,7 +47,7 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 	 * 
 	 * @see picscout.depend.dependency.classes.IProjectDependencyMapper#init()
 	 */
-	public void init() {
+	private void init() {
 		createMap();
 	}
 

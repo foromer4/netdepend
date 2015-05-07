@@ -28,8 +28,7 @@ public class ProjectDependencyMapperTest {
 		for (IProject project : projects) {
 			store.addProject(project);
 		}
-		mapper = new ProjectDependencyMapper(store);
-		mapper.init();
+		mapper = new ProjectDependencyMapper(store);	
 	}
 
 	@Test

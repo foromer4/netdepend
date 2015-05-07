@@ -5,10 +5,6 @@ import java.util.Map;
 
 public interface IProjectDependencyMapper {
 
-	/**
-	 * Initialise the dependency map, calculate the map
-	 */
-	public abstract void init();
 
 	/**
 	 * Get list containing all projects that depend on the given project.
