@@ -12,7 +12,12 @@ public class Wrapper {
         }
         
         else {
-            System.out.println("Going to run calc dependent solutions");
+            System.out.println("Going to run calc dependent solutions for:");
+			for(String arg : args) {
+				System.out.println(arg);
+			}
+			
+			
             List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(Arrays.asList(args));
             for(ISolution sol : result) {
                 System.out.println(sol.getName());                

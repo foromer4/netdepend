@@ -13,32 +13,34 @@ def static map = [
         def repo = 'infrastructure' //args[0]
         def inputJobs = 'PicScout_Inf_MessagingFramework;PicScout_Inf_Messaging;' //args[1]
         
-        println 'going to calc depenencies' + 'repo is:' + repo + 'jobs to calc for are: ' + inputJobs    
-         def  inputsolutionNames  
-        inputsolutionNames = parseJobs(inputJobs)  
-         def dependentsolutionNames   
-    dependentsolutionNames = getDependentSolutionNames(inputsolutionNames)
+        println 'going to calc depenencies.' + ' repo is:' + repo + ', jobs to calc for are: ' + inputJobs    
+          ArrayList<String>  inputsolutionNames = new  ArrayList<String>()
+         parseJobs(inputJobs, inputsolutionNames)  
+         def dependentsolutionNames            
+    dependentsolutionNames = geDependentSolutionNames(inputsolutionNames)
+   
     
     
 }
 
-static parseJobs(inputJobs) {
-  		def inputJobsList = inputJobs.split(';')
-        def inputsolutionNames = ''
+static parseJobs(inputJobs, inputsolutionNames) {
+  		def inputJobsList = inputJobs.split(';')       
         for(job in inputJobsList) {
-        inputsolutionNames = HandleJob(job, inputsolutionNames)
-          println inputsolutionNames  
-}
+        HandleJob(job, inputsolutionNames)  
+} 
+return  inputsolutionNames  
 }
 
 static geDependentSolutionNames(inputsolutionNames) {
  ArrayList<String>  dependentsolutionNames = new  ArrayList<String>()
- Runner runner = new Runner();
-    List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(Arrays.asList(inputsolutionNames));  
+ Runner runner = new Runner();    
+ println 'solutions to calc for are: ' + inputsolutionNames
+    List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(inputsolutionNames); 
+    println 'got results: ' + result     
             for(ISolution sol : result) {
                 System.out.println(sol.getName());
                dependentsolutionNames.add(sol.getName())                
-            }
+            }  
            return dependentsolutionNames
             }
 
@@ -53,8 +55,7 @@ if(map[job] != null) {
         job = job.replace('_', '.')
         }       
        
-        inputsolutionNames += job
-        inputsolutionNames += ' '
+        inputsolutionNames.add(job)            
         return inputsolutionNames
         }
 

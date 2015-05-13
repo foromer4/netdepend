@@ -40,14 +40,14 @@ public class SolutionMapperTest {
 	}
 
 	private void createSolutions() {
-		aSol = TestProjectsGenerator.createSolution("aSolution",
+		aSol = TestProjectsGenerator.createSolution("aSolution.sln",
 				Arrays.asList(aProj.getDescriptor(), bProj.getDescriptor()));
-		bSol = TestProjectsGenerator.createSolution("bSolution", Arrays.asList(
+		bSol = TestProjectsGenerator.createSolution("bSolution.sln", Arrays.asList(
 				bProj.getDescriptor(), cProj.getDescriptor(),
 				dProj.getDescriptor()));
-		cSol = TestProjectsGenerator.createSolution("cSolution",
+		cSol = TestProjectsGenerator.createSolution("cSolution.sln",
 				Arrays.asList(aProj.getDescriptor(), dProj.getDescriptor()));
-		dSol = TestProjectsGenerator.createSolution("dSolution",
+		dSol = TestProjectsGenerator.createSolution("dSolution.sln",
 				Arrays.asList(cProj.getDescriptor()));
 
 		mapper.add(aSol);
@@ -119,21 +119,21 @@ public class SolutionMapperTest {
 	
 	@Test
 	public void testGetBySolutionDCName() {
-		List<String> names  = Arrays.asList("dSolution" , "cSolution");
+		List<String> names  = Arrays.asList("dSolution.sln" , "cSolution.sln");
 		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
 		Assert.assertTrue(checkSameElements(results, Arrays.asList(aSol, bSol)));		
 	}
 	
 	@Test
 	public void testGetBySolutionDCBName() {
-		List<String> names  = Arrays.asList("dSolution" , "cSolution" , "bSolution");
+		List<String> names  = Arrays.asList("dSolution" , "cSolution.sln" , "bSolution.sln");
 		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
 		Assert.assertTrue(checkSameElements(results, Arrays.asList(aSol)));		
 	}
 	
 	@Test
 	public void testGetBySolutionDCBAName() {
-		List<String> names  = Arrays.asList("dSolution" , "cSolution" , "bSolution" , "aSolution");
+		List<String> names  = Arrays.asList("dSolution.sln" , "cSolution.sln" , "bSolution.sln" , "aSolution.sln");
 		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
 		Assert.assertEquals("should get no results", 0, results.size());
 	}
@@ -153,7 +153,7 @@ public class SolutionMapperTest {
 	
 	@Test
 	public void testGetBySolutionAName() {
-		List<String> names  = Arrays.asList("aSolution");
+		List<String> names  = Arrays.asList("aSolution.sln");
 		List<ISolution> results = mapper.getSolutionsBySolutionsNames(names);		
 		Assert.assertTrue(checkSameElements(results, Arrays.asList(cSol, bSol)));		
 	}

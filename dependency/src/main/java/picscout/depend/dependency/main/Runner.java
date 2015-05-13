@@ -93,7 +93,11 @@ public class Runner {
 		initConfig();
 		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
 				null);
-		logger.info("Root directories to scan are:" + roots);
+		StringBuilder builder = new StringBuilder("Root directories to scan are:");
+		for(String root: roots) {
+			builder.append(root).append(";");
+		}
+		logger.info(builder);
 		initPersister();	
 		isInitialized = true;
 	}
@@ -108,6 +112,11 @@ public class Runner {
 		if (configPath == null || configPath.isEmpty()) {
 			logger.info("no config path passed in. use default");
 			configPath = Runner.class.getResource("/config.xml").toString();
+		}
+		
+		else
+		{
+			logger.info("Env. config path is:" + configPath);
 		}
 
 		logger.info("Setting config path to be:" + configPath);

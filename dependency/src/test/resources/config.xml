@@ -1,6 +1,7 @@
 <app>
  <rootPath>c:\git\infrastructure</rootPath>
  <jsonFilePath>c:\temp\state.txt</jsonFilePath>
+ <shoulUsePersistedState>true</shoulUsePersistedState>
  <injection>
  <AppInjector config-class="picscout.depend.dependency.main.AppInjector"/>
  </injection>
