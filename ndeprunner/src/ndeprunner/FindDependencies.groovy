@@ -1,7 +1,7 @@
 import picscout.depend.dependency.main.Runner;
 import picscout.depend.dependency.interfaces.ISolution;
 
-class Jenkins {
+class FindDependencies {
 
 def static map = [     
        key_here: 'value_here.sln'       
@@ -10,10 +10,10 @@ def static map = [
     static void main(String... args) {      
     
     
-        def repo = 'infrastructure' //args[0]
-        def inputJobs = 'PicScout_Inf_MessagingFramework;PicScout_Inf_Messaging;' //args[1]
+     
+        def inputJobs = args[0]
         
-        println 'going to calc depenencies.' + ' repo is:' + repo + ', jobs to calc for are: ' + inputJobs    
+        println 'going to calc depenencies , jobs to calc for are: ' + inputJobs    
           ArrayList<String>  inputsolutionNames = new  ArrayList<String>()
          parseJobs(inputJobs, inputsolutionNames)  
          def dependentsolutionNames            
