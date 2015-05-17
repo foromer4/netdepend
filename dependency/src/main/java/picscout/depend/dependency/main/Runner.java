@@ -2,14 +2,8 @@ package picscout.depend.dependency.main;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
-import com.google.inject.AbstractModule;
-import com.google.inject.Guice;
-import com.google.inject.Injector;
-
 import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
@@ -34,13 +28,17 @@ public class Runner {
 			.getName());
 	private static String[] roots;
 	private boolean shoulUsePersistedState;  
+	private String configPath;
 	
 	/**
 	 * 
 	 */
 	public Runner() {
-			
-	  
+		configPath = System.getProperty("config_file_path");	  
+	}
+	
+	public Runner(String configPath) {
+		this.configPath = configPath;
 	}
 
 	public void CalculateDependencies() {
@@ -108,7 +106,7 @@ public class Runner {
 	}
 
 	private void initConfig() {
-		String configPath = System.getProperty("config_file_path");
+		
 		if (configPath == null || configPath.isEmpty()) {
 			logger.info("no config path passed in. use default");
 			configPath = Runner.class.getResource("/config.xml").toString();
