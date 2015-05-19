@@ -10,7 +10,7 @@ import java.util.concurrent.CancellationException
 
 
 map = [     
-       key_here: 'value_here.sln'       
+       key_here: 'value_here.sln'
 ]
 
 
@@ -49,7 +49,8 @@ out.println 'finished script to find dependencies and run jobs'
          def dependentsolutionNames      
                
     dependentsolutionNames = getDependentSolutionNames(inputsolutionNames,configPath, log4jPath )
-    runJenkinsJobs(dependentsolutionNames)
+    inputsolutionNames.addAll(dependentsolutionNames)  
+    runJenkinsJobs(inputsolutionNames)
     
     
 }
@@ -83,8 +84,8 @@ return
 def anotherBuild
 try {
     def params = [
-      new StringParameterValue('IsCalledFromAnotherJob', true),
-      new StringParameterValue('BranchToBuild', branch)
+	 new StringParameterValue('IsCalledFromAnotherJob', 'true'),     
+	 new StringParameterValue('BranchToBuild', branch)     
     ]
     def future = job.scheduleBuild2(0, new Cause.UpstreamCause(build), new ParametersAction(params))
     println "Waiting for the completion of " + HyperlinkNote.encodeTo('/' + job.url, job.fullDisplayName)
@@ -105,8 +106,10 @@ if (anotherBuild.result != Result.SUCCESS && anotherBuild.result != Result.UNSTA
 
 
  def getJobName(solutionName) {
-for(s in map) {
-    if(map[s] == solutionName) {    
+
+for(s in map.keySet()) {	
+    if(map[s] != null && map[s].equalsIgnoreCase(solutionName)) {
+       println 'solution ' + solutionName + ' is explicilty mapped to: ' + s    
        return s
     }    
 }
