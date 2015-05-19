@@ -3,6 +3,7 @@ package picscout.depend.dependency.utils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
+import picscout.depend.dependency.main.AppInjector;
 import picscout.depend.dependency.main.Runner;
 
 import com.google.inject.AbstractModule;
@@ -23,7 +24,7 @@ public class InjectorFactory {
 	}
 	
 	private static void initInjector() {
-		AbstractModule module = ConfigUtils.<AbstractModule>getInstance("injection.AppInjector", null);
+		AbstractModule module = ConfigUtils.<AbstractModule>getInstance("injection.AppInjector", new AppInjector());
 		if(module != null) {
 			logger.info("Init AppInjector as type:" + module.getClass().getName());
 		}

@@ -8,6 +8,7 @@ import java.util.concurrent.CancellationException
 
 
 
+
 map = [     
        key_here: 'value_here.sln'       
 ]
@@ -21,7 +22,7 @@ config.putAll(bindings.getVariables())
 out = config['out']
 
 out.println 'running script to find dependencies and run jobs'
-go(1)
+go()
 
 out.println 'finished script to find dependencies and run jobs'
 
@@ -31,26 +32,23 @@ out.println 'finished script to find dependencies and run jobs'
 
 
                                     
-    def go(stam) {     
+    def go() {     
    
     def thr = Thread.currentThread()
 	def build = thr?.executable
-	
-
-    
     def inputJobs = build.buildVariableResolver.resolve("JobsToRun")
-   
-    
-     
      def envVarsMap = build.parent.builds[0].properties.get("envVars")
-     println envVarsMap     
-        
-        println 'going to calc depenencies , jobs to calc for are: ' + inputJobs    
+     def configPath = envVarsMap['config_file_path']
+     def log4jPath = envVarsMap['log4j.configuration']    
+      
+     println 'config path is: ' + configPath + ', log4Path is: ' +  log4jPath         
+        println 'going to calc depenencies , jobs to calc for are: ' + inputJobs
+            
          ArrayList<String>  inputsolutionNames = new  ArrayList<String>()
          parseJobs(inputJobs, inputsolutionNames)  
          def dependentsolutionNames      
                
-    dependentsolutionNames = getDependentSolutionNames(inputsolutionNames)
+    dependentsolutionNames = getDependentSolutionNames(inputsolutionNames,configPath, log4jPath )
     runJenkinsJobs(dependentsolutionNames)
     
     
@@ -79,6 +77,7 @@ def runJobInJenkins(jobName) {
 def branch = build.buildVariableResolver.resolve("BranchToBuild")
 def job = Hudson.instance.getJob(jobName)
 if( job == null) {
+println 'could not find job: ' + jobName
 return
 }
 def anotherBuild
@@ -91,6 +90,7 @@ try {
     println "Waiting for the completion of " + HyperlinkNote.encodeTo('/' + job.url, job.fullDisplayName)
     anotherBuild = future.get()
 } catch (CancellationException x) {
+println 'failed to run job: ' + jobName + ' exception is: ' x 
     throw new AbortException("${job.fullDisplayName} aborted.")
 }
 println HyperlinkNote.encodeTo('/' + anotherBuild.url, anotherBuild.fullDisplayName) + " completed. Result was " + anotherBuild.result
@@ -126,9 +126,9 @@ solutionName = solutionName.replace('.' , '_')
 return  inputsolutionNames  
 }
 
- def getDependentSolutionNames(inputsolutionNames) {
+ def getDependentSolutionNames(inputsolutionNames, configPath , log4jPath) {
  ArrayList<String>  dependentsolutionNames = new  ArrayList<String>()
- Runner runner = new Runner("C:/Scripts4Jenkins/netdepend/infrastructureconfig.xml");    
+ Runner runner = new Runner(configPath, log4jPath);    
  println 'solutions to calc for are: ' + inputsolutionNames
     List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(inputsolutionNames); 
     println 'got ' + result.size() + ' results'     

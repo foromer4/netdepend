@@ -5,7 +5,7 @@ public class Wrapper {
     
     public static void main(String[] args) {
     
-        Runner runner = new Runner();
+        Runner runner = new Runner("c:\\temp\\config.xml", "c:\\temp\\log4jmain.xml");
         if (args.length == 0) {
             System.out.println("Going to run calc dependencies");
             runner.CalculateDependencies();

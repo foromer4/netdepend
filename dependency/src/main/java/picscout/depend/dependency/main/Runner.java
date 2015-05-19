@@ -2,8 +2,10 @@ package picscout.depend.dependency.main;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import picscout.depend.dependency.interfaces.IMapBuilder;
 import picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
@@ -13,6 +15,8 @@ import picscout.depend.dependency.interfaces.IStatePersist;
 import picscout.depend.dependency.utils.ConfigUtils;
 import picscout.depend.dependency.utils.InjectorFactory;
 
+import org.apache.log4j.PropertyConfigurator;
+import org.apache.log4j.xml.DOMConfigurator;
 /**
  * Main enrty point
  * 
@@ -37,8 +41,11 @@ public class Runner {
 		configPath = System.getProperty("config_file_path");	  
 	}
 	
-	public Runner(String configPath) {
+	public Runner(String configPath, String log4jPath) {
 		this.configPath = configPath;
+		LogManager.resetConfiguration(); 
+		DOMConfigurator.configure(log4jPath);		
+		logger.info("Config path set externally to: " + configPath + " ,log4j config path set externally to: " + log4jPath);
 	}
 
 	public void CalculateDependencies() {
