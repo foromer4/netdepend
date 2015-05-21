@@ -13,8 +13,14 @@ import picscout.depend.dependency.interfaces.IProjectStore;
 import picscout.depend.dependency.interfaces.ISolutionBuilder;
 import picscout.depend.dependency.interfaces.ISolutionMapper;
 import picscout.depend.dependency.interfaces.IStatePersist;
-
 import com.google.inject.AbstractModule;
+
+
+/**
+ * This is the guice injector, it itself is injected via reflection.
+ * @author OSchliefer
+ *
+ */
 public class AppInjector extends AbstractModule{
 	 @Override
 	    protected void configure() {	       

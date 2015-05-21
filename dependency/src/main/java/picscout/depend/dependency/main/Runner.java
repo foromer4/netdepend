@@ -18,7 +18,7 @@ import picscout.depend.dependency.utils.InjectorFactory;
 import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.xml.DOMConfigurator;
 /**
- * Main enrty point
+ * Main entry point. can be used to run calculation of dependencies of to get dependent projects/solutions from a pre saved map.
  * 
  * @author oschliefer
  *
@@ -35,12 +35,15 @@ public class Runner {
 	private String configPath;
 	
 	/**
-	 * 
+	 * C'tor, use config and logpath from envrionment variables ('config_file_path' , and 'log4j.config')
 	 */
 	public Runner() {
 		configPath = System.getProperty("config_file_path");	  
 	}
 	
+	/**
+	 * C'tor, take explicit definitions of config and logpath.
+	 */
 	public Runner(String configPath, String log4jPath) {
 		this.configPath = configPath;
 		LogManager.resetConfiguration(); 
@@ -48,6 +51,9 @@ public class Runner {
 		logger.info("Config path set externally to: " + configPath + " ,log4j config path set externally to: " + log4jPath);
 	}
 
+	/**
+	 * Calculate dependenices, save them in state file
+	 */
 	public void CalculateDependencies() {
 		logger.info("Starting calculation of dependencies");
 		initIfRequired();
@@ -58,7 +64,12 @@ public class Runner {
 		persister.persist(builder);
 	}
 
-	public List<IProjectDescriptor> getProjectsThatDepeantOnProject(
+	/**
+	 * Get an ordered list of projects that depend on the given project.
+	 * @param projectDescriptor requested project to get dependencies for.
+	 * @return dependency chain.
+	 */
+	public List<IProjectDescriptor> getProjectsThatDepeandOnProject(
 			IProjectDescriptor projectDescriptor) {
 		initIfRequired();
 		loadBuilder();
@@ -66,8 +77,12 @@ public class Runner {
 		return mapper.getProjectsThatDepeantOn(projectDescriptor);
 	}
 	
-	
-	public List<IProjectDescriptor> getProjectsThatDepeantOnProject(
+	/**
+	 * Get an ordered list of projects that depend on the given projects.
+	 * @param projectDescriptors requested projects to get dependencies for.
+	 * @return dependency chain
+	 */
+	public List<IProjectDescriptor> getProjectsThatDepeandOnProjects(
 			List<IProjectDescriptor> projectDescriptors) {
 		initIfRequired();
 		loadBuilder();
@@ -75,6 +90,11 @@ public class Runner {
 		return mapper.getProjectsThatDepeantOn(projectDescriptors);
 	}
 
+	/**
+	 * Get solutions that depend on a specific project.
+	 * @param projectDescriptor project to get dependecnies for
+	 * @return dependecny chain
+	 */
 	public List<ISolution> getSolutionsThatDependOnProject(
 			IProjectDescriptor projectDescriptor) {
 		initIfRequired();
@@ -85,6 +105,11 @@ public class Runner {
 		return solutionMapper.getSolutionsByProjects(descriptors);
 	}
 
+	/**
+	 * Get solutions that depend on solutions
+	 * @param names solutions to get dependencies for
+	 * @return
+	 */
 	public List<ISolution> getSolutionsThatDependOnSolutionsByNames(
 			List<String> names) {
 		initIfRequired();

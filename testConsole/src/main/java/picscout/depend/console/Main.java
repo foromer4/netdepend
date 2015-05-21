@@ -6,8 +6,17 @@ import java.util.List;
 import picscout.depend.dependency.interfaces.ISolution;
 import picscout.depend.dependency.main.Runner;
 
+/**
+ * Console used to test usage of netdepend , can be packaged as a runnable jar.
+ * @author OSchliefer
+ *
+ */
 public class Main {
 
+	/**
+	 * Main entry point	
+	 * @param args args are solution names to get dependencies for.
+	 */
 	public static void main(String[] args) {
 
 		// Test jar run
