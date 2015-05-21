@@ -1,5 +1,5 @@
 /**
- * Implementation of interfaces. all classes are interchangable, you can inject them 
+ * Implementation of interfaces. all classes are interchangeable, you can inject them 
  * in AppInjector.
  * 
  */
