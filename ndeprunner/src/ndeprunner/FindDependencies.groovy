@@ -43,6 +43,11 @@ out.println 'finished script to find dependencies and run jobs'
       
      println 'config path is: ' + configPath + ', log4Path is: ' +  log4jPath         
         println 'going to calc depenencies , jobs to calc for are: ' + inputJobs
+		
+		if(inputJobs == null || inputJobs.isEmpty()) {
+		println 'no jobs to run'
+		return
+		}
             
          ArrayList<String>  inputsolutionNames = new  ArrayList<String>()
          parseJobs(inputJobs, inputsolutionNames)  
