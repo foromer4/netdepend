@@ -10,12 +10,21 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+/**
+ * Factory to get guice injector, loads the injector by reflection using beans.
+ * @author OSchliefer
+ *
+ */
 public class InjectorFactory {
 	
 	private static Injector injector;
 	private static final Logger logger = LogManager.getLogger(InjectorFactory.class
 			.getName());
 	
+	/**
+	 * Get the guice injector
+	 * @return
+	 */
 	public static Injector getInjector() {
 		if(injector == null){
 			initInjector();

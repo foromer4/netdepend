@@ -17,11 +17,22 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
+/**
+ * Helper fo xml actions
+ * @author OSchliefer
+ *
+ */
 public final class XmlUtils {
 
 	
 	 static final Logger logger = LogManager.getLogger(XmlUtils.class.getName());
 	
+	 /**
+	  * Read text from xml file
+	  * @param file file name
+	  * @param xpathExpression xpath to get text from
+	  * @return value in xpath
+	  */
 	public static List<String> readTextFromXML(String file, String xpathExpression)
 	{
 		List<String> reuslts= new ArrayList<String>();
@@ -45,6 +56,13 @@ public final class XmlUtils {
 			return reuslts;
 	}
 	
+	/**
+	 * Read attribute from xml file
+	 * @param file file path
+	 * @param xpathExpression xpath 
+	 * @param attribute attribute name to get value for
+	 * @return value of the requested attribute in the xpath defined
+	 */
 	public static List<String> readAttributeFromXML(String file, String xpathExpression, String attribute)
 	{
 		List<String> reuslts= new ArrayList<String>();
@@ -72,7 +90,12 @@ public final class XmlUtils {
 	}
 	
 	
-	
+	/**
+	 * Read element value from xml
+	 * @param file file path
+	 * @param elementName element name
+	 * @return read value from xml by element name
+	 */
 	public static String readValueFromXML(String file, String elementName)
 	{
 		String result = null;

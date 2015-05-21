@@ -10,6 +10,11 @@ import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.utils.XmlUtils;
 
+/**
+ * @see IProject
+ * @author OSchliefer
+ *
+ */
 public class Project implements IProject {
 
 	

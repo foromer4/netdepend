@@ -13,7 +13,7 @@ import javax.inject.Inject;
 /**
  * Map solution to all projects in it. Also knows given a changed project to
  * tell which solutions should be built by order.
- * 
+ * @see ISolutionMapper
  * @author OSchliefer
  *
  */

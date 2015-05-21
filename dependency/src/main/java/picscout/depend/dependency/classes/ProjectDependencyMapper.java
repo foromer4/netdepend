@@ -18,7 +18,7 @@ import javax.inject.Inject;
  * project that depend on it by the correct order.(closest first). Note that
  * each project can have more than one chain, in that case chains are one after
  * another.
- * 
+ * @see IProjectDependencyMapper
  * @author OSchliefer
  *
  */

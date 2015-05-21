@@ -13,6 +13,7 @@ import javax.inject.Singleton;
 /**
  * Save projects mapped by guid and also mapped by assembly name,
  * enable to query for projects by those keys.
+ * @see IProjectStore
  * @author OSchliefer
  *
  */

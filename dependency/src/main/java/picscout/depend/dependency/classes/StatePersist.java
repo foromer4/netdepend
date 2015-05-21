@@ -15,6 +15,11 @@ import picscout.depend.dependency.interfaces.IStatePersist;
 import picscout.depend.dependency.utils.ConfigUtils;
 import javax.inject.Singleton;
 
+/**
+ * @see IStatePersist
+ * @author OSchliefer
+ *
+ */
 @Singleton
 public class StatePersist implements IStatePersist {
 

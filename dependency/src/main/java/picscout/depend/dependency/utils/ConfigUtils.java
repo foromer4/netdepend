@@ -9,7 +9,11 @@ import org.apache.commons.configuration.beanutils.BeanDeclaration;
 import org.apache.commons.configuration.beanutils.BeanHelper;
 import org.apache.commons.configuration.beanutils.XMLBeanDeclaration;
 
-
+/**
+ * Config wrapper, handles config values including injections from beans.
+ * @author OSchliefer
+ *
+ */
 public class ConfigUtils {
 	
 	private static Configuration config;
@@ -22,6 +26,12 @@ public class ConfigUtils {
 		}
 	}
 	
+	/**
+	 * Read string from config
+	 * @param key key to read
+	 * @param defaultValue default value , if not found
+	 * @return value of key, or default if not found
+	 */
 	public static String readString(String key, String defaultValue) {
 		String res =config.getString(key);
 		if(res == null) {
@@ -30,6 +40,12 @@ public class ConfigUtils {
 		return res;
 	}
 	
+	/**
+	 * Read boolean value
+	 * @param key key 
+	 * @param defaultValue value if not found
+	 * @return value of key, or default if not found
+	 */
 	public static Boolean readBoolean(String key, boolean defaultValue) {
 		Boolean res = defaultValue;
 		try		{
@@ -66,6 +82,12 @@ public class ConfigUtils {
 	}
 	
 	
+	/**
+	 * Load from config using bean reflection
+	 * @param name key
+	 * @param defaultImplemntation , default instance , can be null
+	 * @return instance by key, default if not found
+	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getInstance(String name, T defaultImplemntation) {
 		try {

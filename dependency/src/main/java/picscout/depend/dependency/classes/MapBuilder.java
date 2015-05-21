@@ -17,7 +17,7 @@ import picscout.depend.dependency.utils.InjectorFactory;
 import javax.inject.Singleton;
 
 /**
- * Parse files into mappers for projects/solutions
+ * @see IMapBuilder
  * 
  * @author OSchliefer
  *

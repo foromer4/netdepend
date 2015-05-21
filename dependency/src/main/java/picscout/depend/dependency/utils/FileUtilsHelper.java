@@ -13,6 +13,11 @@ import java.util.Set;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.io.FileUtils;
 
+/**
+ * Helper for file handeling
+ * @author OSchliefer
+ *
+ */
 public class FileUtilsHelper {
 	public static List<String> readFile(String file)
 			throws IOException {
@@ -27,6 +32,12 @@ public class FileUtilsHelper {
 	}
 	
 	
+	/**
+	 * List all files in given paths acccording to extension
+	 * @param rootPaths root paths to look at (include sub directories)
+	 * @param extensionFilters extensions to look for
+	 * @return files in directories matching the extesion filters
+	 */
 	public static Collection<File> listFiles(String[] rootPaths, String[] extensionFilters) {	
 	
 		Set<File> aggregatedResult = new HashSet<File>();		

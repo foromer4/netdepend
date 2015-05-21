@@ -14,7 +14,11 @@ import picscout.depend.dependency.interfaces.IProjectDescriptor;
 import picscout.depend.dependency.interfaces.ISolution;
 import picscout.depend.dependency.utils.FileUtilsHelper;
 
-
+/**
+ * See ISolution
+ * @author OSchliefer
+ *
+ */
 public class Solution implements ISolution {
 
 	private final String fullPath;

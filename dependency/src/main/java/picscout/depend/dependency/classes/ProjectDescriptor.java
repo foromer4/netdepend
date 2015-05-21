@@ -9,6 +9,7 @@ import picscout.depend.dependency.interfaces.IProjectDescriptor;
  * Descriptor for project might contain some or all of these fields.
  * Equality and hash code are based on guid, so do not compare with
  * partial descriptors containins only assembly name.
+ * @see IProjectDescriptor
  * @author OSchliefer
  *
  */
