@@ -41,7 +41,10 @@ public class FileUtilsHelper {
 	public static Collection<File> listFiles(String[] rootPaths, String[] extensionFilters) {	
 	
 		Set<File> aggregatedResult = new HashSet<File>();		
-		for(String rootPath: rootPaths) {		
+		for(String rootPath: rootPaths) {	
+			if(!rootPath.endsWith("\\")) {
+				rootPath += "\\";
+			}
 	    Collection<File> result = FileUtils.listFiles(new File(rootPath), extensionFilters, true);	   
 		aggregatedResult.addAll(result);
 		}
