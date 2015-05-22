@@ -10,13 +10,13 @@ public interface IStatePersist {
 	
 	/**
 	 * Persist state of map builder.
-	 * @param builderState
+	 * @param builderState state to save
 	 */
 	public void persist(IMapBuilder builderState);
 	
 	/**
 	 * Load map builder from persisted resource
-	 * @return
+	 * @return map builder loaded from state 
 	 */
 	public IMapBuilder load();
 	

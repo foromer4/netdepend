@@ -43,6 +43,8 @@ public class Runner {
 	
 	/**
 	 * C'tor, take explicit definitions of config and logpath.
+	 * @param configPath path of config file
+	 * @param log4jPath path for log4 config file
 	 */
 	public Runner(String configPath, String log4jPath) {
 		this.configPath = configPath;
@@ -108,7 +110,7 @@ public class Runner {
 	/**
 	 * Get solutions that depend on solutions
 	 * @param names solutions to get dependencies for
-	 * @return
+	 * @return dependent solutions
 	 */
 	public List<ISolution> getSolutionsThatDependOnSolutionsByNames(
 			List<String> names) {

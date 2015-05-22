@@ -23,7 +23,7 @@ public interface ISolution {
 
 	/**
 	 * Simple name including extension
-	 * @return
+	 * @return name
 	 */
 	public abstract String getName();
 

@@ -65,7 +65,7 @@ public class ConfigUtils {
 	 * @param key key to read
 	 * @param defaultValue default array of result
 	 * @param seperator regex. optional, if null or empty ; will be used.
-	 * @return
+	 * @return list of strings
 	 */
 	public static String[] readList(String key ,String[] defaultValue, String seperator) {
 		String resList = config.getString(key);
@@ -83,10 +83,11 @@ public class ConfigUtils {
 	
 	
 	/**
-	 * Load from config using bean reflection
-	 * @param name key
-	 * @param defaultImplemntation , default instance , can be null
-	 * @return instance by key, default if not found
+	 * get instance from bean
+	 * @param name name of key
+	 * @param defaultImplemntation default instance, if fails to load
+	 * @param <T> type
+	 * @return injected instance
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> T getInstance(String name, T defaultImplemntation) {

@@ -38,8 +38,8 @@ public class SolutionMapper implements ISolutionMapper {
 	 * either because this project is in them, or because a dependent project is
 	 * in them. The result is by build order.
 	 * 
-	 * @param projectDescriptor
-	 * @return
+	 * @param projectDescriptors project to get dependent solutions for
+	 * @return dependent solutions
 	 */
 	public List<ISolution> getSolutionsByProjects(
 			List<IProjectDescriptor> projectDescriptors) {

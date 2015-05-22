@@ -22,7 +22,7 @@ public interface IMapBuilder {
 
 	/**
 	 * Create dependency chain, based on given root paths to read projects/solutions in. read is recursive.
-	 * @param rootPaths
+	 * @param rootPaths multipule root paths to parse
 	 */
 	public abstract void parse(String[] rootPaths);
 

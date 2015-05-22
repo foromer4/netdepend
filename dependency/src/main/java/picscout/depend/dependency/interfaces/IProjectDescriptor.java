@@ -15,19 +15,19 @@ public interface IProjectDescriptor {
 
 	/**
 	 * Get guid of project
-	 * @return
+	 * @return guid
 	 */
 	public abstract String getGuid();
 
 	/**
 	 * Full path of project
-	 * @return
+	 * @return full path
 	 */
 	public abstract String getFullPath();
 
 	/**
 	 * Assembly name of project
-	 * @return
+	 * @return assemblyt name
 	 */
 	public abstract String getAssemblyName();
 

@@ -5,7 +5,7 @@ import picscout.depend.dependency.interfaces.IProject;
 import picscout.depend.dependency.interfaces.IProjectBuilder;
 
 /**
- * @See IProjectBuilder
+ * @see IProjectBuilder
  * @author OSchliefer
  *
  */

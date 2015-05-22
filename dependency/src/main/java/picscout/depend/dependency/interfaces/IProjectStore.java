@@ -24,7 +24,8 @@ public interface IProjectStore {
 
 	/**
 	 * Get project mapped to assembly name
-	 * @param  assembly name
+	 * @param  assemblyName  name
+	 *  
 	 * @return projectGuid project if found, null otherwise
 	 */
 	public abstract IProject getProjectByAssemblyName(String assemblyName);

@@ -23,7 +23,7 @@ public class InjectorFactory {
 	
 	/**
 	 * Get the guice injector
-	 * @return
+	 * @return guice injector
 	 */
 	public static Injector getInjector() {
 		if(injector == null){

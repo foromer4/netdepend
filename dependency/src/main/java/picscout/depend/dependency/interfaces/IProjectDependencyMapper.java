@@ -12,8 +12,7 @@ public interface IProjectDependencyMapper {
 	/**
 	 * Get list containing all projects that depend on the given project.
 	 * 
-	 * @param projectDesceipror
-	 *            descriptor
+	 * @param projectDescriptor descriptor
 	 * @return list if found, null otherwise. order is by closest project to
 	 *         most far , for each dependency chain. chains can be one after
 	 *         another.
@@ -25,8 +24,7 @@ public interface IProjectDependencyMapper {
 	/**
 	 * Get list containing all projects that depend on the given projects.
 	 * 
-	 * @param projectDesceipror
-	 *            descriptor
+	 * @param projectDescriptors   descriptors
 	 * @return list if found, null otherwise. order is by closest project to
 	 *         most far , for each dependency chain. chains can be one after
 	 *         another.
