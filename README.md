@@ -1,6 +1,6 @@
 # NetDepend - .Net dependency resolver
 
-## General
+## Intoduction
 
 This open source project uses java code to resolve all dependencies between existing .NET projects and solutions.
 This can have any number of usage scenarios.
