@@ -11,7 +11,9 @@ e.g. The project was designed to calculate what jobs in Jenkins should run as a 
 The main project is : dependency.
 It is divided into a few packages, the main class Runner is located under package: picscout.depend.dependency.main.
 The Runner class can be used in one of two basic modes:
+
 1. Get prjects/ solutions that depend on given projects/solutions. There are some overloaded methods to support this.
+
 2. Calculate dependencies - When calling CalculateDependencies() , then Runner will build a dependency map and save it.
 
 If there is already a saved state , than when calling one of the methods to find dependent projects/solutions
@@ -50,9 +52,16 @@ This can be done like this:
 
 1. Use git hooks to understand what projects/solutions changed as a result of a push.
  
-2. Use a groovy system script with the [Groovy plugin](https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin) to transltate between Projects/Solutions and Jobs , to run the Dependency Project and translate the results back to Jenkins changed Jobs. an Example of such a script is given at:
+2. Use a groovy system script with the [Groovy plugin](https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin) to transltate between Projects/Solutions and Jobs , run the Dependency Project and translate the results back to Jenkins changed Jobs. an Example of such a script is given at:
 deprunner/FindDependencies.groovy
 
 ## Deployment
 
+The dependency project can be downloaded from Github, it is now being processed as a Maven artifact in Main repos.
+You can run: 
+'mvn package assembly:single' 
+to create a JAR.
+You can also create an executalble JAR by running the same command on project: **picscout.depend.console**
+
+Javadocs can be found [here](http://foromer4.github.io/netdepend/)
 
