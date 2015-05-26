@@ -1,7 +1,4 @@
 # NetDepend - .Net dependency resolver
-# open source developed at ![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
-
-
 
 ## General
 
@@ -69,4 +66,7 @@ to create a JAR.
 You can also create an executalble JAR by running the same command on project: `picscout.depend.console`
 
 Javadocs can be found [here](http://foromer4.github.io/netdepend/)
+
+**developed as an open source project by:
+![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
 
