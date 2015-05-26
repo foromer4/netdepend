@@ -14,7 +14,7 @@ It is divided into a few packages, the main class located here:
 
 The Runner class can be used in one of two basic modes:
 
-1. Get prjects/ solutions that depend on given projects/solutions. There are some overloaded methods to support this.
+1. Get prjects/solutions that depend on the given projects/solutions. There are some overloaded methods to support this.
 
 2. Calculate dependencies - When calling `CalculateDependencies()` , then Runner will build a dependency map and save it.
 
