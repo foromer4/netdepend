@@ -1,6 +1,6 @@
-# netdepend - .Net dependency resolver 
+# netdepend - .Net dependency resolver by ![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
 
-![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
+
 
 ## General
 
