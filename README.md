@@ -10,7 +10,7 @@ We  at [Picscout](http://www.picscout.com/) developed it to help us calculate wh
 
 The main project is : dependency.
 It is divided into a few packages, the main class located here: 
-`picscout.depend.dependency.main.Runner`.
+`picscout.depend.dependency.main.[Runner](https://github.com/foromer4/netdepend/blob/master/dependency/src/main/java/picscout/depend/dependency/main/AppInjector.java)`.
 
 The Runner class can be used in one of two basic modes:
 
