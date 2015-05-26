@@ -38,7 +38,7 @@ and what class implements guice injector (see next session).
 An example config file can be found under the test/resources folder in the dependency project.
 
 
-## Extending or replacing implenting classes
+## Extending or replacing implementing classes
 
 Netdepend uses [Guice](https://github.com/google/guice) to inject dependencies between classes.
 All the plumbing is done in: picscout.depend.dependency.main.AppInjector
