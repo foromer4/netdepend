@@ -25,9 +25,9 @@ The project uses [log4j](http://logging.apache.org/log4j/2.x/) and [apache commo
 Both should be configured in order for it to work properly.
 this can be done by passing th following as environment variables:
 
-**log4j.config= <path to log4j.xml file>**
+**log4j.config=** *path to log4j.xml file*
 
-**config_file_path = <path to config.xml file>**
+**config_file_path=** *<path to config.xml file>*
 
 Or you can pass them directly to the Runner via a specilaized constructor that accepts them.
 
@@ -45,6 +45,13 @@ But you can use [beans](https://commons.apache.org/proper/commons-configuration/
 
 ## Using NetDepend with Jenkins
 
+This project was originaly created to be used along side Jenkins and git to detect what jobs should run as a result of pushed changes.
+This can be done like this:
+
+1. Use git hooks to understand what projects/solutions changed as a result of a push.
+ 
+2. Use a groovy system script with the [Groovy plugin](https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin) to transltate between Projects/Solutions and Jobs , to run the Dependency Project and translate the results back to Jenkins changed Jobs. an Example of such a script is given at:
+deprunner/FindDependencies.groovy
 
 ## Deployment
 
