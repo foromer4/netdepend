@@ -36,14 +36,14 @@ this can be done by setting the following environment variables:
 Or you can pass them directly to the Runner class via a specilaized constructor that accepts them.
 
 The configuration file is used to define what folders should be scanned,  where to save persisted state and if to use it,
-and what class implements guice injector (see next session).
+and what class implements Guice injector (see next session).
 An example config file can be found under the test/resources folder in the dependency project.
 
 
 ## Extending or replacing implementing classes
 
 Netdepend uses [Guice](https://github.com/google/guice) to inject dependencies between classes.
-All the plumbing is done in: picscout.depend.dependency.main.AppInjector
+All the plumbing is done in: `picscout.depend.dependency.main.AppInjector`
 
 But you can use [beans](https://commons.apache.org/proper/commons-configuration/userguide/howto_beans.html) technology to inject a your own class that does the bindings. This will allow you to change implentation of any class you wish to.
 
