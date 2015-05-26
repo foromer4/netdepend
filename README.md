@@ -56,7 +56,7 @@ This can be done like this:
 1. Use [git hooks](https://git-scm.com/book/es/v2/Customizing-Git-Git-Hooks) to understand what projects/solutions changed as a result of a push.
  
 2. Use a groovy system script with the [Groovy plugin](https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin) to transltate between Projects/Solutions and Jobs , run the Dependency Project and translate the results back to Jenkins changed Jobs. an Example of such a script is given at:
-`deprunner/FindDependencies.groovy`
+[FindDependencies.groovy](https://github.com/foromer4/netdepend/blob/master/ndeprunner/src/ndeprunner/FindDependencies.groovy)
 
 ## Deployment
 
