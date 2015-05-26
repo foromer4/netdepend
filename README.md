@@ -10,7 +10,7 @@ We  at [Picscout](http://www.picscout.com/) developed it to help us calculate wh
 
 The main project is : dependency.
 It is divided into a few packages, the main class located here: 
-[picscout.depend.dependency.main.Runner](https://github.com/foromer4/netdepend/blob/master/dependency/src/main/java/picscout/depend/dependency/main/AppInjector.java)
+[picscout.depend.dependency.main.Runner](https://github.com/foromer4/netdepend/blob/master/dependency/src/main/java/picscout/depend/dependency/main/Runner.java)
 
 The Runner class can be used in one of two basic modes:
 
@@ -37,13 +37,14 @@ Or you can pass them directly to the Runner class via a specilaized constructor 
 
 The configuration file is used to define what folders should be scanned,  where to save persisted state and if to use it,
 and what class implements Guice injector (see next session).
-An example config file can be found under the test/resources folder in the dependency project.
+An example config file can be found under the test/resources folder [here](https://github.com/foromer4/netdepend/blob/master/dependency/src/test/resources/config.xml).
 
 
 ## Extending or replacing implementing classes
 
 Netdepend uses [Guice](https://github.com/google/guice) to inject dependencies between classes.
-All the plumbing is done in: `picscout.depend.dependency.main.AppInjector`
+All the plumbing is done in: 
+[picscout.depend.dependency.main.AppInjector](https://github.com/foromer4/netdepend/blob/master/dependency/src/main/java/picscout/depend/dependency/main/AppInjector.java)
 
 But you can use [beans](https://commons.apache.org/proper/commons-configuration/userguide/howto_beans.html) technology to inject a your own class that does the bindings. This will allow you to change implentation of any class you wish to.
 
