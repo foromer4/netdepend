@@ -40,7 +40,7 @@ and what class implements Guice injector (see next session).
 An example config file can be found under the test/resources folder [here](https://github.com/foromer4/netdepend/blob/master/dependency/src/test/resources/config.xml).
 
 
-## Extending or replacing implementing classes
+## Extending or replacing the implementing classes
 
 Netdepend uses [Guice](https://github.com/google/guice) to inject dependencies between classes.
 All the plumbing is done in: 
