@@ -1,4 +1,5 @@
-# netdepend - .Net dependency resolver by ![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
+# NetDepend - .Net dependency resolver
+## open source developed at ![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
 
 
 
