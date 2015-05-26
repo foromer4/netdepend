@@ -2,7 +2,7 @@
 
 ## General
 
-This  project uses java code to resolve all dependencies between existing .NET projects and solutions.
+This open source project uses java code to resolve all dependencies between existing .NET projects and solutions.
 This can have any number of usage scenarios.
 We  at [Picscout](http://www.picscout.com/) developed it to help us calculate what jobs in Jenkins should run as a result of pushed changes in git.
 
