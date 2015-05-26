@@ -27,7 +27,7 @@ The idea here is to give the option to pre-calculate the dependency map,in order
 
 The project uses [log4j](http://logging.apache.org/log4j/2.x/) and [apache commons configuration](https://commons.apache.org/proper/commons-configuration/) frameworks.
 Both should be configured in order for it to work properly.
-this can be done by passing th following as environment variables:
+this can be done by setting the following environment variables:
 
 **log4j.config=** *path to log4j.xml file*
 
