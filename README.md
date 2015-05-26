@@ -14,7 +14,7 @@ The Runner class can be used in one of two basic modes:
 
 1. Get prjects/ solutions that depend on given projects/solutions. There are some overloaded methods to support this.
 
-2. Calculate dependencies - When calling CalculateDependencies() , then Runner will build a dependency map and save it.
+2. Calculate dependencies - When calling `CalculateDependencies()` , then Runner will build a dependency map and save it.
 
 If there is already a saved state , than when calling one of the methods to find dependent projects/solutions
 they will used the already saved state. Otherwise they will calculate the state themselves (but will not save it).
@@ -53,7 +53,7 @@ This can be done like this:
 1. Use [git hooks](https://git-scm.com/book/es/v2/Customizing-Git-Git-Hooks) to understand what projects/solutions changed as a result of a push.
  
 2. Use a groovy system script with the [Groovy plugin](https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin) to transltate between Projects/Solutions and Jobs , run the Dependency Project and translate the results back to Jenkins changed Jobs. an Example of such a script is given at:
-deprunner/FindDependencies.groovy
+`deprunner/FindDependencies.groovy`
 
 ## Deployment
 
