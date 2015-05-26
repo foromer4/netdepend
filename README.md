@@ -9,7 +9,9 @@ We  at [Picscout](http://www.picscout.com/) developed it to help us calculate wh
 ## Project's source overview
 
 The main project is : dependency.
-It is divided into a few packages, the main class located here: `picscout.depend.dependency.main.Runner`.
+It is divided into a few packages, the main class located here: 
+`picscout.depend.dependency.main.Runner`.
+
 The Runner class can be used in one of two basic modes:
 
 1. Get prjects/ solutions that depend on given projects/solutions. There are some overloaded methods to support this.
@@ -17,9 +19,9 @@ The Runner class can be used in one of two basic modes:
 2. Calculate dependencies - When calling `CalculateDependencies()` , then Runner will build a dependency map and save it.
 
 If there is already a saved state , than when calling one of the methods to find dependent projects/solutions
-they will used the already saved state. Otherwise they will calculate the state themselves (but will not save it).
+they will use the already saved state. Otherwise they will calculate the state themselves (but will not save it).
 
-The idea here is to give the options to pre-calculate the dependency map, to save time when querying for dependencies.
+The idea here is to give the option to pre-calculate the dependency map,in order to save time when querying for dependencies.
 
 ## Configuration
 
