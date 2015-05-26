@@ -9,7 +9,7 @@ e.g. The project was designed to calculate what jobs in Jenkins should run as a 
 ## Project's source overview
 
 The main project is : dependency.
-It is divided into a few packages, the main class Runner is located under package: picscout.depend.dependency.main.
+It is divided into a few packages, the main class located here: `picscout.depend.dependency.main.Runner`.
 The Runner class can be used in one of two basic modes:
 
 1. Get prjects/ solutions that depend on given projects/solutions. There are some overloaded methods to support this.
@@ -29,9 +29,9 @@ this can be done by passing th following as environment variables:
 
 **log4j.config=** *path to log4j.xml file*
 
-**config_file_path=** *<path to config.xml file>*
+**config_file_path=** *path to config.xml file*
 
-Or you can pass them directly to the Runner via a specilaized constructor that accepts them.
+Or you can pass them directly to the Runner class via a specilaized constructor that accepts them.
 
 The configuration file is used to define what folders should be scanned,  where to save persisted state and if to use it,
 and what class implements guice injector (see next session).
@@ -50,7 +50,7 @@ But you can use [beans](https://commons.apache.org/proper/commons-configuration/
 This project was originaly created to be used along side Jenkins and git to detect what jobs should run as a result of pushed changes.
 This can be done like this:
 
-1. Use git hooks to understand what projects/solutions changed as a result of a push.
+1. Use [git hooks](https://git-scm.com/book/es/v2/Customizing-Git-Git-Hooks) to understand what projects/solutions changed as a result of a push.
  
 2. Use a groovy system script with the [Groovy plugin](https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin) to transltate between Projects/Solutions and Jobs , run the Dependency Project and translate the results back to Jenkins changed Jobs. an Example of such a script is given at:
 deprunner/FindDependencies.groovy
@@ -59,9 +59,9 @@ deprunner/FindDependencies.groovy
 
 The dependency project can be downloaded from Github, it is now being processed as a Maven artifact in Main repos.
 You can run: 
-'mvn package assembly:single' 
+`mvn package assembly:single` 
 to create a JAR.
-You can also create an executalble JAR by running the same command on project: **picscout.depend.console**
+You can also create an executalble JAR by running the same command on project: `picscout.depend.console`
 
 Javadocs can be found [here](http://foromer4.github.io/netdepend/)
 
