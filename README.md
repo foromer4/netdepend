@@ -1,5 +1,7 @@
 # netdepend - .Net dependency resolver 
 
+![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
+
 ## General
 
 This open source project uses java code to resolve all dependencies between existing .NET projects and solutions.
