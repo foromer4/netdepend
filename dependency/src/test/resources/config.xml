@@ -7,6 +7,6 @@
  <shoulUsePersistedState>true</shoulUsePersistedState>
  <injection>
  <!-- Optional, way to inject a custom guice configurator using beans. -->
- <AppInjector config-class="picscout.depend.dependency.main.AppInjector"/>
+ <AppInjector config-class="com.picscout.depend.dependency.main.AppInjector"/>
  </injection>
 </app>

@@ -1,5 +1,5 @@
-import picscout.depend.dependency.main.Runner;
-import picscout.depend.dependency.interfaces.ISolution;
+import com.picscout.depend.dependency.main.Runner;
+import com.picscout.depend.dependency.interfaces.ISolution;
 import hudson.model.*
 import hudson.AbortException
 import hudson.console.HyperlinkNote
