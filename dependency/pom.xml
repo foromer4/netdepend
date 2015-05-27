@@ -8,6 +8,28 @@
 	<name>dependency</name>
 	<description>enables calculating .net projects and solutions dependencies</description>
 	<url>http://maven.apache.org</url>
+	<scm>
+	<url>
+	https://github.com/foromer4/netdepend.git
+	</url></scm>
+	<licenses>
+	<license>
+    <name>MIT license</name>
+    <url>http://opensource.org/licenses/MIT</url>
+  </license>
+	</licenses>
+	<developers>
+	<developer>
+	  <id>foromer4</id>
+      <name>Omer Schleifer</name>
+      <email>foromer4@gmail.com</email>    
+      <organization>Picscout</organization>
+      <organizationUrl>http://www.picscout.com</organizationUrl>
+      <roles>
+        <role>Development Manager</role>      
+      </roles>
+	</developer>
+	</developers>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
