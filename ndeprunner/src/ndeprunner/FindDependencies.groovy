@@ -45,9 +45,9 @@ def go() {
 	parseJobs(inputJobs, inputsolutionNames)
 	def dependentsolutionNames
 
-	dependentsolutionNames = getDependentSolutionNames(inputsolutionNames,configPath, log4jPath )
-	solutions2Run = addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames)
-	runJenkinsJobs(solutions2Run)
+	dependentsolutionNames = getDependentSolutionNames(inputsolutionNames,configPath, log4jPath )	
+	jobs2Run = addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames)
+	runJenkinsJobs(jobs2Run)
 }
 
 def addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames) {	
@@ -136,15 +136,34 @@ def parseJobs(inputJobs, inputsolutionNames) {
 }
 
 def getDependentSolutionNames(inputsolutionNames, configPath , log4jPath) {
+	
 	ArrayList<String>  dependentsolutionNames = new  ArrayList<String>()
 	Runner runner = new Runner(configPath, log4jPath);
-	println 'solutions to calc for are: ' + inputsolutionNames
-	List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(inputsolutionNames);
-	println 'got ' + result.size() + ' results'
-	for(ISolution sol : result) {
-		println sol.getName()
-		dependentsolutionNames.add(sol.getName())
-	}
+	println 'calculating dependencies'
+	runner.CalculateDependencies()
+	
+	for(inputSolution in inputsolutionNames) {
+		ArrayList<String>  tempNames = new  ArrayList<String>()
+		tempNames.add(inputSolution)
+		List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(tempNames);
+		println 'for input solution: ' + inputSolution + ', got ' + result.size() + ' results ' 
+		for(ISolution sol : result) {
+			solutionName = sol.getName().toLowerCase()
+			if(solutionName.endsWith('.sln')) {
+				solutionName = solutionName.substring(0, solutionName.length()-4)
+			}
+			if(!dependentsolutionNames.contains(solutionName)) {
+				println 'adding to dependent solution names :' + solutionName
+				
+				dependentsolutionNames.add(solutionName)
+			}
+			else {
+				println 'dependent solution name :' + solutionName + ' already exists, will not add it'
+			}
+		}	
+	}	
+	
+	
 	return dependentsolutionNames
 }
 
@@ -159,7 +178,7 @@ def HandleJob(job, inputsolutionNames) {
 		job = job.replace('_', '.')
 	}
 
-	inputsolutionNames.add(job)
+	inputsolutionNames.add(job.toLowerCase())
 	return inputsolutionNames
 }
 
