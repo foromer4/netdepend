@@ -60,10 +60,11 @@ This can be done like this:
 
 ## Deployment
 
-The dependency project source can be downloaded from Github.
 The artifact is deployed in [maven repo](http://repo.maven.apache.org/maven2/com/picscout/depend/dependency/0.0.1).
+The source can be downloaded from Github.
+when you use the source code, you can use: 
 `mvn package assembly:single` 
-to create a JAR.
+to create a JAR iwth dependencies.
 You can also create an executalble JAR by running the same command on project: `com.picscout.depend.console`
 
 Javadocs can be found [here](http://foromer4.github.io/netdepend/)
