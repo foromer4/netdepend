@@ -54,7 +54,11 @@ def addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames) {
 	ArrayList<String>  solutions2Run = new ArrayList<String> (dependentsolutionNames)
 	for(inputSolution in inputsolutionNames ) {
 		if(!solutions2Run.contains(inputSolution)) {
+			println 'adding input solution:' + inputSolution + ' to the list of dependent solutions'
 			solutions2Run.add(0, inputSolution)
+		}
+		else {
+			println 'input solution: ' + inputSolution + ' is already in dependent solutions list'
 		}
 	}
 	
@@ -138,7 +142,7 @@ def getDependentSolutionNames(inputsolutionNames, configPath , log4jPath) {
 	List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(inputsolutionNames);
 	println 'got ' + result.size() + ' results'
 	for(ISolution sol : result) {
-		System.out.println(sol.getName());
+		println sol.getName()
 		dependentsolutionNames.add(sol.getName())
 	}
 	return dependentsolutionNames

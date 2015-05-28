@@ -2,10 +2,8 @@ package com.picscout.depend.dependency.main;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.picscout.depend.dependency.interfaces.IMapBuilder;
 import com.picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import com.picscout.depend.dependency.interfaces.IProjectDescriptor;
@@ -14,8 +12,6 @@ import com.picscout.depend.dependency.interfaces.ISolutionMapper;
 import com.picscout.depend.dependency.interfaces.IStatePersist;
 import com.picscout.depend.dependency.utils.ConfigUtils;
 import com.picscout.depend.dependency.utils.InjectorFactory;
-
-import org.apache.log4j.PropertyConfigurator;
 import org.apache.log4j.xml.DOMConfigurator;
 /**
  * Main entry point. can be used to run calculation of dependencies of to get dependent projects/solutions from a pre saved map.

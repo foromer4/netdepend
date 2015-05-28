@@ -2,10 +2,7 @@ package com.picscout.depend.dependency.utils;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-
 import com.picscout.depend.dependency.main.AppInjector;
-import com.picscout.depend.dependency.main.Runner;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;

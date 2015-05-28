@@ -2,11 +2,8 @@ package com.picscout.depend.dependency.classes;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
-
 import com.picscout.depend.dependency.interfaces.IProject;
 import com.picscout.depend.dependency.interfaces.IProjectStore;
-import com.picscout.depend.dependency.utils.ConfigUtils;
-
 import javax.inject.Singleton;
 
 

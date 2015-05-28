@@ -2,20 +2,9 @@ package com.picscout.depend.dependency.acceptence;
 
 import org.junit.Before;
 import org.junit.Test;
-
-
-
-
-
-
-
-
-import org.mockito.Mockito;
-
 import com.google.inject.AbstractModule;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
 import com.picscout.depend.dependency.classes.MapBuilder;
 import com.picscout.depend.dependency.classes.ProjectBuilder;
 import com.picscout.depend.dependency.classes.ProjectDependencyMapper;
