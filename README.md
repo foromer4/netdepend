@@ -60,8 +60,8 @@ This can be done like this:
 
 ## Deployment
 
-The dependency project can be downloaded from Github, it is now being processed as a Maven artifact in Main repos.
-You can run: 
+The dependency project source can be downloaded from Github.
+The artifact is deployed in [maven repo](http://repo.maven.apache.org/maven2/com/picscout/depend/dependency/0.0.1).
 `mvn package assembly:single` 
 to create a JAR.
 You can also create an executalble JAR by running the same command on project: `com.picscout.depend.console`
