@@ -1,12 +1,13 @@
 <app>
-<!-- Root paths to scan, separated by ';' between them -->
- <rootPaths>c:\git\infrastructure\; c:\temp\stam\</rootPaths>
- <!--  Where to save state file -->
- <jsonFilePath>c:\temp\state.txt</jsonFilePath>
- <!--  If set to true, use pre-calculated state if exists. otherwise calculate ob the fly. -->
- <shoulUsePersistedState>true</shoulUsePersistedState>
- <injection>
- <!-- Optional, way to inject a custom guice configurator using beans. -->
- <AppInjector config-class="com.picscout.depend.dependency.main.AppInjector"/>
- </injection>
+	<!-- Root paths to scan, separated by ';' between them -->
+	<rootPaths>c:\git\infrastructure\; c:\temp\stam\</rootPaths>
+	<!-- Where to save state file -->
+	<jsonFilePath>c:\temp\state.txt</jsonFilePath>
+	<!-- If set to true, use pre-calculated state if exists. otherwise calculate 
+		ob the fly. -->
+	<shoulUsePersistedState>true</shoulUsePersistedState>
+	<injection>
+		<!-- Optional, way to inject a custom guice configurator using beans. -->
+		<AppInjector config-class="com.picscout.depend.dependency.main.AppInjector" />
+	</injection>
 </app>

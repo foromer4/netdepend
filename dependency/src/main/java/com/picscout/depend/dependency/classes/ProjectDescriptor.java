@@ -6,9 +6,10 @@ import java.io.IOException;
 import com.picscout.depend.dependency.interfaces.IProjectDescriptor;
 
 /**
- * Descriptor for project might contain some or all of these fields.
- * Equality and hash code are based on guid, so do not compare with
- * partial descriptors containins only assembly name.
+ * Descriptor for project might contain some or all of these fields. Equality
+ * and hash code are based on guid, so do not compare with partial descriptors
+ * containins only assembly name.
+ * 
  * @see IProjectDescriptor
  * @author OSchliefer
  *
@@ -17,12 +18,11 @@ public final class ProjectDescriptor implements IProjectDescriptor {
 
 	private String fullPath;
 	private String name;
-	private String guid;	
+	private String guid;
 	private String assemblyName;
-	
-	
-	public ProjectDescriptor(String fullPath,String name, String guid, String assemblyName)
-	{
+
+	public ProjectDescriptor(String fullPath, String name, String guid,
+			String assemblyName) {
 		File file = new File(fullPath);
 		try {
 			this.fullPath = file.getCanonicalPath();
@@ -31,10 +31,12 @@ public final class ProjectDescriptor implements IProjectDescriptor {
 		}
 		this.name = name;
 		this.guid = guid.toLowerCase();
-		this.assemblyName = assemblyName;		
+		this.assemblyName = assemblyName;
 	}
-	
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.picscout.depend.dependency.IProjectDescriptor#toString()
 	 */
 	@Override
@@ -43,25 +45,36 @@ public final class ProjectDescriptor implements IProjectDescriptor {
 				+ ", guid=" + guid + ", assemblyName=" + assemblyName + "]";
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.picscout.depend.dependency.IProjectDescriptor#getName()
 	 */
 	public String getName() {
 		return name;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.picscout.depend.dependency.IProjectDescriptor#getGuid()
 	 */
 	public String getGuid() {
 		return guid;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.picscout.depend.dependency.IProjectDescriptor#getFullPath()
 	 */
 	public String getFullPath() {
 		return fullPath;
 	}
-	/* (non-Javadoc)
+
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see com.picscout.depend.dependency.IProjectDescriptor#getAssemblyName()
 	 */
 	public String getAssemblyName() {

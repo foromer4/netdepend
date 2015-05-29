@@ -32,7 +32,7 @@ public class TestProjectsGenerator {
 		addDependency(bProj, dProj, false);
 		addDependency(dProj, cProj, true);
 		addDependency(cProj, dProj, false);
-		
+
 		IProject eProj = createParoject("e", projects);
 		IProject fProj = createParoject("f", projects);
 		IProject gProj = createParoject("g", projects);
@@ -41,8 +41,6 @@ public class TestProjectsGenerator {
 
 		return projects;
 	}
-	
-	
 
 	private static void addDependency(IProject project,
 			IProject projectDependency, boolean isGuidDependency) {
@@ -68,12 +66,13 @@ public class TestProjectsGenerator {
 		projects.add(project);
 		return project;
 	}
-	
-	
-	public static ISolution createSolution(String name, List<IProjectDescriptor> projectsInSolution) {
+
+	public static ISolution createSolution(String name,
+			List<IProjectDescriptor> projectsInSolution) {
 		ISolution result = Mockito.mock(ISolution.class);
 		Mockito.when(result.getName()).thenReturn(name);
-		Mockito.when(result.getProjectsDescriptors()).thenReturn(projectsInSolution);
+		Mockito.when(result.getProjectsDescriptors()).thenReturn(
+				projectsInSolution);
 		return result;
 	}
 }

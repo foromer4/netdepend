@@ -42,7 +42,8 @@ public class MapBuilder implements IMapBuilder {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.picscout.depend.dependency.classes.IMapBuilder#getProjectMapper()
+	 * @see
+	 * com.picscout.depend.dependency.classes.IMapBuilder#getProjectMapper()
 	 */
 	public IProjectDependencyMapper getProjectMapper() {
 		return projectMapper;
@@ -51,7 +52,8 @@ public class MapBuilder implements IMapBuilder {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.picscout.depend.dependency.classes.IMapBuilder#getSolutionMapper()
+	 * @see
+	 * com.picscout.depend.dependency.classes.IMapBuilder#getSolutionMapper()
 	 */
 	public ISolutionMapper getSolutionMapper() {
 		return solutionMapper;

@@ -10,7 +10,7 @@ import com.picscout.depend.dependency.interfaces.IProjectBuilder;
  *
  */
 @Singleton
-public class ProjectBuilder implements IProjectBuilder{
+public class ProjectBuilder implements IProjectBuilder {
 
 	public IProject build(String fullPath) {
 		return new Project(fullPath);

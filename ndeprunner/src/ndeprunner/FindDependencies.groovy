@@ -45,12 +45,12 @@ def go() {
 	parseJobs(inputJobs, inputsolutionNames)
 	def dependentsolutionNames
 
-	dependentsolutionNames = getDependentSolutionNames(inputsolutionNames,configPath, log4jPath )	
+	dependentsolutionNames = getDependentSolutionNames(inputsolutionNames,configPath, log4jPath )
 	jobs2Run = addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames)
 	runJenkinsJobs(jobs2Run)
 }
 
-def addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames) {	
+def addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames) {
 	ArrayList<String>  solutions2Run = new ArrayList<String> (dependentsolutionNames)
 	for(inputSolution in inputsolutionNames ) {
 		if(!solutions2Run.contains(inputSolution)) {
@@ -61,13 +61,10 @@ def addInputJobs2JobsToRun(inputsolutionNames, dependentsolutionNames) {
 			println 'input solution: ' + inputSolution + ' is already in dependent solutions list'
 		}
 	}
-	
 	return solutions2Run
-	
 }
 
 def runJenkinsJobs(dependentsolutionNames) {
-
 	for(solutionName in dependentsolutionNames) {
 		def jobName
 		jobName = getJobName(solutionName)
@@ -79,7 +76,6 @@ def runJenkinsJobs(dependentsolutionNames) {
 
 
 def runJobInJenkins(jobName) {
-
 	def thr = Thread.currentThread()
 	def build = thr?.executable
 
@@ -136,17 +132,17 @@ def parseJobs(inputJobs, inputsolutionNames) {
 }
 
 def getDependentSolutionNames(inputsolutionNames, configPath , log4jPath) {
-	
+
 	ArrayList<String>  dependentsolutionNames = new  ArrayList<String>()
 	Runner runner = new Runner(configPath, log4jPath);
 	println 'calculating dependencies'
 	runner.CalculateDependencies()
-	
+
 	for(inputSolution in inputsolutionNames) {
 		ArrayList<String>  tempNames = new  ArrayList<String>()
 		tempNames.add(inputSolution)
 		List<ISolution> result = runner.getSolutionsThatDependOnSolutionsByNames(tempNames);
-		println 'for input solution: ' + inputSolution + ', got ' + result.size() + ' results ' 
+		println 'for input solution: ' + inputSolution + ', got ' + result.size() + ' results '
 		for(ISolution sol : result) {
 			solutionName = sol.getName().toLowerCase()
 			if(solutionName.endsWith('.sln')) {
@@ -154,23 +150,21 @@ def getDependentSolutionNames(inputsolutionNames, configPath , log4jPath) {
 			}
 			if(!dependentsolutionNames.contains(solutionName)) {
 				println 'adding to dependent solution names :' + solutionName
-				
+
 				dependentsolutionNames.add(solutionName)
 			}
 			else {
 				println 'dependent solution name :' + solutionName + ' already exists, will not add it'
 			}
-		}	
-	}	
-	
-	
+		}
+	}
+
 	return dependentsolutionNames
 }
 
 
 
 def HandleJob(job, inputsolutionNames) {
-
 	if(map[job] != null) {
 		job = map[job]
 	}

@@ -13,12 +13,12 @@ import org.apache.commons.io.FileUtils;
 
 /**
  * Helper for file handeling
+ * 
  * @author OSchliefer
  *
  */
 public class FileUtilsHelper {
-	public static List<String> readFile(String file)
-			throws IOException {
+	public static List<String> readFile(String file) throws IOException {
 		BufferedReader br = new BufferedReader(new FileReader(file));
 		List<String> lines = new ArrayList<String>();
 		String line;
@@ -28,23 +28,27 @@ public class FileUtilsHelper {
 		br.close();
 		return lines;
 	}
-	
-	
+
 	/**
 	 * List all files in given paths acccording to extension
-	 * @param rootPaths root paths to look at (include sub directories)
-	 * @param extensionFilters extensions to look for
+	 * 
+	 * @param rootPaths
+	 *            root paths to look at (include sub directories)
+	 * @param extensionFilters
+	 *            extensions to look for
 	 * @return files in directories matching the extesion filters
 	 */
-	public static Collection<File> listFiles(String[] rootPaths, String[] extensionFilters) {	
-	
-		Set<File> aggregatedResult = new HashSet<File>();		
-		for(String rootPath: rootPaths) {	
-			if(!rootPath.endsWith("\\")) {
+	public static Collection<File> listFiles(String[] rootPaths,
+			String[] extensionFilters) {
+
+		Set<File> aggregatedResult = new HashSet<File>();
+		for (String rootPath : rootPaths) {
+			if (!rootPath.endsWith("\\")) {
 				rootPath += "\\";
 			}
-	    Collection<File> result = FileUtils.listFiles(new File(rootPath), extensionFilters, true);	   
-		aggregatedResult.addAll(result);
+			Collection<File> result = FileUtils.listFiles(new File(rootPath),
+					extensionFilters, true);
+			aggregatedResult.addAll(result);
 		}
 		return aggregatedResult;
 	}

@@ -2,8 +2,10 @@ package com.picscout.depend.dependency.main;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
+
 import com.picscout.depend.dependency.interfaces.IMapBuilder;
 import com.picscout.depend.dependency.interfaces.IProjectDependencyMapper;
 import com.picscout.depend.dependency.interfaces.IProjectDescriptor;
@@ -12,13 +14,18 @@ import com.picscout.depend.dependency.interfaces.ISolutionMapper;
 import com.picscout.depend.dependency.interfaces.IStatePersist;
 import com.picscout.depend.dependency.utils.ConfigUtils;
 import com.picscout.depend.dependency.utils.InjectorFactory;
+
 import org.apache.log4j.xml.DOMConfigurator;
+import org.junit.Ignore;
+
 /**
- * Main entry point. can be used to run calculation of dependencies of to get dependent projects/solutions from a pre saved map.
+ * Main entry point. can be used to run calculation of dependencies of to get
+ * dependent projects/solutions from a pre saved map.
  * 
  * @author oschliefer
  *
  */
+@Ignore
 public class Runner {
 
 	private IMapBuilder builder;
@@ -27,26 +34,31 @@ public class Runner {
 	private static final Logger logger = LogManager.getLogger(Runner.class
 			.getName());
 	private static String[] roots;
-	private boolean shoulUsePersistedState;  
+	private boolean shoulUsePersistedState;
 	private String configPath;
-	
+
 	/**
-	 * C'tor, use config and logpath from envrionment variables ('config_file_path' , and 'log4j.config')
+	 * C'tor, use config and logpath from envrionment variables
+	 * ('config_file_path' , and 'log4j.config')
 	 */
 	public Runner() {
-		configPath = System.getProperty("config_file_path");	  
+		configPath = System.getProperty("config_file_path");
 	}
-	
+
 	/**
 	 * C'tor, take explicit definitions of config and logpath.
-	 * @param configPath path of config file
-	 * @param log4jPath path for log4 config file
+	 * 
+	 * @param configPath
+	 *            path of config file
+	 * @param log4jPath
+	 *            path for log4 config file
 	 */
 	public Runner(String configPath, String log4jPath) {
 		this.configPath = configPath;
-		LogManager.resetConfiguration(); 
-		DOMConfigurator.configure(log4jPath);		
-		logger.info("Config path set externally to: " + configPath + " ,log4j config path set externally to: " + log4jPath);
+		LogManager.resetConfiguration();
+		DOMConfigurator.configure(log4jPath);
+		logger.info("Config path set externally to: " + configPath
+				+ " ,log4j config path set externally to: " + log4jPath);
 	}
 
 	/**
@@ -56,7 +68,8 @@ public class Runner {
 		logger.info("Starting calculation of dependencies");
 		initIfRequired();
 		if (builder == null) {
-			builder = InjectorFactory.getInjector().getInstance(IMapBuilder.class);
+			builder = InjectorFactory.getInjector().getInstance(
+					IMapBuilder.class);
 		}
 		builder.parse(roots);
 		persister.persist(builder);
@@ -64,7 +77,9 @@ public class Runner {
 
 	/**
 	 * Get an ordered list of projects that depend on the given project.
-	 * @param projectDescriptor requested project to get dependencies for.
+	 * 
+	 * @param projectDescriptor
+	 *            requested project to get dependencies for.
 	 * @return dependency chain.
 	 */
 	public List<IProjectDescriptor> getProjectsThatDepeandOnProject(
@@ -74,10 +89,12 @@ public class Runner {
 		IProjectDependencyMapper mapper = builder.getProjectMapper();
 		return mapper.getProjectsThatDepeantOn(projectDescriptor);
 	}
-	
+
 	/**
 	 * Get an ordered list of projects that depend on the given projects.
-	 * @param projectDescriptors requested projects to get dependencies for.
+	 * 
+	 * @param projectDescriptors
+	 *            requested projects to get dependencies for.
 	 * @return dependency chain
 	 */
 	public List<IProjectDescriptor> getProjectsThatDepeandOnProjects(
@@ -90,7 +107,9 @@ public class Runner {
 
 	/**
 	 * Get solutions that depend on a specific project.
-	 * @param projectDescriptor project to get dependecnies for
+	 * 
+	 * @param projectDescriptor
+	 *            project to get dependecnies for
 	 * @return dependecny chain
 	 */
 	public List<ISolution> getSolutionsThatDependOnProject(
@@ -105,7 +124,9 @@ public class Runner {
 
 	/**
 	 * Get solutions that depend on solutions
-	 * @param names solutions to get dependencies for
+	 * 
+	 * @param names
+	 *            solutions to get dependencies for
 	 * @return dependent solutions
 	 */
 	public List<ISolution> getSolutionsThatDependOnSolutionsByNames(
@@ -121,42 +142,45 @@ public class Runner {
 		initConfig();
 		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
 				null);
-		StringBuilder builder = new StringBuilder("Root directories to scan are:");
-		for(String root: roots) {
+		StringBuilder builder = new StringBuilder(
+				"Root directories to scan are:");
+		for (String root : roots) {
 			builder.append(root).append(";");
 		}
 		logger.info(builder);
-		initPersister();	
+		initPersister();
 		isInitialized = true;
 	}
 
 	private void initPersister() {
-		persister  = InjectorFactory.getInjector().getInstance(IStatePersist.class);		
-		shoulUsePersistedState = ConfigUtils.readBoolean("shoulUsePersistedState" , true);
+		persister = InjectorFactory.getInjector().getInstance(
+				IStatePersist.class);
+		shoulUsePersistedState = ConfigUtils.readBoolean(
+				"shoulUsePersistedState", true);
 	}
 
 	private void initConfig() {
-		
+
 		if (configPath == null || configPath.isEmpty()) {
 			logger.info("no config path passed in. use default");
 			configPath = Runner.class.getResource("/config.xml").toString();
 		}
-		
-		else
-		{
+
+		else {
 			logger.info("Env. config path is:" + configPath);
 		}
 
 		logger.info("Setting config path to be:" + configPath);
 		ConfigUtils.init(configPath);
-	}	
+	}
 
 	private void loadBuilder() {
-		if(shoulUsePersistedState) {
-		builder = persister.load();
+		if (shoulUsePersistedState) {
+			builder = persister.load();
 		}
 		if (builder == null) {
-			builder = InjectorFactory.getInjector().getInstance(IMapBuilder.class);
+			builder = InjectorFactory.getInjector().getInstance(
+					IMapBuilder.class);
 			builder.parse(roots);
 		}
 	}

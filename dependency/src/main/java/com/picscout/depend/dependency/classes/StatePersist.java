@@ -26,13 +26,14 @@ public class StatePersist implements IStatePersist {
 	private static String jsonFilePath;
 	private static final Logger logger = LogManager
 			.getLogger(StatePersist.class.getName());
+
 	public StatePersist() {
 		jsonFilePath = ConfigUtils.readString("jsonFilePath",
 				"c:\\temp\\json.txt");
 	}
 
 	public void persist(IMapBuilder builderState) {
-		
+
 		logger.info("Persisting state to:" + jsonFilePath);
 		Writer writer = null;
 		try {
@@ -64,7 +65,8 @@ public class StatePersist implements IStatePersist {
 			jr = new JsonReader(inStream);
 			map = (IMapBuilder) jr.readObject();
 		} catch (Exception e) {
-			logger.warn("Error rerading state from state file:" + jsonFilePath, e);
+			logger.warn("Error rerading state from state file:" + jsonFilePath,
+					e);
 		} finally {
 			if (jr != null) {
 				jr.close();

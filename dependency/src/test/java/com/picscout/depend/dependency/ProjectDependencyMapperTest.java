@@ -28,7 +28,7 @@ public class ProjectDependencyMapperTest {
 		for (IProject project : projects) {
 			store.addProject(project);
 		}
-		mapper = new ProjectDependencyMapper(store);	
+		mapper = new ProjectDependencyMapper(store);
 	}
 
 	@Test
@@ -76,10 +76,10 @@ public class ProjectDependencyMapperTest {
 				.getProjectsThatDepeantOn(Arrays
 						.asList(new IProjectDescriptor[] {
 								aProj.getDescriptor(), bProj.getDescriptor() }));
-	
+
 		assertNull("a and b should have no project depending on them", result);
 	}
-	
+
 	@Test
 	public void testChainForBCProject() {
 		IProject bProj = projects.get(1);
@@ -90,13 +90,13 @@ public class ProjectDependencyMapperTest {
 								bProj.getDescriptor(), cProj.getDescriptor() }));
 
 		ArrayList<IProjectDescriptor> expected = new ArrayList<IProjectDescriptor>();
-		expected.add(projects.get(0).getDescriptor());		
+		expected.add(projects.get(0).getDescriptor());
 		expected.add(projects.get(3).getDescriptor());
-		
-		assertArrayEquals("b ,c projects should have a , d project depending on them",
+
+		assertArrayEquals(
+				"b ,c projects should have a , d project depending on them",
 				expected.toArray(), result.toArray());
 	}
-
 
 	@Test
 	public void testChainForAProject() {

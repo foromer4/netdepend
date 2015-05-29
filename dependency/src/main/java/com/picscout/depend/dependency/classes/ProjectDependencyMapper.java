@@ -1,4 +1,5 @@
 package com.picscout.depend.dependency.classes;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ import javax.inject.Inject;
  * project that depend on it by the correct order.(closest first). Note that
  * each project can have more than one chain, in that case chains are one after
  * another.
+ * 
  * @see IProjectDependencyMapper
  * @author OSchliefer
  *
@@ -45,7 +47,8 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.picscout.depend.dependency.classes.IProjectDependencyMapper#init()
+	 * @see
+	 * com.picscout.depend.dependency.classes.IProjectDependencyMapper#init()
 	 */
 	private void init() {
 		createMap();
@@ -79,7 +82,8 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 			List<IProjectDescriptor> result = getProjectsThatDepeantOn(projectDescriptor);
 			if (result != null) {
 				for (IProjectDescriptor descriptor : result) {
-					if (!aggregatedResult.contains(descriptor) && !projectDescriptors.contains(descriptor)) {
+					if (!aggregatedResult.contains(descriptor)
+							&& !projectDescriptors.contains(descriptor)) {
 						aggregatedResult.add(descriptor);
 					}
 				}
@@ -91,7 +95,8 @@ public class ProjectDependencyMapper implements IProjectDependencyMapper {
 	/*
 	 * (non-Javadoc)
 	 * 
-	 * @see com.picscout.depend.dependency.classes.IProjectDependencyMapper#getMap()
+	 * @see
+	 * com.picscout.depend.dependency.classes.IProjectDependencyMapper#getMap()
 	 */
 	public Map<IProjectDescriptor, List<IProjectDescriptor>> getMap() {
 		if (projectReveresedDependencies == null) {

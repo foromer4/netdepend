@@ -1,4 +1,5 @@
 package com.picscout.depend.dependency.classes;
+
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -9,10 +10,10 @@ import com.picscout.depend.dependency.interfaces.ISolutionMapper;
 import javax.inject.Singleton;
 import javax.inject.Inject;
 
-
 /**
  * Map solution to all projects in it. Also knows given a changed project to
  * tell which solutions should be built by order.
+ * 
  * @see ISolutionMapper
  * @author OSchliefer
  *
@@ -27,7 +28,7 @@ public class SolutionMapper implements ISolutionMapper {
 	public SolutionMapper(IProjectDependencyMapper projectMapper) {
 		map = new HashSet<ISolution>();
 		this.projectMapper = projectMapper;
-	}	
+	}
 
 	public void add(ISolution solution) {
 		map.add(solution);
@@ -38,7 +39,8 @@ public class SolutionMapper implements ISolutionMapper {
 	 * either because this project is in them, or because a dependent project is
 	 * in them. The result is by build order.
 	 * 
-	 * @param projectDescriptors project to get dependent solutions for
+	 * @param projectDescriptors
+	 *            project to get dependent solutions for
 	 * @return dependent solutions
 	 */
 	public List<ISolution> getSolutionsByProjects(
@@ -61,7 +63,7 @@ public class SolutionMapper implements ISolutionMapper {
 		List<ISolution> changedSolutions = new ArrayList<ISolution>();
 		List<IProjectDescriptor> projectDescriptors = new ArrayList<IProjectDescriptor>();
 		for (String name : names) {
-			if(!name.endsWith(".sln")) {
+			if (!name.endsWith(".sln")) {
 				name += ".sln";
 			}
 			for (ISolution solution : map) {

@@ -1,6 +1,5 @@
 package com.picscout.depend.dependency;
 
-
 import java.net.URL;
 import java.util.List;
 import java.util.ArrayList;
@@ -13,35 +12,37 @@ import com.picscout.depend.dependency.classes.Project;
 import com.picscout.depend.dependency.interfaces.IProject;
 
 public class ProjectTest {
-	
 
 	IProject project;
-	
+
 	@Before
 	public void init() {
 
 		URL url = this.getClass().getResource("/test.csproj");
-	    project = new Project(url.getPath());
-				
-	}	
+		project = new Project(url.getPath());
+
+	}
 
 	@Test
-	public void testParse() {		
+	public void testParse() {
 		project.parse();
 		List<String> expectedDepnedenciesGuids = createDepnedenciesGuids();
 		List<String> expectedDepnedenciesAssembliesNames = createDepnedenciesAssembliesNames();
-		Assert.assertEquals("should have 1 Guid dependency",expectedDepnedenciesGuids,project.getDependenciesGuids());
-		Assert.assertEquals("should have 8 Guid assembly names",expectedDepnedenciesAssembliesNames,project.getDepnedenciesAssembliesNames());
+		Assert.assertEquals("should have 1 Guid dependency",
+				expectedDepnedenciesGuids, project.getDependenciesGuids());
+		Assert.assertEquals("should have 8 Guid assembly names",
+				expectedDepnedenciesAssembliesNames,
+				project.getDepnedenciesAssembliesNames());
 	}
 
 	private List<String> createDepnedenciesGuids() {
-		List<String> list =  new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		list.add("8b7db1ba-afc9-42aa-855c-c588876b65e2");
 		return list;
 	}
 
 	private List<String> createDepnedenciesAssembliesNames() {
-		List<String> list =  new ArrayList<String>();
+		List<String> list = new ArrayList<String>();
 		list.add("PicScout.IR.Crawler.Common");
 		list.add("System");
 		list.add("System.Core");
@@ -52,6 +53,5 @@ public class ProjectTest {
 		list.add("System.Xml");
 		return list;
 	}
-	
-	
+
 }
