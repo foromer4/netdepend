@@ -30,6 +30,14 @@ public class InjectorFactory {
 		}
 		return injector;
 	}
+	
+	/**
+	 * Set injector , for testing purposes.
+	 * @param injector injector to set.
+	 */
+	public static void setInjector(Injector injector){
+		InjectorFactory.injector = injector;
+	}
 
 	private static void initInjector() {
 		AbstractModule module = ConfigUtils.<AbstractModule> getInstance(

@@ -23,7 +23,6 @@ import com.picscout.depend.dependency.interfaces.ISolutionMapper;
 import com.picscout.depend.dependency.interfaces.IStatePersist;
 import com.picscout.depend.dependency.utils.ConfigUtils;
 
-@Ignore
 public class MapBuilderTest {
 	String[] roots;
 	MapBuilder builder;
@@ -33,8 +32,8 @@ public class MapBuilderTest {
 		String configPath = MapBuilderTest.class.getResource("/config.xml")
 				.toString();
 		ConfigUtils.init(configPath);
-		roots = ConfigUtils.readList("rootPath", new String[] { "c:\\temp" },
-				null);
+		roots = ConfigUtils.readList("rootPath",
+				new String[] {  MapBuilderTest.class.getResource("/config.xml").getPath().replace("config.xml", "") }, null);
 
 		Injector injector = Guice.createInjector(new AbstractModule() {
 
