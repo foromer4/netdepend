@@ -4,6 +4,7 @@
   <artifactId>plugin</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>jenkins dependendcy plugin</name>
+  <packaging>hpi</packaging>
   <description>create edges in graph, using extension point in Dependency Graph View Plugin</description>
   <dependencies> 
  <dependency>
@@ -16,12 +17,44 @@
 	<artifactId>hudson-core</artifactId>
 	<version>3.0.0-M2</version>
 </dependency>
-
+<dependency>
+  <groupId>org.jenkins-ci.main</groupId>
+  <artifactId>jenkins-core</artifactId>
+  <version>1.609.1</version>
+</dependency>
+<dependency>
+<groupId>com.picscout.depend</groupId>
+	<artifactId>dependency</artifactId>
+	<version>0.0.1</version>
+</dependency>
   </dependencies>
+  
+  
+  <build>
+   <plugins>
+      <plugin>
+          <groupId>org.jenkins-ci.tools</groupId>
+          <artifactId>maven-hpi-plugin</artifactId>
+          <version>1.90</version>
+          <extensions>true</extensions>
+      </plugin>
+    </plugins>
+  </build>
+  
+  
   <repositories>
  <repository>
     <id>jenkins-releases</id>
     <url>http://repo.jenkins-ci.org/releases/</url>
   </repository>
   </repositories>
+  
+   <pluginRepositories>
+        <pluginRepository>
+            <id>repo.jenkins-ci.org</id>
+            <url>http://repo.jenkins-ci.org/public/</url>
+        </pluginRepository>
+    </pluginRepositories>
+  
+  
 </project>
