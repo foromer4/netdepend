@@ -30,7 +30,7 @@ public class MapBuilder implements IMapBuilder {
 	private static final Logger logger = LogManager.getLogger(MapBuilder.class
 			.getName());
 	private IProjectStore projectStore;
-	private IProjectDependencyMapper projectMapper; // TODO -delete
+	private IProjectDependencyMapper projectMapper; 
 	private ISolutionMapper solutionMapper;
 	private IProjectBuilder projectBuilder;
 	private ISolutionBuilder solutionBuilder;
