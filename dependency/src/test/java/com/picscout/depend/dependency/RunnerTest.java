@@ -64,7 +64,7 @@ public class RunnerTest {
 
 	@Test
 	public void testCalcDependencies() {
-		runner.CalculateDependencies();
+		runner.calculateDependencies();
 		Mockito.verify(mapBuilder).parse(Mockito.any(String[].class));
 	}
 

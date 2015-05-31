@@ -136,7 +136,7 @@ def getDependentSolutionNames(inputsolutionNames, configPath , log4jPath) {
 	ArrayList<String>  dependentsolutionNames = new  ArrayList<String>()
 	Runner runner = new Runner(configPath, log4jPath);
 	println 'calculating dependencies'
-	runner.CalculateDependencies()
+	runner.calculateDependencies()
 
 	for(inputSolution in inputsolutionNames) {
 		ArrayList<String>  tempNames = new  ArrayList<String>()

@@ -64,7 +64,7 @@ public class Runner {
 	/**
 	 * Calculate dependenices, save them in state file
 	 */
-	public void CalculateDependencies() {
+	public void calculateDependencies() {
 		logger.info("Starting calculation of dependencies");
 		initIfRequired();
 		if (builder == null) {

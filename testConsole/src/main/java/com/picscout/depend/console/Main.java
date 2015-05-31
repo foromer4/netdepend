@@ -26,7 +26,7 @@ public class Main {
 		Runner runner = new Runner();
 		if (args.length == 0) {
 			System.out.println("Going to run calc dependencies");
-			runner.CalculateDependencies();
+			runner.calculateDependencies();
 		}
 
 		else {
