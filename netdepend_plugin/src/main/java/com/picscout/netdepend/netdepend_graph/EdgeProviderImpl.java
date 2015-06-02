@@ -17,13 +17,14 @@ import hudson.plugins.depgraph_view.model.graph.EdgeProvider;
 import hudson.plugins.depgraph_view.model.graph.ProjectNode;
 import jenkins.model.Jenkins;
 
+@Extension
 public class EdgeProviderImpl implements EdgeProvider {
 
 	private final static Logger LOG = Logger.getLogger(EdgeProviderImpl.class
 			.getName());
 
-	@Extension
-	public static Iterable<Edge> getEdgesIncidentWith(AbstractProject<?, ?> project) {
+
+	public Iterable<Edge> getEdgesIncidentWith(AbstractProject<?, ?> project) {
 
 		try {
 

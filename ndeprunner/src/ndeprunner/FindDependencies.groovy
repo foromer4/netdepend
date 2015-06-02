@@ -6,6 +6,9 @@ import hudson.console.HyperlinkNote
 import java.util.concurrent.CancellationException
 
 
+/**
+ * Script used in Jenkins (using groovy plugin) as a system script, to run dependent jobs.
+ */
 map = [
 	key_here: 'value_here.sln'
 ]

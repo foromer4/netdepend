@@ -1,5 +1,13 @@
 import com.picscout.depend.dependency.main.Runner;
 import com.picscout.depend.dependency.interfaces.ISolution;
+
+
+/**
+ * This script may be used in Jenkins or elsewhere to detect dependencies .
+ * If you wish to use Jenkins API , run FindDepenedncies instead, as a system script.
+ * @author OSchliefer
+ *
+ */
 public class Wrapper {
 
 
