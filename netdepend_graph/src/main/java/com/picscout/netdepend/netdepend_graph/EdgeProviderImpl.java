@@ -17,7 +17,7 @@ import hudson.plugins.depgraph_view.model.graph.EdgeProvider;
 import hudson.plugins.depgraph_view.model.graph.ProjectNode;
 import jenkins.model.Jenkins;
 
-@Extension
+
 public class EdgeProviderImpl implements EdgeProvider {
 
 	private final static Logger LOG = Logger.getLogger(EdgeProviderImpl.class
@@ -38,7 +38,7 @@ public class EdgeProviderImpl implements EdgeProvider {
 		}
 	}
 
-	private static List<ISolution> getDependentSolutions(AbstractProject<?, ?> project) {
+	private List<ISolution> getDependentSolutions(AbstractProject<?, ?> project) {
 		String projectNAme = project.getName();
 
 		Runner runner = new Runner(
@@ -57,7 +57,7 @@ public class EdgeProviderImpl implements EdgeProvider {
 		return result;
 	}
 
-	private static Iterable<Edge> getEdges(AbstractProject<?, ?> inputProject,
+	private Iterable<Edge> getEdges(AbstractProject<?, ?> inputProject,
 			List<ISolution> solutions) {
 
 		ArrayList<Edge> edges = new ArrayList<Edge>();
@@ -81,7 +81,7 @@ public class EdgeProviderImpl implements EdgeProvider {
 		return edges;
 	}
 
-	private  static Edge createEdge(AbstractProject<?, ?> lastProject,
+	private  Edge createEdge(AbstractProject<?, ?> lastProject,
 			AbstractProject<?, ?> abstractProject) {
 		ProjectNode source = new ProjectNode(lastProject);
 		ProjectNode target = new ProjectNode(abstractProject);
@@ -89,11 +89,11 @@ public class EdgeProviderImpl implements EdgeProvider {
 		return edge;
 	}
 
-	public static String jobName2SolutionName(String jobName) {
+	public String jobName2SolutionName(String jobName) {
 		return jobName.replace("_", ".").toLowerCase() + ".sln";
 	}
 
-	public static String solutionName2JobName(String solutionName) {
+	public String solutionName2JobName(String solutionName) {
 		if (solutionName.endsWith(".sln")) {
 			solutionName = solutionName.substring(0, solutionName.length() - 4);
 		}
