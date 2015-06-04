@@ -17,12 +17,10 @@ import hudson.plugins.depgraph_view.model.graph.EdgeProvider;
 import hudson.plugins.depgraph_view.model.graph.ProjectNode;
 import jenkins.model.Jenkins;
 
-
 public class EdgeProviderImpl implements EdgeProvider {
 
 	private final static Logger LOG = Logger.getLogger(EdgeProviderImpl.class
 			.getName());
-
 
 	public Iterable<Edge> getEdgesIncidentWith(AbstractProject<?, ?> project) {
 
@@ -76,12 +74,21 @@ public class EdgeProviderImpl implements EdgeProvider {
 
 			} else {
 				LOG.info("Failed to find job by name: " + jobName);
+
+				// Test
+				Item itema = jenkins.getItemByFullName("pJob");
+				AbstractProject<?, ?> pProject = (AbstractProject<?, ?>) (itema);
+				Item itemb = jenkins.getItemByFullName("cJob");
+				AbstractProject<?, ?> cProject = (AbstractProject<?, ?>) (itemb);
+				Edge edge = createEdge(pProject, cProject);
+				edges.add(edge);
+
 			}
 		}
 		return edges;
 	}
 
-	private  Edge createEdge(AbstractProject<?, ?> lastProject,
+	private Edge createEdge(AbstractProject<?, ?> lastProject,
 			AbstractProject<?, ?> abstractProject) {
 		ProjectNode source = new ProjectNode(lastProject);
 		ProjectNode target = new ProjectNode(abstractProject);

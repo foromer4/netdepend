@@ -3,9 +3,11 @@
   <groupId>com.picscout.netdepend</groupId>
   <artifactId>netdepend_graph</artifactId>
   <version>0.0.1</version>
-  <name>jenkins netdepend plugin</name>
+  <name>netdepend_graph</name>
   <packaging>hpi</packaging>
   <description>create edges in graph, using extension point in Dependency Graph View Plugin. build using hpi:hpi and put in Jenkins plugins library, upload from advanced-> hpi</description>
+  
+  
   
   <parent>
    <groupId>org.jenkins-ci.plugins</groupId>
@@ -68,6 +70,8 @@
             <url>http://repo.jenkins-ci.org/public/</url>
         </pluginRepository>
     </pluginRepositories>
+    
+   
   
   
 </project>
