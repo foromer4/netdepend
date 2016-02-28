@@ -58,6 +58,8 @@ This can be done like this:
  
 2. Use a groovy system script with the [Groovy plugin](https://wiki.jenkins-ci.org/display/JENKINS/Groovy+plugin) to transltate between Projects/Solutions and Jobs , run the Dependency Project and translate the results back to Jenkins changed Jobs. an Example of such a script is given at:
 [FindDependencies.groovy](https://github.com/foromer4/netdepend/blob/master/ndeprunner/src/ndeprunner/FindDependencies.groovy)
+Another more advanced script we wrote can run in parallel jobs that do not depend on each other:
+https://github.com/foromer4/netdepend/blob/master/ndeprunner/src/ndeprunner/ParalleFindDependencies.groovy
 
 ## Deployment
 
@@ -72,5 +74,5 @@ Javadocs can be found [here](http://foromer4.github.io/netdepend/)
 
 **This project was developed as an open source project by:**
 
-![alt tag](https://picscout.s3.amazonaws.com/Images/Picscout_Logo.png)
+[Picscout](http://www.picscout.com/)
 
