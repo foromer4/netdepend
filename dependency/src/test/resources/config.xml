@@ -4,7 +4,7 @@
 	<!-- Where to save state file -->
 	<jsonFilePath>c:\temp\state.txt</jsonFilePath>
 	<!-- If set to true, use pre-calculated state if exists. otherwise calculate 
-		ob the fly. -->
+		on the fly. -->
 	<shoulUsePersistedState>true</shoulUsePersistedState>
 	<injection>
 		<!-- Optional, way to inject a custom guice configurator using beans. -->
